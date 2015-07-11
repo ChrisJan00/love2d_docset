@@ -1,0 +1,129 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.graphics.rotate - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.graphics.rotate" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_graphics_rotate skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.graphics.rotate</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Rotates the coordinate system in two dimensions.
+</p>
+              <p>Calling this function affects all future drawing operations by rotating the coordinate system around the origin by the given amount of radians. This change lasts until love.draw() exits.
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love<span class="sy0">.</span>graphics<span class="sy0">.</span>rotate<span class="br0">(</span> angle <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> angle</code>
+                </dt>
+                <dd> The amount to rotate the coordinate system in radians.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <p>Nothing.
+</p>
+              <h2>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Rotating_a_static_scene">Rotating a static scene</span>
+              </h3>
+              <p>This example shows how to rotate a static scene around a given point. Since the rotation is always around the origin, translating the center of the screen to the origin and back around the rotate operation makes the effective rotation point be the center of the screen. This is demonstrated by drawing a rectangle that shows the rotation and a point that is right in the center and thus does not move when the scene rotates. Note that the drawing commands have coordinates that depend solely on the screen size.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">local</span> angle <span class="sy0">=</span> <span class="nu0">0</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+	<span class="kw1">local</span> width <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>getWidth<span class="br0">(</span><span class="br0">)</span>
+	<span class="kw1">local</span> height <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>getHeight<span class="br0">(</span><span class="br0">)</span>
+	<span class="co1">-- rotate around the center of the screen by angle radians</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>translate<span class="br0">(</span>width<span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> height<span class="sy0">/</span><span class="nu0">2</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>rotate<span class="br0">(</span>angle<span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>translate<span class="br0">(</span><span class="sy0">-</span>width<span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> <span class="sy0">-</span>height<span class="sy0">/</span><span class="nu0">2</span><span class="br0">)</span>
+	<span class="co1">-- draw a white rectangle slightly off center</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setColor<span class="br0">(</span><span class="nu0">0xff</span><span class="sy0">,</span> <span class="nu0">0xff</span><span class="sy0">,</span> <span class="nu0">0xff</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>rectangle<span class="br0">(</span><span class="st0">'fill'</span><span class="sy0">,</span> width<span class="sy0">/</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">100</span><span class="sy0">,</span> height<span class="sy0">/</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">300</span><span class="sy0">,</span> <span class="nu0">400</span><span class="br0">)</span>
+	<span class="co1">-- draw a five-pixel-wide blue point at the center</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setPointSize<span class="br0">(</span><span class="nu0">5</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setColor<span class="br0">(</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0xff</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>point<span class="br0">(</span>width<span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> height<span class="sy0">/</span><span class="nu0">2</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+	love<span class="sy0">.</span>timer<span class="sy0">.</span>sleep<span class="br0">(</span><span class="nu0">.01</span><span class="br0">)</span>
+	angle <span class="sy0">=</span> angle <span class="sy0">+</span> dt <span class="sy0">*</span> <span class="kw3">math.pi</span><span class="sy0">/</span><span class="nu0">2</span>
+	angle <span class="sy0">=</span> angle <span class="sy0">%</span> <span class="br0">(</span><span class="nu0">2</span><span class="sy0">*</span><span class="kw3">math.pi</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+                <li>
+                  <a href="love.graphics11.html" title="love.graphics.pop">love.graphics.pop</a>
+                </li>
+                <li>
+                  <a href="love.graphics10.html" title="love.graphics.push">love.graphics.push</a>
+                </li>
+                <li>
+                  <a href="love.graphics233.html" title="love.graphics.translate">love.graphics.translate</a>
+                </li>
+                <li>
+                  <a href="love.graphics103.html" title="love.graphics.scale">love.graphics.scale</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

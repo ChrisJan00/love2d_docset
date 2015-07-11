@@ -1,0 +1,155 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.window.setFullscreen - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.window.setFullscreen" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="love.window3.html" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love.window3.html" rel="canonical"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_window_setFullscreen skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.window.setFullscreen</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table bgcolor="#d0d0ff" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Available since L&#xD6;VE <a href="0.9.html" title="0.9.0">0.9.0</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This function is not supported in earlier versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <p>Enters or exits fullscreen. The display to use when entering fullscreen is chosen based on which display the window is currently in, if multiple monitors are connected.
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">success <span class="sy0">=</span> love<span class="sy0">.</span>window<span class="sy0">.</span>setFullscreen<span class="br0">(</span> fullscreen <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> fullscreen</code>
+                </dt>
+                <dd> Whether to enter or exit fullscreen mode.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> success</code>
+                </dt>
+                <dd> True if successful, false otherwise.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_2">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis_2">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">success <span class="sy0">=</span> love<span class="sy0">.</span>window<span class="sy0">.</span>setFullscreen<span class="br0">(</span> fullscreen<span class="sy0">,</span> fstype <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_2">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> fullscreen</code>
+                </dt>
+                <dd> Whether to enter or exit fullscreen mode.</dd>
+                <dt>
+                  <code><a href="fullscreentype.html" title="FullscreenType">FullscreenType</a> fstype</code>
+                </dt>
+                <dd> The type of fullscreen mode to use.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_2">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> success</code>
+                </dt>
+                <dd> True if successful, false otherwise.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Notes">Notes</span>
+              </h2>
+              <p>If fullscreen mode is entered and the window size doesn't match one of the monitor's display modes (in normal fullscreen mode) or the window size doesn't match the desktop size (in 'desktop' fullscreen mode), the window will be resized appropriately. The window will revert back to its original size again when fullscreen mode is exited using this function.
+</p>
+              <h2>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h2>
+              <p>Make the window fullscreen in desktop mode.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span>
+    love<span class="sy0">.</span>window<span class="sy0">.</span>setFullscreen<span class="br0">(</span><span class="kw4">true</span><span class="sy0">,</span> <span class="st0">"desktop"</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love16.html" title="love.window">love.window</a>
+                </li>
+                <li>
+                  <a href="love.window12.html" title="love.window.getFullscreen">love.window.getFullscreen</a>
+                </li>
+                <li>
+                  <a href="love.window.html" title="love.window.setMode">love.window.setMode</a>
+                </li>
+                <li>
+                  <a href="love42.html" title="love.resize">love.resize</a>
+                </li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

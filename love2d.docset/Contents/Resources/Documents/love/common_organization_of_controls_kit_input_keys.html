@@ -1,0 +1,77 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Common Organization of Controls Kit Input keys - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Common Organization of Controls Kit Input keys" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Common_Organization_of_Controls_Kit_Input_keys skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Common Organization of Controls Kit Input keys</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Input keys are essentially what L&#xD6;VE's .isDown and such report when called. 
+</p>
+              <h2>
+                <span class="mw-headline" id="Basics">Basics</span>
+              </h2>
+              <p>Input keys for keyboard is strings reported by love.keyboard.isDown, same for mouse and joystick buttons and hats. Joystick axis are represented as themselves. Mouse axis are mapped to numbers: X axis is 1, and Y axis is 2. Additionally, following axis names are defined:
+</p>
+              <ul>
+                <li> "x" (1)</li>
+                <li> "y" (2)</li>
+                <li> "z" (3)</li>
+                <li> "r" (4)</li>
+                <li> "u" (5)</li>
+                <li> "v" (6)</li>
+                <li> "7" (7)</li>
+                <li> "8" (8), etc.</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Details">Details</span>
+              </h2>
+              <p>Input keys are what they are, except for mouse axis, which are mapped to numbers. When using any function that accepts an input key, you can either provide a regular value, which is useful for programmatical input, or for axis-like devices you can provide literal value, which is useful for user interaction. You shouldn't use numerical values for hard-coding data, because 1) that will make your code messier with all of these magic numbers and 2) internal conversion is an effecient and optimized operation, and it won't save execution time. 
+</p>
+              <h2>
+                <span class="mw-headline" id="See_also">See also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="common_organization_of_controls_kit_input_devices.html" title="Common Organization of Controls Kit Input devices">Common Organization of Controls Kit Input devices</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_modes.html" title="Common Organization of Controls Kit Modes">Common Organization of Controls Kit Modes</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_manual.html" title="Common Organization of Controls Kit Manual">Common Organization of Controls Kit Manual</a>
+                </li>
+              </ul>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+              </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

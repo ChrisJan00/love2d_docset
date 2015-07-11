@@ -1,0 +1,86 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>FractalNoise - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="FractalNoise" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-FractalNoise skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">FractalNoise</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Generates a fractal noise using LOVE's noise functions
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- x, y, z are the positions to sample</span><span class="co1">-- iter is how many iterations (octaves) of the noise (default: 1)</span><span class="co1">-- amp is the amplitude factor (default: 0.5)</span><span class="co1">-- freq is the frequency factor (default: 2)</span>
+&#xA0;
+<span class="co1">-- returns a fractal noise value in the range [-1.0, 1.0]</span>
+<span class="kw1">function</span> genFractalNoise2<span class="br0">(</span>x<span class="sy0">,</span> y<span class="sy0">,</span> iter<span class="sy0">,</span> amp<span class="sy0">,</span> freq<span class="br0">)</span>
+	val <span class="sy0">=</span> love<span class="sy0">.</span><span class="kw3">math</span><span class="sy0">.</span>noise<span class="br0">(</span>x<span class="sy0">,</span> y<span class="br0">)</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">1</span>
+	freq <span class="sy0">=</span> freq <span class="kw2">or</span> <span class="nu0">2</span>
+	iter <span class="sy0">=</span> iter <span class="kw2">or</span> <span class="nu0">1</span>
+	amp <span class="sy0">=</span> amp <span class="kw2">or</span> <span class="nu0">0.5</span>
+	<span class="kw1">local</span> n <span class="sy0">=</span> <span class="nu0">0</span>
+	<span class="kw1">while</span> n <span class="sy0">&lt;</span> iter<span class="sy0">-</span><span class="nu0">1</span> <span class="kw1">do</span>
+		val <span class="sy0">=</span> val <span class="sy0">+</span> <span class="br0">(</span>love<span class="sy0">.</span><span class="kw3">math</span><span class="sy0">.</span>noise<span class="br0">(</span>x<span class="sy0">*</span>freq<span class="sy0">,</span> y<span class="sy0">*</span>freq<span class="br0">)</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">*</span>amp
+		freq <span class="sy0">=</span> freq <span class="sy0">*</span> freq
+		amp <span class="sy0">=</span> amp <span class="sy0">*</span> amp
+		n <span class="sy0">=</span> n <span class="sy0">+</span> <span class="nu0">1</span>
+	<span class="kw1">end</span>
+	<span class="kw1">return</span> <span class="kw3">math.max</span><span class="br0">(</span><span class="kw3">math.min</span><span class="br0">(</span>val<span class="sy0">,</span> <span class="nu0">1.0</span><span class="br0">)</span><span class="sy0">,</span> <span class="sy0">-</span><span class="nu0">1.0</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">-- returns a fractal noise value in the range [-1.0, 1.0]</span>
+<span class="kw1">function</span> genFractalNoise3<span class="br0">(</span>x<span class="sy0">,</span> y<span class="sy0">,</span> z<span class="sy0">,</span> iter<span class="sy0">,</span> amp<span class="sy0">,</span> freq<span class="br0">)</span>
+	<span class="kw1">local</span> val <span class="sy0">=</span> love<span class="sy0">.</span><span class="kw3">math</span><span class="sy0">.</span>noise<span class="br0">(</span>x<span class="sy0">,</span> y<span class="sy0">,</span> z<span class="br0">)</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">1</span>
+	freq <span class="sy0">=</span> freq <span class="kw2">or</span> <span class="nu0">2</span>
+	iter <span class="sy0">=</span> iter <span class="kw2">or</span> <span class="nu0">1</span>
+	amp <span class="sy0">=</span> amp <span class="kw2">or</span> <span class="nu0">0.5</span>
+	<span class="kw1">local</span> n <span class="sy0">=</span> <span class="nu0">0</span>
+	<span class="kw1">while</span> n <span class="sy0">&lt;</span> iter<span class="sy0">-</span><span class="nu0">1</span> <span class="kw1">do</span>
+		val <span class="sy0">=</span> val <span class="sy0">+</span> <span class="br0">(</span>love<span class="sy0">.</span><span class="kw3">math</span><span class="sy0">.</span>noise<span class="br0">(</span>x<span class="sy0">*</span>freq<span class="sy0">,</span> y<span class="sy0">*</span>freq<span class="sy0">,</span> z<span class="sy0">*</span>freq<span class="br0">)</span><span class="sy0">*</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="sy0">*</span>amp
+		freq <span class="sy0">=</span> freq <span class="sy0">*</span> freq
+		amp <span class="sy0">=</span> amp <span class="sy0">*</span> amp
+		n <span class="sy0">=</span> n <span class="sy0">+</span> <span class="nu0">1</span>
+	<span class="kw1">end</span>
+	<span class="kw1">return</span> <span class="kw3">math.max</span><span class="br0">(</span><span class="kw3">math.min</span><span class="br0">(</span>val<span class="sy0">,</span> <span class="nu0">1.0</span><span class="br0">)</span><span class="sy0">,</span> <span class="sy0">-</span><span class="nu0">1.0</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Contributors">Contributors</span>
+              </h2>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

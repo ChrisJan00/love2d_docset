@@ -1,0 +1,146 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>SoundManager - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="SoundManager" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-SoundManager skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">SoundManager</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>This is the simple sound manager that's used in bartbes and Nevon's game Volley Brawl.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Copyright <span class="br0">(</span>c<span class="br0">)</span> <span class="nu0">2011</span><span class="sy0">,</span> Bart van Strien <span class="kw2">and</span> Tommy Brunn
+All rights reserved<span class="sy0">.</span>
+&#xA0;
+Redistribution <span class="kw2">and</span> use <span class="kw2">in</span> source <span class="kw2">and</span> binary forms<span class="sy0">,</span> with <span class="kw2">or</span> without
+modification<span class="sy0">,</span> are permitted provided that the following conditions are met<span class="sy0">:</span>
+    <span class="sy0">*</span> Redistributions of source code must retain the above copyright
+      notice<span class="sy0">,</span> this list of conditions <span class="kw2">and</span> the following disclaimer<span class="sy0">.</span>
+    <span class="sy0">*</span> Redistributions <span class="kw2">in</span> binary form must reproduce the above copyright
+      notice<span class="sy0">,</span> this list of conditions <span class="kw2">and</span> the following disclaimer <span class="kw2">in</span> the
+      documentation <span class="kw2">and</span><span class="sy0">/</span><span class="kw2">or</span> other materials provided with the distribution<span class="sy0">.</span>
+    <span class="sy0">*</span> Neither the name of the <span class="sy0">&lt;</span>organization<span class="sy0">&gt;</span> nor the
+      names of its contributors may be used to endorse <span class="kw2">or</span> promote products
+      derived from this software without specific prior written permission<span class="sy0">.</span>
+&#xA0;
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS <span class="st0">"AS IS"</span> AND
+ANY EXPRESS OR IMPLIED WARRANTIES<span class="sy0">,</span> INCLUDING<span class="sy0">,</span> BUT NOT LIMITED TO<span class="sy0">,</span> THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED<span class="sy0">.</span> IN NO EVENT SHALL <span class="sy0">&lt;</span>COPYRIGHT HOLDER<span class="sy0">&gt;</span> BE LIABLE FOR ANY
+DIRECT<span class="sy0">,</span> INDIRECT<span class="sy0">,</span> INCIDENTAL<span class="sy0">,</span> SPECIAL<span class="sy0">,</span> EXEMPLARY<span class="sy0">,</span> OR CONSEQUENTIAL DAMAGES
+<span class="br0">(</span>INCLUDING<span class="sy0">,</span> BUT NOT LIMITED TO<span class="sy0">,</span> PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES<span class="sy0">;</span>
+LOSS OF USE<span class="sy0">,</span> DATA<span class="sy0">,</span> OR PROFITS<span class="sy0">;</span> OR BUSINESS INTERRUPTION<span class="br0">)</span> HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY<span class="sy0">,</span> WHETHER IN CONTRACT<span class="sy0">,</span> STRICT LIABILITY<span class="sy0">,</span> OR TORT
+<span class="br0">(</span>INCLUDING NEGLIGENCE OR OTHERWISE<span class="br0">)</span> ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE<span class="sy0">,</span> EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE<span class="sy0">.</span>
+&#xA0;
+soundmanager <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+soundmanager<span class="sy0">.</span>queue <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+soundmanager<span class="sy0">.</span>playlist <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+soundmanager<span class="sy0">.</span>currentsong <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span>
+&#xA0;
+<span class="kw1">local</span> <span class="kw1">function</span> shuffle<span class="br0">(</span>a<span class="sy0">,</span> b<span class="br0">)</span>
+   <span class="kw1">return</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">)</span> <span class="sy0">==</span> <span class="nu0">1</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">--do the magic</span>
+<span class="kw1">function</span> soundmanager<span class="sy0">:</span>play<span class="br0">(</span>sndData<span class="br0">)</span>
+   <span class="co1">--make a source out of the sound data</span>
+   <span class="kw1">local</span> src <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>newSource<span class="br0">(</span>sndData<span class="sy0">,</span> <span class="st0">"static"</span><span class="br0">)</span>
+   <span class="co1">--put it in the queue</span>
+   <span class="kw3">table.insert</span><span class="br0">(</span>self<span class="sy0">.</span>queue<span class="sy0">,</span> src<span class="br0">)</span>
+   <span class="co1">--and play it</span>
+   love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span>src<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">--do the music magic</span>
+<span class="kw1">function</span> soundmanager<span class="sy0">:</span>playMusic<span class="br0">(</span>first<span class="sy0">,</span> <span class="sy0">...</span><span class="br0">)</span>
+   <span class="co1">--stop all currently playing music</span>
+   <span class="kw1">for</span> i<span class="sy0">,</span> v <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>self<span class="sy0">.</span>playlist<span class="br0">)</span> <span class="kw1">do</span>
+      love<span class="sy0">.</span>audio<span class="sy0">.</span>stop<span class="br0">(</span>v<span class="br0">)</span>
+   <span class="kw1">end</span>
+   <span class="co1">--decide if we were passed a table or a vararg,</span>
+   <span class="co1">--and assemble the playlist</span>
+   <span class="kw1">if</span> <span class="kw3">type</span><span class="br0">(</span>first<span class="br0">)</span> <span class="sy0">==</span> <span class="st0">"table"</span> <span class="kw1">then</span>
+      self<span class="sy0">.</span>playlist <span class="sy0">=</span> first
+   <span class="kw1">else</span>
+      self<span class="sy0">.</span>playlist <span class="sy0">=</span> <span class="br0">{</span>first<span class="sy0">,</span> <span class="sy0">...</span><span class="br0">}</span>
+   <span class="kw1">end</span>
+   self<span class="sy0">.</span>currentsong <span class="sy0">=</span> <span class="nu0">1</span>
+   <span class="co1">--play</span>
+   love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span>self<span class="sy0">.</span>playlist<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">--do some shufflin'</span>
+<span class="kw1">function</span> soundmanager<span class="sy0">:</span>shuffle<span class="br0">(</span>first<span class="sy0">,</span> <span class="sy0">...</span><span class="br0">)</span>
+   <span class="kw1">local</span> playlist
+   <span class="kw1">if</span> <span class="kw3">type</span><span class="br0">(</span>first<span class="br0">)</span> <span class="sy0">==</span> <span class="st0">"table"</span> <span class="kw1">then</span>
+      playlist <span class="sy0">=</span> first
+   <span class="kw1">else</span>
+      playlist <span class="sy0">=</span> <span class="br0">{</span>first<span class="sy0">,</span> <span class="sy0">...</span><span class="br0">}</span>
+   <span class="kw1">end</span>
+   <span class="kw3">table.sort</span><span class="br0">(</span>playlist<span class="sy0">,</span> shuffle<span class="br0">)</span>
+   <span class="kw1">return</span> <span class="kw3">unpack</span><span class="br0">(</span>playlist<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">--update</span>
+<span class="kw1">function</span> soundmanager<span class="sy0">:</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+   <span class="co1">--check which sounds in the queue have finished, and remove them</span>
+   <span class="kw1">local</span> removelist <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+   <span class="kw1">for</span> i<span class="sy0">,</span> v <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>self<span class="sy0">.</span>queue<span class="br0">)</span> <span class="kw1">do</span>
+      <span class="kw1">if</span> v<span class="sy0">:</span>isStopped<span class="br0">(</span><span class="br0">)</span> <span class="kw1">then</span>
+         <span class="kw3">table.insert</span><span class="br0">(</span>removelist<span class="sy0">,</span> i<span class="br0">)</span>
+      <span class="kw1">end</span>
+   <span class="kw1">end</span>
+   <span class="co1">--we can't remove them in the loop, so use another loop</span>
+   <span class="kw1">for</span> i<span class="sy0">,</span> v <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>removelist<span class="br0">)</span> <span class="kw1">do</span>
+      <span class="kw3">table.remove</span><span class="br0">(</span>self<span class="sy0">.</span>queue<span class="sy0">,</span> v<span class="sy0">-</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">)</span>
+   <span class="kw1">end</span>
+   <span class="co1">--advance the playlist if necessary</span>
+   <span class="kw1">if</span> self<span class="sy0">.</span>currentsong <span class="sy0">~=</span> <span class="sy0">-</span><span class="nu0">1</span> <span class="kw2">and</span> self<span class="sy0">.</span>playlist <span class="kw2">and</span> self<span class="sy0">.</span>playlist<span class="br0">[</span>self<span class="sy0">.</span>currentsong<span class="br0">]</span><span class="sy0">:</span>isStopped<span class="br0">(</span><span class="br0">)</span> <span class="kw1">then</span>
+      self<span class="sy0">.</span>currentsong <span class="sy0">=</span> self<span class="sy0">.</span>currentsong <span class="sy0">+</span> <span class="nu0">1</span>
+      <span class="kw1">if</span> self<span class="sy0">.</span>currentsong <span class="sy0">&gt;</span> <span class="sy0">#</span>self<span class="sy0">.</span>playlist <span class="kw1">then</span>
+         self<span class="sy0">.</span>currentsong <span class="sy0">=</span> <span class="nu0">1</span>
+      <span class="kw1">end</span>
+      love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span>self<span class="sy0">.</span>playlist<span class="br0">[</span>self<span class="sy0">.</span>currentsong<span class="br0">]</span><span class="br0">)</span>
+   <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

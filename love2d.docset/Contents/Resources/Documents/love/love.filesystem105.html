@@ -1,0 +1,129 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.filesystem.load - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.filesystem.load" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_filesystem_load skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.filesystem.load</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Load a lua file (but not run it)
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">chunk <span class="sy0">=</span> love<span class="sy0">.</span>filesystem<span class="sy0">.</span>load<span class="br0">(</span> name <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> name</code>
+                </dt>
+                <dd> The name (and path) of the file</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="function.html" title="function">function</a> chunk</code>
+                </dt>
+                <dd> The loaded chunk</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Example">Example</span>
+              </h2>
+              <p>It is important to note that love.filesystem.load does <b>not</b> invoke the code, it just creates a function (a 'chunk') that will contain the contents of the file inside it. In order to execute the chunk, you have to put () behind it.
+</p>
+              <p>Also, it is worth noting that loaded files can return values. For example, the following file:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">
+                    <span class="kw1">return</span>
+                    <span class="nu0">1</span>
+                    <span class="sy0">+</span>
+                    <span class="nu0">1</span>
+                  </pre>
+                </div>
+              </div>
+              <p>Will return 2, when called like this:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">chunk <span class="sy0">=</span> love<span class="sy0">.</span>filesystem<span class="sy0">.</span>load<span class="br0">(</span> name <span class="br0">)</span> <span class="co1">-- load the chunk</span>
+<span class="kw1">local</span> result <span class="sy0">=</span> chunk<span class="br0">(</span><span class="br0">)</span> <span class="co1">-- execute the chunk</span>
+<span class="kw3">print</span><span class="br0">(</span><span class="st0">'result: '</span> <span class="sy0">..</span> <span class="kw3">tostring</span><span class="br0">(</span>result<span class="br0">)</span><span class="br0">)</span> <span class="co1">-- prints 'result: 2'</span></pre>
+                </div>
+              </div>
+              <p>This bluescreens if there is a syntax error in the loaded file. If you want to continue your game if the file is not valid (for example if you expect it to be written by users), you can protect the calling of the chunk with <b>pcall</b>:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">local</span> ok<span class="sy0">,</span> chunk<span class="sy0">,</span> result
+ok<span class="sy0">,</span> chunk <span class="sy0">=</span> <span class="kw3">pcall</span><span class="br0">(</span> love<span class="sy0">.</span>filesystem<span class="sy0">.</span>load<span class="sy0">,</span> name <span class="br0">)</span> <span class="co1">-- load the chunk safely</span>
+<span class="kw1">if</span> <span class="kw2">not</span> ok <span class="kw1">then</span>
+  <span class="kw3">print</span><span class="br0">(</span><span class="st0">'The following error happend: '</span> <span class="sy0">..</span> <span class="kw3">tostring</span><span class="br0">(</span>chunk<span class="br0">)</span><span class="br0">)</span>
+<span class="kw1">else</span>
+  ok<span class="sy0">,</span> result <span class="sy0">=</span> <span class="kw3">pcall</span><span class="br0">(</span>chunk<span class="br0">)</span> <span class="co1">-- execute the chunk safely</span>
+&#xA0;
+  <span class="kw1">if</span> <span class="kw2">not</span> ok <span class="kw1">then</span> <span class="co1">-- will be false if there is an error</span>
+    <span class="kw3">print</span><span class="br0">(</span><span class="st0">'The following error happened: '</span> <span class="sy0">..</span> <span class="kw3">tostring</span><span class="br0">(</span>result<span class="br0">)</span><span class="br0">)</span>
+  <span class="kw1">else</span>
+    <span class="kw3">print</span><span class="br0">(</span><span class="st0">'The result of loading is: '</span> <span class="sy0">..</span> <span class="kw3">tostring</span><span class="br0">(</span>result<span class="br0">)</span><span class="br0">)</span>
+  <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love3.html" title="love.filesystem">love.filesystem</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

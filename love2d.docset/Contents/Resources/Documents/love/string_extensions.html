@@ -1,0 +1,83 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>String extensions - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="String extensions" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-String_extensions skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">String extensions</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>This code modifies the metatable of the string type to add some useful functionality.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">local</span> meta <span class="sy0">=</span> <span class="kw3">getmetatable</span><span class="br0">(</span><span class="st0">""</span><span class="br0">)</span> <span class="co1">-- get the string metatable</span>
+&#xA0;
+meta<span class="sy0">.</span>__add <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span> <span class="co1">-- the + operator</span>
+    <span class="kw1">return</span> a<span class="sy0">..</span>b
+<span class="kw1">end</span>
+&#xA0;
+meta<span class="sy0">.</span>__sub <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span> <span class="co1">-- the - operator</span>
+    <span class="kw1">return</span> a<span class="sy0">:</span><span class="kw3">gsub</span><span class="br0">(</span>b<span class="sy0">,</span><span class="st0">""</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+meta<span class="sy0">.</span>__mul <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span> <span class="co1">-- the * operator</span>
+    <span class="kw1">return</span> a<span class="sy0">:</span>rep<span class="br0">(</span>b<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">-- if you have string.explode (check out the String exploding snippet) you can also add this:</span>
+meta<span class="sy0">.</span>__div <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span> <span class="co1">-- the / operator</span>
+    <span class="kw1">return</span> a<span class="sy0">:</span>explode<span class="br0">(</span>b<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+meta<span class="sy0">.</span>__index <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span> <span class="co1">-- if you attempt to do string[id]</span>
+    <span class="kw1">if</span> <span class="kw3">type</span><span class="br0">(</span>b<span class="br0">)</span> <span class="sy0">~=</span> <span class="st0">"number"</span> <span class="kw1">then</span>
+        <span class="kw1">return</span> <span class="kw3">string</span><span class="br0">[</span>b<span class="br0">]</span>
+    <span class="kw1">end</span>
+    <span class="kw1">return</span> a<span class="sy0">:</span>sub<span class="br0">(</span>b<span class="sy0">,</span>b<span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Once you've applied this code, you'll be able to do this:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw3">print</span><span class="br0">(</span><span class="st0">"foo"</span><span class="sy0">+</span><span class="st0">"bar"</span><span class="br0">)</span><span class="co1">--&gt; foobar</span><span class="kw3">print</span><span class="br0">(</span><span class="st0">"foo the bar"</span><span class="sy0">-</span><span class="st0">" the "</span><span class="br0">)</span><span class="co1">--&gt; foobar</span><span class="kw3">print</span><span class="br0">(</span><span class="st0">"repetition is repetetive "</span><span class="sy0">*</span><span class="nu0">3</span><span class="br0">)</span><span class="co1">--&gt; repetition is repetetive repetition is repetetive repetition is repetetive </span>
+tbl <span class="sy0">=</span> <span class="st0">"foo bar"</span> <span class="sy0">/</span> <span class="st0">" "</span>
+<span class="kw3">print</span><span class="br0">(</span>tbl<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span><span class="br0">)</span> <span class="co1">--&gt; foo</span>
+mystring <span class="sy0">=</span> <span class="st0">"abc"</span>
+<span class="kw3">print</span><span class="br0">(</span>mystring<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="br0">)</span> <span class="co1">--&gt; b</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

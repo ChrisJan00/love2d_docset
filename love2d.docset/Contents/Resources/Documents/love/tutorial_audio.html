@@ -1,0 +1,105 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tutorial:Audio - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tutorial:Audio" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-500 ns-subject page-Tutorial_Audio skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tutorial:Audio</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>In L&#xD6;VE, audio is the domain of the <a href="love1.html" title="love.audio">love.audio</a> module, which uses OpenAL for playback. love.audio has only one type of audio object - a <a href="source.html" title="Source">Source</a>. You can load audio and play it like so:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">sound <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>newSource<span class="br0">(</span><span class="st0">"pling.wav"</span><span class="sy0">,</span> <span class="st0">"static"</span><span class="br0">)</span> <span class="co1">-- the "static" tells L&#xD6;VE to load the file into memory, good for short sound effects</span>
+music <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>newSource<span class="br0">(</span><span class="st0">"techno.ogg"</span><span class="br0">)</span> <span class="co1">-- if "static" is omitted, L&#xD6;VE will stream the file from disk, good for longer music tracks</span>
+sound<span class="sy0">:</span>play<span class="br0">(</span><span class="br0">)</span>
+music<span class="sy0">:</span>play<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Formats">Formats</span>
+              </h2>
+              <p>L&#xD6;VE supports a lot of audio formats, thanks to the <a href="love12.html" title="love.sound">love.sound</a> module, which handles all the decoding. Supported formats include:
+</p>
+              <ul>
+                <li> MP3</li>
+                <li> Ogg Vorbis</li>
+                <li> WAVE</li>
+                <li> and just about every tracker format you can think of - XM, MOD, <a class="external text" href="http://sourceforge.net/p/modplug-xmms/git/ci/master/tree/libmodplug/README#l39" rel="nofollow">and over twenty others</a>.</li>
+              </ul>
+              <p>Ogg Vorbis and 16-bit WAVE are the recommended formats. Others may have minor quirks. For example, the MP3 decoder may pad a few samples depending on what encoder was used. These issues come from the libraries L&#xD6;VE uses to decode the audio files and can't be fixed in L&#xD6;VE directly.
+</p>
+              <h2>
+                <span class="mw-headline" id="Static_vs._Streaming">Static vs. Streaming</span>
+              </h2>
+              <p>Keep in mind that, if you pass <code><a href="love.audio.html" title="love.audio.newSource">love.audio.newSource</a></code> "static" as a second argument, the sound file will be expanded into memory, so if you load a 5MB compressed .ogg file that way, it would consume ~50MB RAM when fully decompressed. Consider not using "static" in such cases. 
+</p>
+              <p>If you omit the "static", the audio will be streamed from the file as it's played, something that saves a lot of memory when you're dealing with massive files.
+</p>
+              <h2>
+                <span class="mw-headline" id="Audio_control">Audio control</span>
+              </h2>
+              <p>To pause, stop, change volume, looping, pitch, etc., simply call the relevant method of a <a href="source.html" title="Source">Source</a>.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">src1 <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>newSource<span class="br0">(</span><span class="st0">"bang.wav"</span><span class="sy0">,</span> <span class="st0">"static"</span><span class="br0">)</span>
+src2 <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>newSource<span class="br0">(</span><span class="st0">"bgm.mp3"</span><span class="br0">)</span>
+&#xA0;
+src1<span class="sy0">:</span>setVolume<span class="br0">(</span><span class="nu0">0.9</span><span class="br0">)</span> <span class="co1">-- 90% of ordinary volume</span>
+src1<span class="sy0">:</span>setPitch<span class="br0">(</span><span class="nu0">0.5</span><span class="br0">)</span> <span class="co1">-- one octave lower</span>
+src2<span class="sy0">:</span>setVolume<span class="br0">(</span><span class="nu0">0.7</span><span class="br0">)</span>
+&#xA0;
+src1<span class="sy0">:</span>play<span class="br0">(</span><span class="br0">)</span>
+src2<span class="sy0">:</span>play<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Further details can be found in the <a href="source.html" title="Source">Source documentation</a>.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li><a href="tesound.html" title="TEsound">TEsound</a> - A sound manager which makes it easier to use sound effects and music</li>
+                <li><a href="minimalist_sound_manager.html" title="Minimalist Sound Manager">Minimalist Sound Manager</a> - A <a class="mw-redirect" href="category_snippets.html" title="Snippets">snippet</a> that makes usage of love.audio easier and automatically manages sources</li>
+              </ul>
+              <h2/>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_tutorials.html" title="Category:Tutorials">Tutorials</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.mouse.isDown - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.mouse.isDown" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_mouse_isDown skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.mouse.isDown</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Checks whether a certain mouse button is down. This function does not detect mousewheel scrolling; you must use the <a href="love50.html" title="love.mousepressed">love.mousepressed</a> callback for that. 
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">down <span class="sy0">=</span> love<span class="sy0">.</span>mouse<span class="sy0">.</span>isDown<span class="br0">(</span> button <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="mouseconstant.html" title="MouseConstant">MouseConstant</a> button</code>
+                </dt>
+                <dd> The button to check.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> down</code>
+                </dt>
+                <dd> True if the specified button is down.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_2">Function</span>
+              </h2>
+              <table bgcolor="#d0d0ff" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Available since L&#xD6;VE <a href="0.71.html" title="0.7.2">0.7.2</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This variant is not supported in earlier versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <h3>
+                <span class="mw-headline" id="Synopsis_2">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">anyDown <span class="sy0">=</span> love<span class="sy0">.</span>mouse<span class="sy0">.</span>isDown<span class="br0">(</span> button1<span class="sy0">,</span> button2<span class="sy0">,</span> button3<span class="sy0">,</span> <span class="sy0">...</span> <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_2">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="mouseconstant.html" title="MouseConstant">MouseConstant</a> buttonN</code>
+                </dt>
+                <dd> A button to check.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_2">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> anyDown</code>
+                </dt>
+                <dd> True if any specified button is down, false otherwise.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Example">Example</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Increase_a_value_while_the_right_mouse_button_is_held">Increase a value while the right mouse button is held</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">val <span class="sy0">=</span> <span class="nu0">0</span>   <span class="co1">-- establish a variable for later use</span>
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+	<span class="kw1">if</span> love<span class="sy0">.</span>mouse<span class="sy0">.</span>isDown<span class="br0">(</span><span class="st0">"r"</span><span class="br0">)</span> <span class="kw1">then</span>
+		val <span class="sy0">=</span> val <span class="sy0">+</span> dt   <span class="co1">-- we will increase the variable by 1 for every second the button is held down</span>
+	<span class="kw1">end</span>	
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="mouseconstant.html" title="MouseConstant">Mouse Constant / buttons</a>
+                </li>
+                <li>
+                  <a href="love10.html" title="love.mouse">love.mouse</a>
+                </li>
+                <li>
+                  <a href="love50.html" title="love.mousepressed">love.mousepressed</a>
+                </li>
+                <li>
+                  <a href="love51.html" title="love.mousereleased">love.mousereleased</a>
+                </li>
+                <li>
+                  <a href="love.keyboard5.html" title="love.keyboard.isDown">love.keyboard.isDown</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

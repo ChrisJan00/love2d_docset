@@ -1,0 +1,162 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>0.8.0 - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="0.8.0" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-0_8_0 skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">0.8.0</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <div class="thumb tright">
+                <div class="thumbinner" style="width:302px;">
+                  <div class="thumbcaption"><div class="magnify"><a class="internal" href="file_0.8.0_no_game.html" title="Enlarge"/></div>no-game screen</div>
+                  <img alt="" class="thumbimage" height="237" src="0.8.0_no_game.png" width="300"/>
+                </div>
+              </div>
+              <p>The codename for L&#xD6;VE 0.8.0 is <b>Rubber Piggy</b>. It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+              <h2>
+                <span class="mw-headline" id="Changes_from_0.7.2">Changes from <a href="0.71.html" title="0.7.2">0.7.2</a></span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Additions">Additions</span>
+              </h3>
+              <ul>
+                <li> Added release error screen.</li>
+                <li> Added alpha to <a href="love.graphics.html" title="love.graphics.setBackgroundColor">love.graphics.setBackgroundColor</a>.</li>
+                <li> Added <a href="canvas_clear.html" title="Canvas:clear">Canvas:clear(r, g, b, a)</a>.</li>
+                <li> Added Canvas support to <a href="love.graphics1.html" title="love.graphics.drawq">love.graphics.drawq</a>.</li>
+                <li> Added <a href="canvas_getwidth.html" title="Canvas:getWidth">Canvas:getWidth</a> and <a href="canvas_getheight.html" title="Canvas:getHeight">Canvas:getHeight</a>.</li>
+                <li> Added <a href="love.graphics2.html" title="love.graphics.arc">love.graphics.arc</a>.</li>
+                <li> Added <a href="source_seek.html" title="Source:seek">Source:seek</a> and <a href="source_tell.html" title="Source:tell">Source:tell</a>.</li>
+                <li> Added color interpolation to <a href="particlesystem.html" title="ParticleSystem">ParticleSystems</a>.</li>
+                <li> Added automatic PO2 padding for systems not supporting the OpenGL extension.</li>
+                <li> Added UTF-8 support for fonts.</li>
+                <li> Added Box2D error handling for some commonly failing functions.</li>
+                <li> Added ability for fused release games to have their write dir in appdata.</li>
+                <li> Added <a href="love.graphics3.html" title="love.graphics.shear">love.graphics.shear</a>.</li>
+                <li> Added origin to font printing.</li>
+                <li> Added <a href="love.graphics4.html" title="love.graphics.getMode">love.graphics.getMode</a>.</li>
+                <li> Added per-sprite colors on <a href="spritebatch.html" title="SpriteBatch">SpriteBatches</a>.</li>
+                <li> Added <a href="pixeleffect.html" title="PixelEffect">PixelEffects</a>.</li>
+                <li> Added <a href="love.graphics5.html" title="love.graphics.isSupported">love.graphics.isSupported</a>.</li>
+                <li> Added <a href="love.graphics6.html" title="love.graphics.getCanvas">love.graphics.getCanvas</a>.</li>
+                <li> Added <a href="love.event.html" title="love.event.quit">love.event.quit</a>.</li>
+                <li> Added <a href="love.graphics7.html" title="love.graphics.setStencil">stencil masks</a>.</li>
+                <li> Added alternative <a href="spritebatch.html" title="SpriteBatch">SpriteBatch</a> provider, it should work everywhere now.</li>
+                <li> Added a loader for binary modules.</li>
+                <li> Added <a href="thread_getkeys.html" title="Thread:getKeys">Thread:getKeys()</a>.</li>
+                <li> Added option of fractions for quads.</li>
+                <li> Added PNG, JPEG and GIF support to <a href="imagedata_encode.html" title="ImageData:encode">ImageData:encode</a>.</li>
+                <li> Added 64-bit support for Mac OS X.</li>
+                <li> Added premultiplied <a href="blendmode.html" title="BlendMode">blending mode</a>.</li>
+                <li> Added <a href="love.graphics8.html" title="love.graphics.setDefaultImageFilter">love.graphics.setDefaultImageFilter</a>/<a href="love.graphics9.html" title="love.graphics.getDefaultImageFilter">getDefaultImageFilter</a>.</li>
+                <li> Added <a href="spritebatch_set.html" title="SpriteBatch:set">SpriteBatch:set</a>.</li>
+                <li> Added new events system, with support for custom events and long event names.</li>
+                <li> Added sound attenuation by distance.</li>
+                <li> Added <a href="spritebatch_getimage.html" title="SpriteBatch:getImage">SpriteBatch:getImage</a>.</li>
+                <li> Added combine <a href="colormode.html" title="ColorMode">color mode</a>.</li>
+                <li> Added automatic random seeding to love.run.</li>
+                <li> Added support for the subtract <a href="blendmode.html" title="BlendMode">BlendMode</a> on older graphics cards.</li>
+                <li> Added love._os field, which contains the OS the game is running on.</li>
+              </ul>
+              <h3>
+                <span class="mw-headline" id="Bugfixes">Bugfixes</span>
+              </h3>
+              <ul>
+                <li> Fixed wrapping for single words.</li>
+                <li> Fixed tracebacks not showing filenames.</li>
+                <li> Fixed <a href="love.graphics10.html" title="love.graphics.push">love.graphics.push</a>/<a href="love.graphics11.html" title="love.graphics.pop">pop</a> capable of causing overflows/underflows.</li>
+                <li> Fixed <a href="love.graphics12.html" title="love.graphics.setScissor">setScissor</a> on <a href="canvas.html" title="Canvas">Canvases</a>.</li>
+                <li> Fixed several issues with audio, e.g. clicks and pops in mp3s.</li>
+                <li> Fixed crashes when <a href="body.html" title="Body">bodies</a> were destroyed during collisions.</li>
+                <li> Fixed bound <a href="spritebatch.html" title="SpriteBatch">SpriteBatches</a> corrupting when drawing.</li>
+                <li> Fixed thread-safety issues with <a href="imagedata.html" title="ImageData">ImageData</a>.</li>
+                <li> Fixed memory leaks in audio sources.</li>
+                <li> Fixed <a href="thread_set.html" title="Thread:set">Thread:set</a> (previously send) accidentally changing the type.</li>
+                <li> Fixed <a href="sounddata.html" title="SoundData">SoundData</a> allocating the wrong number of samples.</li>
+                <li> Fixed <a href="spritebatch.html" title="SpriteBatch">SpriteBatch</a> support on Intel cards.</li>
+                <li> Fixed <a href="love.filesystem1.html" title="love.filesystem.lines">love.filesystem.lines</a> leaking.</li>
+                <li> Fixed most leaking on unclosed <a href="file.html" title="File">File</a> objects.</li>
+                <li> Fixed crashes when operating on non-existent files.</li>
+                <li> Fixed a bug where empty files on Windows would never reach EOF.</li>
+                <li> Fixed crash when <a href="sounddata.html" title="SoundData">SoundData</a> runs out of memory.</li>
+                <li> Fixed ordering of loaders, love should have priority over lua.</li>
+                <li> Fixed several miscellaneous memory leaks.</li>
+                <li> Fixed a few cases where strings with \0 in them would not be stored correctly.</li>
+                <li> Fixed L&#xD6;VE's startup time being in the first dt.</li>
+                <li> Fixed internal string conversions, they are faster now.</li>
+                <li> Fixed (bad) performance of <a href="imagedata_paste.html" title="ImageData:paste">ImageData:paste</a>.</li>
+                <li> Fixed <a href="love.graphics13.html" title="love.graphics.toggleFullscreen">love.graphics.toggleFullscreen</a> not maintaining graphics state.</li>
+              </ul>
+              <h3>
+                <span class="mw-headline" id="Other_Changes">Other Changes</span>
+              </h3>
+              <ul>
+                <li> Renamed <a href="spritebatch_lock.html" title="SpriteBatch:lock">SpriteBatch:lock</a>/<a href="spritebatch_unlock.html" title="SpriteBatch:unlock">unlock</a> to <a href="spritebatch_bind.html" title="SpriteBatch:bind">bind</a>/<a href="spritebatch_unbind.html" title="SpriteBatch:unbind">unbind</a>.</li>
+                <li> Renamed <a href="framebuffer.html" title="Framebuffer">Framebuffer</a> to <a href="canvas.html" title="Canvas">Canvas</a>.</li>
+                <li> Renamed <a href="thread_send.html" title="Thread:send">Thread:send</a>/<a href="thread_receive.html" title="Thread:receive">receive</a> to <a href="thread_set.html" title="Thread:set">set</a>/<a href="thread_get.html" title="Thread:get">get</a>.</li>
+                <li> Renamed <a href="love.graphics14.html" title="love.graphics.setRenderTarget">love.graphics.setRenderTarget</a> to <a href="love.graphics15.html" title="love.graphics.setCanvas">setCanvas</a>.</li>
+                <li> Updated <a href="love7.html" title="love.joystick">love.joystick</a> to be 1-indexed.</li>
+                <li> Updated Sources to update more cleanly and control more intuitively.</li>
+                <li> Updated font engine.</li>
+                <li> Updated line drawing to a custom system.</li>
+                <li> Updated <a href="love.timer.html" title="love.timer.sleep">love.timer.sleep</a> to use seconds, like the rest of love.</li>
+                <li> Updated <a href="love15.html" title="love.timer">love.timer</a> to be more accurate.</li>
+                <li> Updated <a href="love.graphics16.html" title="love.graphics.circle">love.graphics.circle</a> to have max(10, r) as default for segments.</li>
+                <li> Updated <a href="imagedata_encode.html" title="ImageData:encode">ImageData:encode</a> to write to files directly.</li>
+                <li> Updated version compatibility system to actually do something.</li>
+                <li> Updated <a href="love40.html" title="love.run">love.run</a>'s order, events are checked just before update.</li>
+                <li> Updated Box2D to version 2.2.1.</li>
+                <li> Updated sdl to 1.2.15 on Windows</li>
+                <li> Updated freetype to 2.4.9 on Windows</li>
+                <li> Updated libjpeg to 8d on Windows</li>
+                <li> Updated libmodplug to 0.8.8.4 on Windows</li>
+                <li> Updated libogg to 1.3.0 on Windows</li>
+                <li> Updated libpng to 1.5.10 on Windows</li>
+                <li> Updated mpg123 to 1.13.7 on Windows</li>
+                <li> Updated openal-soft to 1.14 on Windows</li>
+                <li> Updated zlib to 1.2.6 on Windows</li>
+              </ul>
+              <h3>
+                <span class="mw-headline" id="Removals">Removals</span>
+              </h3>
+              <ul>
+                <li> Removed <a href="canvas.html" title="Canvas">Canvas</a> auto-clearing.</li>
+                <li> Removed <em class="new">EncodedImageData</em>.</li>
+                <li> Removed old syntax for require (with extension and slashes).</li>
+                <li> Removed <a href="love.graphics17.html" title="love.graphics.setFont">love.graphics.setFont([file, ][size])</a>.</li>
+                <li> Removed <a href="thread_kill.html" title="Thread:kill">Thread:kill</a>.</li>
+              </ul>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_versions.html" title="Category:Versions">Versions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

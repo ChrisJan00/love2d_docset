@@ -1,0 +1,143 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tutorial:Drawing Order - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tutorial:Drawing Order" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-500 ns-subject page-Tutorial_Drawing_Order skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tutorial:Drawing Order</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>As L&#xD6;VE doesn't have a built-in z-ordering system, you may encounter some issues when trying to create a game that automatically draws a character in front or behind objects depending on their respective positions such as is customarily found in adventure games. This tutorial will show you how to do this in a very simplistic manner.
+</p>
+              <p>Note: In this tutorial, when I refer to an object being "in front" of the character I mean that it is between the character and the screen (ie: you). "Behind" means that the character is between the screen and the object. 
+</p>
+              <p>First, we need some resources:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- the background for our scene</span>
+scene <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newImage<span class="br0">(</span><span class="st0">"room.png"</span><span class="br0">)</span>
+<span class="co1">-- the character we will be moving around</span>
+person <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newImage<span class="br0">(</span><span class="st0">"guy.png"</span><span class="br0">)</span>
+<span class="co1">-- an object to move around</span>
+object <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newImage<span class="br0">(</span><span class="st0">"ball.png"</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Alright, now that we have our resources we need some variables to contain the positions of our person and objects:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- the character position</span>
+character <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">400</span><span class="sy0">,</span><span class="nu0">400</span><span class="br0">}</span> <span class="co1">-- x,y</span>
+&#xA0;
+<span class="co1">-- a bunch of objects, each with a position</span>
+objects <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+objects<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">550</span><span class="sy0">,</span><span class="nu0">370</span><span class="br0">}</span>
+objects<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">220</span><span class="sy0">,</span><span class="nu0">390</span><span class="br0">}</span>
+objects<span class="br0">[</span><span class="nu0">3</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">600</span><span class="sy0">,</span><span class="nu0">410</span><span class="br0">}</span>
+objects<span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">300</span><span class="sy0">,</span><span class="nu0">450</span><span class="br0">}</span>
+objects<span class="br0">[</span><span class="nu0">5</span><span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">400</span><span class="sy0">,</span><span class="nu0">530</span><span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>Make sure that your list of objects are ordered by their y-position. This becomes important when drawing them. For a general application, one can first use the Lua function <code>table.sort</code>.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> orderY<span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span>
+  <span class="kw1">return</span> a<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">&lt;</span> b<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span>
+<span class="kw1">end</span>
+<span class="kw3">table.sort</span><span class="br0">(</span>objects<span class="sy0">,</span> orderY<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Although, You must be careful not to store the index to an object directly. As the objects index will change after the sort (You may wish to make a copy for drawing purposes only)
+</p>
+              <p>To draw these objects, we are going to use
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>object<span class="sy0">,</span> objects<span class="br0">[</span>i<span class="br0">]</span><span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">-</span> object<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> objects<span class="br0">[</span>i<span class="br0">]</span><span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">-</span>  object<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>The <code>object</code> parameter specifies the image we're going to draw and the next two arguments specify where the upper left corner of the image should be drawn on the screen. We subtract by half of the width and the height of the image to place the image's bottom horizontal center at <code>object[i]</code>'s specified x and y coordinate.
+</p>
+              <p>Ok, now we are ready to draw the whole shebang, assuming that you have created some way of moving your character around the screen (or else this is just pointless as you won't see the difference). If you don't know how to do that, I suggest looking at some of our other tutorials for assistance. For simplicity I am just going to show you the entire <code><a href="love49.html" title="love.draw">love.draw</a></code> function and then explain what happens:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span> 
+    love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>scene<span class="sy0">,</span> love<span class="sy0">.</span>graphics<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span> <span class="sy0">/</span> <span class="nu0">2</span> <span class="sy0">-</span> scene<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span>
+        love<span class="sy0">.</span>graphics<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span> <span class="sy0">/</span> <span class="nu0">2</span> <span class="sy0">-</span> scene<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span> <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span> <span class="co1">-- draw at the center of the screen</span>
+&#xA0;
+    <span class="kw1">local</span> drawn <span class="sy0">=</span> <span class="kw4">false</span> <span class="co1">-- true when the character has been drawn</span>
+&#xA0;
+    <span class="kw1">for</span> i<span class="sy0">,</span>v <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>objects<span class="br0">)</span> <span class="kw1">do</span>
+        <span class="kw1">if</span> <span class="kw2">not</span> drawn <span class="kw2">and</span> objects<span class="br0">[</span>i<span class="br0">]</span><span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">&gt;</span> character<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="kw1">then</span>
+            love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>person<span class="sy0">,</span> character<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">-</span> person<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> character<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">-</span> person<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+            drawn <span class="sy0">=</span> <span class="kw4">true</span>
+        <span class="kw1">end</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>object<span class="sy0">,</span> objects<span class="br0">[</span>i<span class="br0">]</span><span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">-</span> object<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> objects<span class="br0">[</span>i<span class="br0">]</span><span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">-</span> object<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+   <span class="kw1">end</span>
+&#xA0;
+   <span class="kw1">if</span> <span class="kw2">not</span> drawn <span class="kw1">then</span> <span class="co1">-- if the person is below all objects it won't be drawn within the for loop</span>
+      love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>person<span class="sy0">,</span> character<span class="br0">[</span><span class="nu0">1</span><span class="br0">]</span> <span class="sy0">-</span> person<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">,</span> character<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span> <span class="sy0">-</span> person<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+   <span class="kw1">end</span>
+&#xA0;
+   <span class="co1">-- any foreground objects go here</span>
+&#xA0;
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>First of all we draw our scene as it normally is in the back (like any potential foreground objects will always be in the front).
+Then I create a variable called <code>drawn</code>. This will tell us if the character has been drawn to ensure that he isn't re-drawn multiple times which will cause him to be in front of objects where he shouldn't be.
+Next I go into a for loop and iterate through all of our objects (which are ordered from furthest away to closest). Then I check if the object is supposed to be in front of our character, if it is then you should draw the character (and set the drawn variable). The reason for this is because this for loop will go through and draw the objects (which are all the same image in this case, but that doesn't have to be so) until it comes to an object which should be in front of the chracter which is when it draws the character and then continues to draw the rest of the objects.
+If it comes to the end of the for loop and hasn't drawn the character yet it means that the character is in front of all the objects so it draws it at the end. 
+</p>
+              <p>That's all. Download the demo and give it a go. It may be very simple but this tutorial is only about drawing order and if you want to know how to check if the character is colliding with the object or you want the character to go where you have clicked then you're on your own (until a tutorial is made for that).
+If this is not straightforward enough, please feel free to comment on it on our <a class="external text" href="http://www.love2d.org/forums/" rel="nofollow">forum</a>. 
+</p>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <p>An alternative, scalable implementation&#xA0;: <a href="skip_list_drawing_order.html" title="Skip list:Drawing Order">Skip list:Drawing Order</a>
+</p>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Other_languages">Other languages</span>
+              </h2>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_tutorials.html" title="Category:Tutorials">Tutorials</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

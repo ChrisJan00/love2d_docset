@@ -1,0 +1,181 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>enet.host - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="enet.host" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-enet_host skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">enet.host</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <h2>
+                <span class="mw-headline" id="Description">Description</span>
+              </h2>
+              <p>An ENet host for communicating with peers. On creation it will bind to a port on an address, unless otherwise specified, which will keep other applications from binding to the same port and address.
+</p>
+              <p>The only way to free the port is by garbage collecting the ENet host, which can be done like so:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">local</span> host <span class="sy0">=</span> enet<span class="sy0">.</span>host_create<span class="br0">(</span><span class="st0">"*:6789"</span><span class="br0">)</span>
+host <span class="sy0">=</span> <span class="kw4">nil</span>
+<span class="kw3">collectgarbage</span><span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <table class="wikitable">
+                <tr>
+                  <th>Function
+</th>
+                  <th>Description
+</th>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet4.html" title="enet.host:service"> host:service</a>
+                  </td>
+                  <td>Wait for <a href="enet3.html" title="enet.event"> events</a>, send and receive any ready packets.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet5.html" title="enet.host:check events"> host:check_events</a>
+                  </td>
+                  <td>Checks for any queued <a href="enet3.html" title="enet.event"> events</a> and dispatches one if available.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet6.html" title="enet.host:connect"> host:connect</a>
+                  </td>
+                  <td>Connects a host to a remote host. Returns <a href="enet2.html" title="enet.peer"> peer</a> object associated with remote host.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet7.html" title="enet.host:flush"> host:flush</a>
+                  </td>
+                  <td>Sends any queued packets.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet8.html" title="enet.host:broadcast"> host:broadcast</a>
+                  </td>
+                  <td>Queues a packet to be sent to all connected peers.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet9.html" title="enet.host:channel limit"> host:channel_limit</a>
+                  </td>
+                  <td>Sets the maximum number of channels allowed.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet10.html" title="enet.host:bandwidth limit"> host:bandwidth_limit</a>
+                  </td>
+                  <td>Sets the bandwidth limits of the host in bytes/sec.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a class="mw-redirect" href="enet33.html" title="enet.host:socket get address"> host:socket_get_address</a>
+                  </td>
+                  <td>Returns a <a href="string.html" title="string">string</a> that describes the socket address of the given host.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet12.html" title="enet.host:total sent data"> host:total_sent_data</a>
+                  </td>
+                  <td>Returns the <a href="number.html" title="number">number</a> of bytes that were sent through the given host.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet13.html" title="enet.host:total received data"> host:total_received_data</a>
+                  </td>
+                  <td>Returns the <a href="number.html" title="number">number</a> of bytes that were received by the given host.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet14.html" title="enet.host:service time"> host:service_time</a>
+                  </td>
+                  <td>Returns the timestamp of the last call to <a href="enet4.html" title="enet.host:service"> host:service()</a> or <a href="enet7.html" title="enet.host:flush"> host:flush()</a>.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet15.html" title="enet.host:peer count"> host:peer_count</a>
+                  </td>
+                  <td>Returns the number of peers that are allocated for the given host.
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet16.html" title="enet.host:get peer"> host:get_peer</a>
+                  </td>
+                  <td>Returns the connected <a href="enet2.html" title="enet.peer"> peer</a> at the specified index (starting at 1).
+</td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="enet17.html" title="enet.host: gc"> host:__gc</a>
+                  </td>
+                  <td>Destroys the host, freeing any bound ports and addresses.
+</td>
+                </tr>
+              </table>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="lua_enet.html" title="lua-enet">lua-enet</a>
+                </li>
+                <li>
+                  <a href="enet_host_create.html" title="enet:host create">enet:host_create</a>
+                </li>
+                <li>
+                  <a href="enet3.html" title="enet.event">enet.event</a>
+                </li>
+                <li>
+                  <a href="enet2.html" title="enet.peer">enet.peer</a>
+                </li>
+              </ul>
+            </div>
+            <div class="catlinks" id="catlinks">
+            <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

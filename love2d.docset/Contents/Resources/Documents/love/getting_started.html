@@ -1,0 +1,177 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Getting Started - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Getting Started" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Getting_Started skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Getting Started</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <h2>
+                <span class="mw-headline" id="Get_L.C3.96VE">Get L&#xD6;VE</span>
+              </h2>
+              <p>Download the latest version of L&#xD6;VE from <a class="external text" href="http://love2d.org/#download" rel="nofollow">the website</a>, and install it. If you're on Windows and don't want to <i>install</i> L&#xD6;VE, you can also just download the zipped executables and extract them anywhere.
+</p>
+              <p>To find out which version of L&#xD6;VE is installed, run the following command:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1">love <span class="re5">--version</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Making_a_Game">Making a Game</span>
+              </h2>
+              <p>To make a minimal game, create a folder anywhere, and open up your favorite text editor. <a class="external text" href="http://www.sublimetext.com" rel="nofollow">Sublime Text</a> is a pretty good one for all operating systems, and it has Lua support built in. Create a new file in the folder you just created, and name it <code>main.lua</code>. Put the following code in the file, and save it.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+    love<span class="sy0">.</span>graphics<span class="sy0">.</span><span class="kw3">print</span><span class="br0">(</span><span class="st0">"Hello World"</span><span class="sy0">,</span> <span class="nu0">400</span><span class="sy0">,</span> <span class="nu0">300</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Running_Games">Running Games</span>
+              </h2>
+              <p>L&#xD6;VE can load a game in two ways:
+</p>
+              <ul>
+                <li> From a folder that contains a main.lua file.</li>
+                <li> From a <a href="l_ve_game_file.html" title="L&#xD6;VE Game File">.love file</a> that has a main.lua file in the top-most directory level (aka root)</li>
+              </ul>
+              <p>For creating .love files see <a href="game_distribution.html" title="Game Distribution">Game Distribution</a>.
+</p>
+              <h3>
+                <span class="mw-headline" id="Windows">Windows</span>
+              </h3>
+              <p><a class="external text" href="http://studio.zerobrane.com" rel="nofollow">ZeroBrane Studio</a>, <a href="http://www.sublimetext.com/" title="Sublime Text 2">Sublime Text 2</a>, <a href="https://notepad-plus-plus.org/" title="Notepad++">Notepad++</a>, and <a href="http://www.scintilla.org/SciTE.html" title="SciTE">SciTE</a> allow you to launch the game from within their code editors.
+</p>
+              <p>Otherwise, the easiest way to run the game is to drag the folder onto either love.exe or a shortcut to love.exe. Remember to drag the folder containing <code>main.lua</code>, and not <code>main.lua</code> itself.
+</p>
+              <p>You can also launch the game from the command line:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="powershell source-powershell">
+                  <pre class="de1">
+                    <span class="st0">"C:\Program Files\LOVE\love.exe"</span>
+                    <span class="st0">"C:\games\mygame"</span>
+                    <span class="st0">"C:\Program Files\LOVE\love.exe"</span>
+                    <span class="st0">"C:\games\packagedgame.love"</span>
+                  </pre>
+                </div>
+              </div>
+              <p>You can create a shortcut to do this; simply make a shortcut to love.exe, right-click on it and select "Properties", and then put the command line you want in the "Target" box for the shortcut.
+</p>
+              <p>On Windows, there is a special command-line option which will attach a console to the window, allowing you to see the result of <code>print</code> calls (equivalent to setting <code>t.console=true</code> in <a class="mw-redirect" href="config_files.html" title="conf.lua">conf.lua</a>):
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1">
+                    <span class="st0">"C:\Program Files\LOVE\love.exe"</span>
+                    <span class="re5">--console</span>
+                  </pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Linux">Linux</span>
+              </h3>
+              <p>On Linux, you can use one of these command lines:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1">love <span class="sy0">/</span>home<span class="sy0">/</span>path<span class="sy0">/</span>to<span class="sy0">/</span>gamedir<span class="sy0">/</span>
+love <span class="sy0">/</span>home<span class="sy0">/</span>path<span class="sy0">/</span>to<span class="sy0">/</span>packagedgame.love</pre>
+                </div>
+              </div>
+              <p>If you installed L&#xD6;VE system-wide, you can double click on .love files in your file manager as well.
+</p>
+              <h3>
+                <span class="mw-headline" id="Mac_OS_X">Mac OS X</span>
+              </h3>
+              <p>On Mac OS X, a folder or .love file can be dropped onto the love application bundle. On the Mac Terminal (command line), you can use love like this (assuming it's installed to the Applications directory):
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1">open <span class="re5">-n</span> <span class="re5">-a</span> love <span class="st0">"~/path/to/mygame"</span></pre>
+                </div>
+              </div>
+              <p>However, the above method will not output printed text to the terminal window. To do that, you will need to execute the love binary inside the application bundle directly: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1"><span class="sy0">/</span>Applications<span class="sy0">/</span>love.app<span class="sy0">/</span>Contents<span class="sy0">/</span>MacOS<span class="sy0">/</span>love ~<span class="sy0">/</span>path<span class="sy0">/</span>to<span class="sy0">/</span>mygame</pre>
+                </div>
+              </div>
+              <p>You can set up an alias in your Terminal session to call the binary when you use <code>love</code> by adding an alias to your <code>~/.bash_profile</code>.
+</p>
+              <p>Open the file with
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1">open <span class="re5">-a</span> TextEdit ~<span class="sy0">/</span>.bash_profile</pre>
+                </div>
+              </div>
+              <p>You may have to run
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1"><span class="kw2">touch</span> ~<span class="sy0">/</span>.bash_profile</pre>
+                </div>
+              </div>
+              <p>first if the file does not yet exist.
+</p>
+              <p>Then paste in the following code and save the file:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1"><span class="co0"># alias to love</span><span class="kw3">alias</span><span class="re2">love</span>=<span class="st0">"/Applications/love.app/Contents/MacOS/love"</span></pre>
+                </div>
+              </div>
+              <p>Now you can call love from the command line like Linux and Windows:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="bash source-bash">
+                  <pre class="de1">love <span class="st0">"~/path/to/mygame"</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Next_steps">Next steps</span>
+              </h2>
+              <ul>
+                <li><a href="tutorial_callback_functions1.html" title="Tutorial:Callback Functions">Tutorial:Callback_Functions</a> will teach you the basic structure of a love game.</li>
+                <li><a href="category_tutorials.html" title="Category:Tutorials">Category:Tutorials</a> are the next piece of reading</li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_l_ve.html" title="Category:L&#xD6;VE">L&#xD6;VE</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

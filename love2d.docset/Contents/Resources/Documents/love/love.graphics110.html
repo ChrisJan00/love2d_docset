@@ -1,0 +1,139 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.graphics.quad - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.graphics.quad" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_graphics_quad skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.graphics.quad</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table bgcolor="#ffacac" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Removed in L&#xD6;VE <a href="0.9.html" title="0.9.0">0.9.0</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This function is not supported in that and later versions. Use <a href="love.graphics136.html" title="love.graphics.polygon">love.graphics.polygon</a> instead.</small>
+                  </td>
+                </tr>
+              </table>
+              <p>Draws a quadrilateral shape.
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love<span class="sy0">.</span>graphics<span class="sy0">.</span>quad<span class="br0">(</span> mode<span class="sy0">,</span> x1<span class="sy0">,</span> y1<span class="sy0">,</span> x2<span class="sy0">,</span> y2<span class="sy0">,</span> x3<span class="sy0">,</span> y3<span class="sy0">,</span> x4<span class="sy0">,</span> y4 <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="drawmode.html" title="DrawMode">DrawMode</a> mode</code>
+                </dt>
+                <dd> How to draw the quad.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> x1</code>
+                </dt>
+                <dd> The position of the top left corner along x-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> y1</code>
+                </dt>
+                <dd> The position of the top left corner along y-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> x2</code>
+                </dt>
+                <dd> The position of the top right corner along x-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> y2</code>
+                </dt>
+                <dd> The position of the top right corner along y-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> x3</code>
+                </dt>
+                <dd> The position of the bottom right corner along x-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> y3</code>
+                </dt>
+                <dd> The position of the bottom right corner along y-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> x4</code>
+                </dt>
+                <dd> The position of the bottom left corner along x-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> y4</code>
+                </dt>
+                <dd> The position of the bottom left corner along y-axis.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <p>Nothing.
+</p>
+              <h2>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="A_quadrilateral_that_has_its_top_left_corner_located_at_0.2C0_and_whose_width_and_height_are_100_pixels.">A quadrilateral that has its top left corner located at 0,0 and whose width and height are 100 pixels.</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>quad<span class="br0">(</span><span class="st0">"fill"</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">100</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

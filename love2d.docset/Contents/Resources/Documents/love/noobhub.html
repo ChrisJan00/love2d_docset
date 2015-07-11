@@ -1,0 +1,104 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Noobhub - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Noobhub" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Noobhub skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Noobhub</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="NoobHub">NoobHub</span>
+              </h2>
+              <p>Source: <a class="external free" href="https://github.com/Overtorment/NoobHub" rel="nofollow">https://github.com/Overtorment/NoobHub</a>
+</p>
+              <p>Forum thread: <em class="external free" rel="nofollow">https://love2d.org/forums/viewtopic.php?f=3&amp;t=76953</em>
+</p>
+              <p>
+                <br/>
+              </p>
+              <p>OpenSource multiplayer and network messaging for CoronaSDK, Moai, Gideros &amp; L&#xD6;VE
+</p>
+              <ul>
+                <li> Connections are routed through socket server with minimum latency, ideal for action games.</li>
+                <li> Simple interface. Publish/subscribe paradigm in action.</li>
+                <li> Server written on blazing fast Nodejs.</li>
+                <li> Socket connections, works great through any NAT (local area network), messages delivery is reliable and fast.</li>
+              </ul>
+              <p><br/>
+Repo includes server code (so you can use your own server) and CoronaSDK/Moai/Gideros client. More clients to come. You can test on my server, credentials are hardcoded in demo project!
+</p>
+              <p><br/>
+Lua code may serve as an example of how LuaSocket library works.
+</p>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="How_to_use_it">How to use it</span>
+              </h2>
+              <p>START SERVER
+</p>
+              <pre>   $ node node.js
+</pre>
+              <p>INITIALIZE
+</p>
+              <pre>   hub = noobhub.new({ server = "127.0.0.1"; port = 1337; }); 
+</pre>
+              <p>SUBSCRIBE TO A CHANNEL AND RECEIVE CALLBACKS WHEN NEW JSON MESSAGES ARRIVE
+</p>
+              <pre>   hub:subscribe({
+     channel = "hello-world";  
+       callback = function(message)
+</pre>
+              <pre>           if(message.action == "ping")   then 
+               print("Pong!")
+           end;
+</pre>
+              <pre>       end;
+   });
+</pre>
+              <p>SAY SOMETHING TO EVERYBODY ON THE CHANNEL
+</p>
+              <pre>   hub:publish({
+       message = {
+           action  =  "ping",
+           timestamp = system.getTimer()
+       }
+   });
+</pre>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

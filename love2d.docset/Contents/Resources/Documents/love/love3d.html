@@ -1,0 +1,204 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Love3D - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Love3D" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Love3D skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Love3D</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>
+                <b>IF YOU'RE LOOKING FOR ANOTHER LIBRARY OF THE SAME NAME SEE&#xA0;: <em class="external text" rel="nofollow">L3D Library</em></b>
+              </p>
+              <p>This library allows you to simulate pseudo-3D, although you can model some basic 3D polyhedrons with the 3D triangles. There are also other functions too.
+</p>
+              <h2>
+                <span class="mw-headline" id="Download">Download</span>
+              </h2>
+              <p><a class="external text" href="https://dl.dropbox.com/u/105405645/Love2D%20Libraries/Love3D%20by%20Substitute541.zip" rel="nofollow">The Love3D Library.zip</a>
+Current Version&#xA0;: 0.3.2 [Backface Update]
+</p>
+              <p>
+                <a class="external text" href="https://dl.dropbox.com/u/105405645/Test%20Files/test5.love" rel="nofollow">Lighting Demo</a>
+              </p>
+              <p>
+                <a class="external text" href="https://dl.dropbox.com/u/105405645/Test%20Files/test6.love" rel="nofollow">Ambient Lighting Demo</a>
+              </p>
+              <p>
+                <a class="external text" href="https://dl.dropbox.com/u/105405645/Test%20Files/Love3D/test7.love" rel="nofollow">Backface Culling Demo</a>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Instructions">Instructions</span>
+              </h2>
+              <ul>
+                <li> Unzip the .zip file</li>
+                <li> If you are using this, put the Love3D.lua in your .love file</li>
+                <li> On the outside of any function in main.lua add&#xA0;:</li>
+              </ul>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">
+                    <span class="kw3">require</span>
+                    <span class="st0">"Love3D"</span>
+                  </pre>
+                </div>
+              </div>
+              <ul>
+                <li> Then on the INSIDE of love.load(), near the end of the function, add&#xA0;:</li>
+              </ul>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love3D<span class="sy0">.</span>load<span class="br0">(</span>fl<span class="sy0">,</span> vpX<span class="sy0">,</span> vpY<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <ul>
+                <li> (Note&#xA0;: FL means Focal Length. This value is usually 250. vp means Vanishing Point) And you're done! Just call the functions and you're ready to go!</li>
+              </ul>
+              <p>
+                <b>How to load additional extensions</b>
+              </p>
+              <ul>
+                <li> Put yourExtension.lua in your love file</li>
+                <li> Love3D.lua will automatically require yourExtension.lua when it exists. So just load  it inside love.load() AFTER loading Love3D.</li>
+              </ul>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love3D<span class="sy0">.</span>extensionName<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <ul>
+                <li> And you're done!</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <p>
+                <b>Love3D Functions</b>
+              </p>
+              <ul>
+                <li><b>love3D.load</b>. Loads the library, must be called in the love.load function</li>
+              </ul>
+              <ul>
+                <li><b>love3D.calculatePointPosition</b>. Calculates point position by transforming the 3D coordinates to 2D</li>
+              </ul>
+              <ul>
+                <li><b>love3D.isBackFace</b>. Checks if the face is a <a class="external text" href="http://en.wikipedia.org/wiki/Backface_culling#Backface_culling" rel="nofollow">backface</a></li>
+              </ul>
+              <ul>
+                <li><b>love3D.graphics.quad</b>. Draws a quadrilateral</li>
+              </ul>
+              <ul>
+                <li><b>love3D.graphics.triangle</b>. Draws a triangle</li>
+              </ul>
+              <ul>
+                <li><b>love3D.graphics.lineSegment2D</b>. Draws a 2D line segment in 3D space</li>
+              </ul>
+              <ul>
+                <li><b>love3D.graphics.draw2D</b>. Draws a 2D image in 3D space</li>
+              </ul>
+              <ul>
+                <li><b>love3D.func.rotateX/Y/Z</b>. Rotates a point in a chosen center point</li>
+              </ul>
+              <ul>
+                <li><b>love3D.func.checkDistCollision</b>. Checks if two circular objects in 3D space are colliding</li>
+              </ul>
+              <ul>
+                <li><b>love3D.func.getAvgZTriangle/Quad</b>. Finds the average Z of a triangle/quad</li>
+              </ul>
+              <ul>
+                <li><b>love3D.func.zSortTriangle/Quad</b>. Sorts a triangle/quad by their average Z</li>
+              </ul>
+              <ul>
+                <li><b>love3D.func.zSortTriangle2</b>. Sorts a triangle triangle by their minimum Z</li>
+              </ul>
+              <ul>
+                <li><b>love3D.func.zSortPoint</b>. Sorts a table of points</li>
+              </ul>
+              <ul>
+                <li><b>love3D.checkVersion</b>. Checks the current version of Love3D</li>
+              </ul>
+              <p>
+                <b>Light3D Functions</b>
+              </p>
+              <ul>
+                <li><b>love3D.light.load</b>. Loads Light3D.lua</li>
+              </ul>
+              <ul>
+                <li><b>love3D.light.set</b>. Sets all the variables</li>
+              </ul>
+              <ul>
+                <li><b>love3D.light.setAmbience</b>. Sets the ambient lighting</li>
+              </ul>
+              <ul>
+                <li><b>love3D.light.getLightFactor</b>. Gets the light factor (only used by love3D.light.getNewColor)</li>
+              </ul>
+              <ul>
+                <li><b>love3D.light.getNewColor</b>. Gets the new color</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Possible_uses">Possible uses</span>
+              </h2>
+              <ul>
+                <li>Spinning cube for menu screens</li>
+              </ul>
+              <ul>
+                <li>A more accurate Parallax Scrolling</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Changelog">Changelog</span>
+              </h2>
+              <ul>
+                <li> 0.1.x&#xA0;: Added the perspective function</li>
+                <li> 0.2.0 -&gt; 0.2.8&#xA0;: Added simple perspective functions and graphics functions</li>
+                <li> 0.2.9&#xA0;: Optimized code, renamed the perspective function</li>
+                <li> 0.3.0&#xA0;: Added simple lighting, optimized code</li>
+                <li> 0.3.1&#xA0;: Added ambient lighting, removed the [[Experimental]] tag</li>
+                <li> 0.3.2&#xA0;: Added <a class="external text" href="http://en.wikipedia.org/wiki/Backface_culling#Backface_culling" rel="nofollow">Backface culling</a>, added a second zSort function for the triangle, added support for <a href="beetle_debug.html" title="Beetle Debug">Beetle Debug</a>, added Preset3D</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Screenshots">Screenshots</span>
+              </h2>
+              <div class="thumb tright">
+                <div class="thumbinner" style="width:502px;">
+                  <div class="thumbcaption"><div class="magnify"><a class="internal" href="file_love3dlighting.html" title="Enlarge"/></div>The Love3D Lighting demo (please note that the color on the demo is gray, not red).</div>
+                  <img alt="" class="thumbimage" height="387" src="love3dlighting.jpg" width="500"/>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Contributors">Contributors</span>
+              </h2>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

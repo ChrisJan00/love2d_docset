@@ -1,0 +1,78 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>LuaC - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="LuaC" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-LuaC skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">LuaC</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>We're not kidding here; LuaC might have its uses, but it comes with a lot of strings attached.
+<ul><li>Don't use it.</li><li><i>(for experts)</i> Don't use it yet.</li></ul>
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>Although <a class="mw-redirect" href="index.html" title="L&#xD6;VE">L&#xD6;VE</a> accepts bytecode (because well, the VM does) we <i>don't</i> actually support it, if you have problems with bytecode, try plaintext before reporting bugs.
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <p>LuaC is tool which takes a <em class="new">lua</em> <em class="new">source file</em> and parses it into lua byte-code.
+</p>
+              <p>Sounds useful? Keep reading.
+</p>
+              <p>Lua byte-codes are not part of the Lua specification but rather a practical result of the LuaVM's design. The LuaVM is also not a part of any standardized specification, for it too is an implementation detail.
+<b>The only part of Lua that has a standardized specification is the language itself, and the <em class="new">CAPI</em>.</b> <i><b>Nothing else.</b></i>
+</p>
+              <p>The incompatibility of the byte-codes stems from this. Since there is no specification for Lua byte-codes, and <b>they are not meant to be ported between different builds of Lua</b>, there's no need to insulate the byte-codes from the vagaries and tribulations of the compiler. The upshot of this is that the compiler is free to rearrange the various <tt>struct</tt>s and <tt>enum</tt>s upon which the VM relies as deems fit (usually for efficiency), the down side is that <b>any byte-code is potentially idiosyncratic to the exact build of lua that created it.</b>
+</p>
+              <p><i>"But then, why create LuaC?"</i>, a question with a simple answer: One possible build configuration of Lua is parserless (an ultra-small size Lua build), which has the down side that it is unable to process source files on its own; it must be given pre-parsed source files...which is to say, byte-codes.
+The same limitations apply, though; <b>the build of LuaC used must match the VM.</b> A brittle solution, but tolerable given the circumstances.
+</p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_lua.html" title="Category:Lua">Lua</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

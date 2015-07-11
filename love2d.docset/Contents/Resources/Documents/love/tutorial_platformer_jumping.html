@@ -1,0 +1,185 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tutorial:Platformer Jumping - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tutorial:Platformer Jumping" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-500 ns-subject page-Tutorial_Platformer_Jumping skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tutorial:Platformer Jumping</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>This tutorial is incomplete. Do you want to <em class="external text" rel="nofollow">complete it</em>?
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <p>Due to a request on IRC, this guide has been written to show a basic implementation of platformer-style jumping physics for a player character.
+</p>
+              <p>The tutorial is fairly basic and even a newbie should have no issue understanding.
+</p>
+              <p>First, let's start off with our basic code, without any jumping.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span>
+	player <span class="sy0">=</span> <span class="br0">{</span> <span class="co1">-- nice and organised.</span>
+		x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+		y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+		image <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newImage<span class="br0">(</span><span class="st0">"hamster.png"</span><span class="br0">)</span> <span class="co1">-- let's just re-use this sprite.</span>
+	<span class="br0">}</span>
+&#xA0;
+	winW<span class="sy0">,</span> winH <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>getWidth<span class="br0">(</span><span class="br0">)</span><span class="sy0">,</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>getHeight<span class="br0">(</span><span class="br0">)</span> <span class="co1">-- this is just</span>
+	<span class="co1">-- so we can draw it in a fabulous manner.</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>rectangle<span class="br0">(</span><span class="st0">"fill"</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> winH <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">,</span> winW<span class="sy0">,</span> winH <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>translate<span class="br0">(</span>winW <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">,</span> winH <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span> <span class="co1">-- you don't need to understand this</span>
+&#xA0;
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>player<span class="sy0">.</span>image<span class="sy0">,</span> player<span class="sy0">.</span>x<span class="sy0">,</span> <span class="sy0">-</span>player<span class="sy0">.</span>y<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">64</span><span class="sy0">,</span> <span class="nu0">103</span><span class="br0">)</span> <span class="co1">-- trust me</span>
+	<span class="co1">-- on the origin position. just trust me.</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <dl>
+                <dd>Note: The hamster.png file is <em href="file_resource_hamsterball.html">File:Resource-HamsterBall.png</em>.</dd>
+              </dl>
+              <p>You should get something that looks like this:
+</p>
+              <div class="thumb tright">
+                <div class="thumbinner" style="width:302px;">
+                  <div class="thumbcaption">
+                    <div class="magnify">
+                      <a class="internal" href="file_platformerjumpingstepone.html" title="Enlarge"/>
+                    </div>
+                  </div>
+                  <img alt="PlatformerJumpingStepOne.jpg" class="thumbimage" height="225" src="platformerjumpingstepone.jpg" width="300"/>
+                </div>
+              </div>
+              <p>Now, it's time to make it jump. To do this, we'll give the player an upwards velocity, create a gravity variable and a jump height variable.
+</p>
+              <p>Add this to your love.load function:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">	player <span class="sy0">=</span> <span class="br0">{</span>
+		<span class="sy0">...</span>
+		y_velocity <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+	<span class="br0">}</span>
+	<span class="sy0">...</span>
+	gravity <span class="sy0">=</span> <span class="nu0">400</span>
+	jump_height <span class="sy0">=</span> <span class="nu0">300</span></pre>
+                </div>
+              </div>
+              <p>When the player presses the jump button (spacebar for this tutorial) we will increase the x_velocity by the jump_height.
+</p>
+              <p>Then, we will move the player upwards while decreasing the velocity by the gravity. We'll add a love.update and love.keypressed callback to make this work.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+	<span class="kw1">if</span> player<span class="sy0">.</span>y_velocity <span class="sy0">~=</span> <span class="nu0">0</span> <span class="kw1">then</span> <span class="co1">-- we're probably jumping</span>
+		player<span class="sy0">.</span>y <span class="sy0">=</span> player<span class="sy0">.</span>y <span class="sy0">+</span> player<span class="sy0">.</span>y_velocity <span class="sy0">*</span> dt <span class="co1">-- dt means we wont move at</span>
+		<span class="co1">-- different speeds if the game lags</span>
+		player<span class="sy0">.</span>y_velocity <span class="sy0">=</span> player<span class="sy0">.</span>y_velocity <span class="sy0">-</span> gravity <span class="sy0">*</span> dt
+		<span class="kw1">if</span> player<span class="sy0">.</span>y <span class="sy0">&lt;</span> <span class="nu0">0</span> <span class="kw1">then</span> <span class="co1">-- we hit the ground again</span>
+			player<span class="sy0">.</span>y_velocity <span class="sy0">=</span> <span class="nu0">0</span>
+			player<span class="sy0">.</span>y <span class="sy0">=</span> <span class="nu0">0</span>
+		<span class="kw1">end</span>
+	<span class="kw1">end</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>keypressed<span class="br0">(</span>key<span class="br0">)</span>
+	<span class="kw1">if</span> key <span class="sy0">==</span> <span class="st0">" "</span> <span class="kw1">then</span>
+		<span class="kw1">if</span> player<span class="sy0">.</span>y_velocity <span class="sy0">==</span> <span class="nu0">0</span> <span class="kw1">then</span> <span class="co1">-- we're probably on the ground, let's jump</span>
+			player<span class="sy0">.</span>y_velocity <span class="sy0">=</span> jump_height
+		<span class="kw1">end</span>
+	<span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Yay, jumping!
+</p>
+              <p>However, this is not true platformer-style jumping. In a lot of platformers, holding the jump key makes you jump higher. Let's implement this.
+</p>
+              <p>First, let's create a new player variable in love.load.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">	player <span class="sy0">=</span> <span class="br0">{</span>
+		<span class="sy0">...</span>
+		jetpack_fuel <span class="sy0">=</span> <span class="nu0">0.5</span><span class="sy0">,</span> <span class="co1">-- note: not an actual jetpack. variable is the time (in seconds)</span>
+		<span class="co1">-- you can hold spacebar and jump higher.</span>
+		jetpack_fuel_max <span class="sy0">=</span> <span class="nu0">0.5</span><span class="sy0">,</span>
+	<span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>Now, we remove our love.keypressed callback. We won't exact time, which is just bothersome to find out using keypressed and keyreleased. Instead, we'll move that logic to love.update.
+</p>
+              <p>....glhf
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+	<span class="kw1">if</span> player<span class="sy0">.</span>jetpack_fuel <span class="sy0">&gt;</span> <span class="nu0">0</span> <span class="co1">-- we can still move upwards</span>
+	<span class="kw2">and</span> love<span class="sy0">.</span>keyboard<span class="sy0">.</span>isDown<span class="br0">(</span><span class="st0">" "</span><span class="br0">)</span> <span class="kw1">then</span> <span class="co1">-- and we're actually holding space</span>
+		player<span class="sy0">.</span>jetpack_fuel <span class="sy0">=</span> player<span class="sy0">.</span>jetpack_fuel <span class="sy0">-</span> dt <span class="co1">-- decrease the fuel meter</span>
+		player<span class="sy0">.</span>y_velocity <span class="sy0">=</span> player<span class="sy0">.</span>y_velocity <span class="sy0">+</span> jump_height <span class="sy0">*</span> <span class="br0">(</span>dt <span class="sy0">/</span> player<span class="sy0">.</span>jetpack_fuel_max<span class="br0">)</span>
+	<span class="kw1">end</span>
+	<span class="kw1">if</span> player<span class="sy0">.</span>y_velocity <span class="sy0">~=</span> <span class="nu0">0</span> <span class="kw1">then</span> <span class="co1">-- we're probably jumping</span>
+		player<span class="sy0">.</span>y <span class="sy0">=</span> player<span class="sy0">.</span>y <span class="sy0">+</span> player<span class="sy0">.</span>y_velocity <span class="sy0">*</span> dt <span class="co1">-- dt means we wont move at</span>
+		<span class="co1">-- different speeds if the game lags</span>
+		player<span class="sy0">.</span>y_velocity <span class="sy0">=</span> player<span class="sy0">.</span>y_velocity <span class="sy0">-</span> gravity <span class="sy0">*</span> dt
+		<span class="kw1">if</span> player<span class="sy0">.</span>y <span class="sy0">&lt;</span> <span class="nu0">0</span> <span class="kw1">then</span> <span class="co1">-- we hit the ground again</span>
+			player<span class="sy0">.</span>y_velocity <span class="sy0">=</span> <span class="nu0">0</span>
+			player<span class="sy0">.</span>y <span class="sy0">=</span> <span class="nu0">0</span>
+			player<span class="sy0">.</span>jetpack_fuel <span class="sy0">=</span> player<span class="sy0">.</span>jetpack_fuel_max
+		<span class="kw1">end</span>
+	<span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Other_languages">Other languages</span>
+              </h2>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_tutorials.html" title="Category:Tutorials">Tutorials</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

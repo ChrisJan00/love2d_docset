@@ -1,0 +1,210 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>TLpath - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="TLpath" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-TLpath skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">TLpath</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <h2>
+                <span class="mw-headline" id="About">About</span>
+              </h2>
+              <p>TLpath adds pathfinding to Love! It uses an optimized implementation of the excellent <a class="external text" href="https://secure.wikimedia.org/wikipedia/en/wiki/A*" rel="nofollow">A* search algorithm</a> used in many commercial games. It comes with a demo which demonstrates its ability to find optimal paths in as little as 0.015 seconds in mazes comprised of over fifty nodes. TLpath uses threading, meaning it will only work in Love2D version 0.7.1 or higher, and requires <a class="mw-redirect" href="tserial.html" title="TSerial">TSerial</a> (included).
+</p>
+              <p>It's under the <a class="external text" href="http://www.opensource.org/licenses/zlib-license.php" rel="nofollow">ZLIB license</a>.
+</p>
+              <h3>
+                <span class="mw-headline" id="Download">Download</span>
+              </h3>
+              <p>
+                <a class="external text" href="http://dl.dropbox.com/u/3713769/web/Love/TLpath.zip" rel="nofollow">Direct from Dropbox</a>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Contact">Contact</span>
+              </h3>
+              <ul>
+                <li>
+                  <em class="external text" rel="nofollow">Forum thread</em>
+                </li>
+                <li>Taehl - SelfMadeSpirit@gmail.com</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Setup">Setup</span>
+              </h2>
+              <p>Everything in the module is contained in the TLpath namespace, so don't worry about it messing with your global variables. It does its work in a separate thread, allowing the host game to continue running normally.
+</p>
+              <ol>
+                <li> Put TLpath.lua and TSerial.lua in your game's folder</li>
+                <li> At the top of main.lua, add the line <code>require"TLpath"</code></li>
+                <li> In love.update(), add the line <code>TLpath.update()</code></li>
+              </ol>
+              <h2>
+                <span class="mw-headline" id="FAQ">FAQ</span>
+              </h2>
+              <dl>
+                <dt>Q) What are nodes?</dt>
+                <dd>A) A*, like nearly every pathfinding algorithm, uses nodes for increased speed. They are simply points which have connections to other nodes. In TLpath, they are expected to be a list of tables, for example, <code>{{x=1,y=1}, {x=5,y=3}, {x=2,y=8}, {x=9,y=6}}</code>. Technically speaking, nodes don't need x and y values, but may contain any relevant information. Nodes may also have a dests table, which contains the indexen of reachable nodes and the g-factor of that connection.</dd>
+              </dl>
+              <dl>
+                <dt>Q) What's a g-factor? An h-factor? An f-factor?</dt>
+                <dd>A) I would highly recommend you read about the A* algorithm <a class="external text" href="https://secure.wikimedia.org/wikipedia/en/wiki/A*" rel="nofollow">on the Wikipedia</a> for an explanation.</dd>
+              </dl>
+              <dl>
+                <dt>Q) Can TLpath use different functions to calculate g- and h-factors?</dt>
+                <dd>A) Yes, with TLpath.setGfunction() and TLpath.setHfunction()</dd>
+              </dl>
+              <dl>
+                <dt>Q) My game has node relationships which are too complex to calculate in one function. Can I set them myself?</dt>
+                <dd>A) Yes. If you TLpath.calcNodes() a list of nodes which already have dests tables, the tables will be left alone. Dests are required to be in form of <code>node.dests = {neighbor_index = g_factor_number}</code>.</dd>
+              </dl>
+              <dl>
+                <dt>Q) What's the difference between dynamic and static nodes?</dt>
+                <dd>A) Static nodes pre-calculate the node graph and g-factors, allowing all pathfinding calculations to be faster, but this calculation may take a moment to complete (your game won't freeze during this time). Dynamic nodes don't have this delay, but it will take longer to find paths. Static mode is generally preferable, unless your game frequently changes nodes and/or their connections.</dd>
+              </dl>
+              <dl>
+                <dt>Q) How do I know what TLpath is doing? What happens if it has an error?</dt>
+                <dd>A) TLpath updates the string TLpath.status with messages detailing what it's doing (including timing information if love.timer is available). If TLpath or its thread has an error, it will summon the standard Love2D error screen.</dd>
+              </dl>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <h4>
+                <span class="mw-headline" id="TLpath.calcNodes">TLpath.calcNodes</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLpath<span class="sy0">.</span>calcNodes<span class="br0">(</span>nodes<span class="sy0">,</span> dynamic<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>This function updates the node graph that TLpath uses. Use it whenever the nodes or their connections change. Non-dynamic nodes take a moment to calculate, but are generally preferable to dynamic ones.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> nodes</code>
+                </dt>
+                <dd> A list of nodes. For example: <code>{{x=1,y=1}, {x=5,y=3}, {x=2,y=8}, {x=9,y=6}}</code></dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> dynamic</code>
+                </dt>
+                <dd> If true, node relationships won't be pre-calculated, allowing paths to start being calculated instantly and under changing conditions, but take longer than static nodes. Non-dynamic nodes are recommended.</dd>
+              </dl>
+              <h4>
+                <span class="mw-headline" id="TLpath.setGfunction">TLpath.setGfunction</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLpath<span class="sy0">.</span>setGfunction<span class="br0">(</span>f<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>This function is used to specify the g-function. The g-function is called to determine whether a node can reach another, and how "expensive" the resulting path will be. This will likely need to be changed to suit your game.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> f</code>
+                </dt>
+                <dd> A string which is Lua code for a function that will be called when calculating the node graph. The function is passed two nodes as parameters and is expected to return either nil (if a path can't extend from the first to the second) or a number (the g-factor of the path). By default, it is <code>[[local d = ((b.x-a.x)^2+(b.y-a.y)^2)^0.5 return d&lt;=100 and d or nil]]</code>, which means that nodes can only be traveled between if they're less than 100 pixels apart.</dd>
+              </dl>
+              <p>
+                <br/>
+              </p>
+              <h4>
+                <span class="mw-headline" id="TLpath.setHfunction">TLpath.setHfunction</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLpath<span class="sy0">.</span>setHfunction<span class="br0">(</span>f<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Much like TLpath.setGfunction(), except for calculating the heuristic factor of a node to the goal. This function must return a number which is less than or equal to (NOT greater than) the actual cost of a path from the node to the goal. The closer the h-factor is to the real cost of the path, the faster pathfinding calculations will be. The default h-function simply calculates the distance between the node and the goal, which is fast and should be fine for most games.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> f</code>
+                </dt>
+                <dd> Defaults to <code>[[return ((goal.x-a.x)^2+(goal.y-a.y)^2)^0.5</code>]].</dd>
+              </dl>
+              <h4>
+                <span class="mw-headline" id="TLpath.findPath">TLpath.findPath</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLpath<span class="sy0">.</span>findPath<span class="br0">(</span>ent<span class="sy0">,</span> goal<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>This function tells TLpath to calculate a path from ent to goal, where ent is a table that includes a path list, and goal is a node index. Paths are calculated one at a time in the order they're requested, and may take a little bit of time to find, so there may be a small delay between requesting a path and receiving it. When a path is found, the path table of ent will be updated. If the goal isn't able to be reached from ent's current position, ent.path.unreachable will equal true and the ent's current path will be left unchanged.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> ent</code>
+                </dt>
+                <dd> A table which includes a paths table which lists at least one node index (i.e., where the ent is currently located).</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> goal</code>
+                </dt>
+                <dd>The index of the goal node (that is, nodes[goal] = the desired node).</dd>
+              </dl>
+              <h4>
+                <span class="mw-headline" id="TLpath.cancelPathfinding">TLpath.cancelPathfinding</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLpath<span class="sy0">.</span>cancelPathfinding<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Calling this will empty the pathfinding queue and cancel any currently-processing searches. TLpath.calcNodes automatically calls it to prevent bizarre behavior that emerges from changing the node graph while in the middle of finding a path.
+</p>
+              <h4>
+                <span class="mw-headline" id="TLpath.update">TLpath.update</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLpath<span class="sy0">.</span>update<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Call this in love.update() to handle TLpath's events (path request spooling, receiving data from thread, etc.).
+</p>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

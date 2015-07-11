@@ -1,0 +1,130 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tserial - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tserial" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Tserial skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tserial</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <h2>
+                <span class="mw-headline" id="About">About</span>
+              </h2>
+              <p>Tserial is a library for turning tables into strings ("serialization") and vice-versa. This has several uses, including making a game save/load system (you write all your game state to a file) and multiplayer (you can pass tables across the network). Tserial turns tables into Lua script, for maximum ease-of-use.
+</p>
+              <h3>
+                <span class="mw-headline" id="Download">Download</span>
+              </h3>
+              <p>
+                <a class="external text" href="http://dl.dropbox.com/u/3713769/web/Love/TLTools/Tserial.lua" rel="nofollow">Direct from Dropbox</a>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Contact">Contact</span>
+              </h3>
+              <h2>
+                <span class="mw-headline" id="Setup">Setup</span>
+              </h2>
+              <ol>
+                <li> Put Tserial.lua in your game's folder</li>
+                <li> At the top of main.lua, add the line <code>require"Tserial"</code></li>
+              </ol>
+              <h2>
+                <span class="mw-headline" id="FAQ">FAQ</span>
+              </h2>
+              <dl>
+                <dt>Q) Can Tserial pack a table that contains other tables?</dt>
+                <dd>A) Yes. Any number of nested tables is fine (it's suitable even for things like tile maps). However, Tserial can NOT handle self-referential tables (such as <code>t={t}</code> or <code>t={{1,2,3},{t}}</code>).</dd>
+              </dl>
+              <dl>
+                <dt>Q) What data types can/can't be handled by Tserial?</dt>
+                <dd>A) It will properly serialize strings, numbers, booleans, and tables. A table may have any of these types as either keys or values. Userdata and functions can't be serialized by default, but can be supported with a little extra work.</dd>
+              </dl>
+              <dl>
+                <dt>Q) How can I serialize userdata?</dt>
+                <dd>A) The second parameter of Tserial.pack is used for these. If it's true, Tserial will simply skip userdata and functions. If it's a function, this function will be used to serialize the data. If it's a table, the table will be used for serial lookups.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <h4>
+                <span class="mw-headline" id="Tserial.pack">Tserial.pack</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Tserial<span class="sy0">.</span>pack<span class="br0">(</span>t<span class="sy0">,</span> drop<span class="sy0">,</span> indent<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Serializes a table into a string. Returns a string of Lua script which recreates the table.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> t</code>
+                </dt>
+                <dd> The table to be serialized. May not be self-referential.</dd>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> drop</code>
+                </dt>
+                <dd> What to do upon encountering data that can't be serialized, like userdata and functions. If absent, Tserial will throw an error upon encountering them. If drop is a function, then it will be called with one parameter (the data) and expect a string in return (so you can supply your own serializing function). If drop is a table, it will be used to look up serials (with data as keys and serials as values).</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> indent</code>
+                </dt>
+                <dd> If true, output will be in "human-readable mode" with newlines and proper indentation. Otherwise, the string will all be on one line (resulting in smaller sizes).</dd>
+              </dl>
+              <h4>
+                <span class="mw-headline" id="Tserial.unpack">Tserial.unpack</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Tserial<span class="sy0">.</span><span class="kw3">unpack</span><span class="br0">(</span>s<span class="sy0">,</span> safe<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Turns a serial back into a table. Returns a table recreated from the string (or nil and an error message if safe is true and a malformed string was given).
+</p>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> s</code>
+                </dt>
+                <dd> The serial to be turned into a table.</dd>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> safe</code>
+                </dt>
+                <dd> If true, all extraneous parts of the string will be removed, leaving only a table (this prevents running anomalous code when unpacking untrusted strings). Will also cause malformed tables to quietly return nil and an error message, instead of throwing an error (so your program can't be crashed with a bad string).</dd>
+              </dl>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

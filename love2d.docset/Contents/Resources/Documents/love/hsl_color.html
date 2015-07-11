@@ -1,0 +1,74 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>HSL color - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="HSL color" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-HSL_color skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">HSL color</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>The <a class="external text" href="https://secure.wikimedia.org/wikipedia/en/wiki/HSL_and_HSV" rel="nofollow">HSL color space</a> is based on how humans perceive color, and as such, makes various aesthetically-pleasing color transformations very simple. Instead of saying how much light a monitor will emit (not a very natural way to think about colors), colors are described in terms of Hue, Saturation, and Lightness.
+</p>
+              <ul>
+                <li><b>Hue</b> describes where in the spectrum the color is. As Hue increases, a color will transition in the following order: Red, orange, yellow, green, cyan, blue, violet, purple, magenta, red.</li>
+                <li><b>Saturation</b> denotes how vibrant a color is. Ranges from grey to pure color.</li>
+                <li><b>Lightness</b> is how light or dark a color is. Ranges from black to white. In the middle is either grey (if low saturation) or a color (if high saturation).</li>
+              </ul>
+              <p>Here is a function <em href="user_taehl.html">Taehl</em> wrote to convert HSL colors to RGB:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- Converts HSL to RGB. (input and output range: 0 - 255)</span><span class="kw1">function</span> HSL<span class="br0">(</span>h<span class="sy0">,</span> s<span class="sy0">,</span> l<span class="sy0">,</span> a<span class="br0">)</span>
+	<span class="kw1">if</span> s<span class="sy0">&lt;=</span><span class="nu0">0</span> <span class="kw1">then</span> <span class="kw1">return</span> l<span class="sy0">,</span>l<span class="sy0">,</span>l<span class="sy0">,</span>a <span class="kw1">end</span>
+	h<span class="sy0">,</span> s<span class="sy0">,</span> l <span class="sy0">=</span> h<span class="sy0">/</span><span class="nu0">256</span><span class="sy0">*</span><span class="nu0">6</span><span class="sy0">,</span> s<span class="sy0">/</span><span class="nu0">255</span><span class="sy0">,</span> l<span class="sy0">/</span><span class="nu0">255</span>
+	<span class="kw1">local</span> c <span class="sy0">=</span> <span class="br0">(</span><span class="nu0">1</span><span class="sy0">-</span><span class="kw3">math.abs</span><span class="br0">(</span><span class="nu0">2</span><span class="sy0">*</span>l<span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">*</span>s
+	<span class="kw1">local</span> x <span class="sy0">=</span> <span class="br0">(</span><span class="nu0">1</span><span class="sy0">-</span><span class="kw3">math.abs</span><span class="br0">(</span>h<span class="sy0">%</span><span class="nu0">2</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">*</span>c
+	<span class="kw1">local</span> m<span class="sy0">,</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> <span class="br0">(</span>l<span class="sy0">-</span><span class="nu0">.5</span><span class="sy0">*</span>c<span class="br0">)</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>
+	<span class="kw1">if</span> h <span class="sy0">&lt;</span> <span class="nu0">1</span>     <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> c<span class="sy0">,</span>x<span class="sy0">,</span><span class="nu0">0</span>
+	<span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">2</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> x<span class="sy0">,</span>c<span class="sy0">,</span><span class="nu0">0</span>
+	<span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">3</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>c<span class="sy0">,</span>x
+	<span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">4</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>x<span class="sy0">,</span>c
+	<span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">5</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> x<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>c
+	<span class="kw1">else</span>              r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> c<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>x
+	<span class="kw1">end</span> <span class="kw1">return</span> <span class="br0">(</span>r<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">*</span><span class="nu0">255</span><span class="sy0">,</span><span class="br0">(</span>g<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">*</span><span class="nu0">255</span><span class="sy0">,</span><span class="br0">(</span>b<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">*</span><span class="nu0">255</span><span class="sy0">,</span>a
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>This could be used, for example, like this: <code><a href="love.graphics228.html" title="love.graphics.setColor">love.graphics.setColor</a>(HSL(150,100,200))</code> (this would color things a greyish blue)
+</p>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

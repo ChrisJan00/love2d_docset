@@ -1,0 +1,104 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>HSV color - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="HSV color" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-HSV_color skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">HSV color</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>The <a class="external text" href="https://secure.wikimedia.org/wikipedia/en/wiki/HSL_and_HSV" rel="nofollow">HSV color space</a> is based on how humans perceive color, and as such, makes various aesthetically-pleasing color transformations very simple.
+</p>
+              <ul>
+                <li><b>Hue</b> describes where in the spectrum the color is. As Hue increases, a color will transition in the following order: Red, orange, yellow, green, teal, blue, violet, purple, magenta, red.</li>
+                <li><b>Saturation</b> denotes how vibrant a color is. Ranges from grey to pure color.</li>
+                <li><b>Value</b> is how saturated an image is, the amount of each color.</li>
+              </ul>
+              <p>This function converts HSV values to RGB:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- Converts HSV to RGB. (input and output range: 0 - 255)</span>
+&#xA0;
+<span class="kw1">function</span> HSV<span class="br0">(</span>h<span class="sy0">,</span> s<span class="sy0">,</span> v<span class="br0">)</span>
+    <span class="kw1">if</span> s <span class="sy0">&lt;=</span> <span class="nu0">0</span> <span class="kw1">then</span> <span class="kw1">return</span> v<span class="sy0">,</span>v<span class="sy0">,</span>v <span class="kw1">end</span>
+    h<span class="sy0">,</span> s<span class="sy0">,</span> v <span class="sy0">=</span> h<span class="sy0">/</span><span class="nu0">256</span><span class="sy0">*</span><span class="nu0">6</span><span class="sy0">,</span> s<span class="sy0">/</span><span class="nu0">255</span><span class="sy0">,</span> v<span class="sy0">/</span><span class="nu0">255</span>
+    <span class="kw1">local</span> c <span class="sy0">=</span> v<span class="sy0">*</span>s
+    <span class="kw1">local</span> x <span class="sy0">=</span> <span class="br0">(</span><span class="nu0">1</span><span class="sy0">-</span><span class="kw3">math.abs</span><span class="br0">(</span><span class="br0">(</span>h<span class="sy0">%</span><span class="nu0">2</span><span class="br0">)</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">*</span>c
+    <span class="kw1">local</span> m<span class="sy0">,</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> <span class="br0">(</span>v<span class="sy0">-</span>c<span class="br0">)</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span>
+    <span class="kw1">if</span> h <span class="sy0">&lt;</span> <span class="nu0">1</span>     <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> c<span class="sy0">,</span>x<span class="sy0">,</span><span class="nu0">0</span>
+    <span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">2</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> x<span class="sy0">,</span>c<span class="sy0">,</span><span class="nu0">0</span>
+    <span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">3</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>c<span class="sy0">,</span>x
+    <span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">4</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>x<span class="sy0">,</span>c
+    <span class="kw1">elseif</span> h <span class="sy0">&lt;</span> <span class="nu0">5</span> <span class="kw1">then</span> r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> x<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>c
+    <span class="kw1">else</span>              r<span class="sy0">,</span>g<span class="sy0">,</span>b <span class="sy0">=</span> c<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>x
+    <span class="kw1">end</span> <span class="kw1">return</span> <span class="br0">(</span>r<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">*</span><span class="nu0">255</span><span class="sy0">,</span><span class="br0">(</span>g<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">*</span><span class="nu0">255</span><span class="sy0">,</span><span class="br0">(</span>b<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">*</span><span class="nu0">255</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>and the same function implemented in GLSL, for those that need it:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="c source-c">
+                  <pre class="de1">    vec3 HSV<span class="br0">(</span><span class="kw4">float</span> h<span class="sy0">,</span> <span class="kw4">float</span> s<span class="sy0">,</span> <span class="kw4">float</span> v<span class="br0">)</span>
+    <span class="br0">{</span>
+    	<span class="kw1">if</span> <span class="br0">(</span>s <span class="sy0">&lt;=</span> <span class="nu0">0</span> <span class="br0">)</span> <span class="br0">{</span> <span class="kw1">return</span> vec3 <span class="br0">(</span>v<span class="br0">)</span><span class="sy0">;</span> <span class="br0">}</span>
+        h <span class="sy0">=</span> h <span class="sy0">*</span> <span class="nu0">6</span><span class="sy0">;</span>
+    	<span class="kw4">float</span> c <span class="sy0">=</span> v<span class="sy0">*</span>s<span class="sy0">;</span>
+    	<span class="kw4">float</span> x <span class="sy0">=</span> <span class="br0">(</span><span class="nu0">1</span><span class="sy0">-</span><span class="kw3">abs</span><span class="br0">(</span><span class="br0">(</span>mod<span class="br0">(</span>h<span class="sy0">,</span><span class="nu0">2</span><span class="br0">)</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">*</span>c<span class="sy0">;</span>
+    	<span class="kw4">float</span> m <span class="sy0">=</span> v<span class="sy0">-</span>c<span class="sy0">;</span>
+    	<span class="kw4">float</span> r <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span>
+        <span class="kw4">float</span> g <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span>
+        <span class="kw4">float</span> b <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span>
+&#xA0;
+    	<span class="kw1">if</span> <span class="br0">(</span>h <span class="sy0">&lt;</span> <span class="nu0">1</span><span class="br0">)</span> <span class="br0">{</span> r <span class="sy0">=</span> c<span class="sy0">;</span> g <span class="sy0">=</span> x<span class="sy0">;</span>b <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span><span class="br0">}</span>
+	    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>h <span class="sy0">&lt;</span> <span class="nu0">2</span><span class="br0">)</span> <span class="br0">{</span> r <span class="sy0">=</span> x<span class="sy0">;</span> g <span class="sy0">=</span> c<span class="sy0">;</span> b <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span> <span class="br0">}</span>
+	    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>h <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="br0">)</span> <span class="br0">{</span> r <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span> g <span class="sy0">=</span> c<span class="sy0">;</span> b <span class="sy0">=</span> x<span class="sy0">;</span> <span class="br0">}</span>
+	    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>h <span class="sy0">&lt;</span> <span class="nu0">4</span><span class="br0">)</span> <span class="br0">{</span> r <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span> g <span class="sy0">=</span> x<span class="sy0">;</span> b <span class="sy0">=</span> c<span class="sy0">;</span> <span class="br0">}</span>
+	    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">(</span>h <span class="sy0">&lt;</span> <span class="nu0">5</span><span class="br0">)</span> <span class="br0">{</span> r <span class="sy0">=</span> x<span class="sy0">;</span> g <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span> b <span class="sy0">=</span> c<span class="sy0">;</span> <span class="br0">}</span>
+	    <span class="kw1">else</span>  <span class="br0">{</span> r <span class="sy0">=</span> c<span class="sy0">;</span> g <span class="sy0">=</span> <span class="nu16">0.0</span><span class="sy0">;</span> b <span class="sy0">=</span> x<span class="sy0">;</span> <span class="br0">}</span>
+&#xA0;
+    	<span class="kw1">return</span> vec3<span class="br0">(</span>r<span class="sy0">+</span>m<span class="sy0">,</span>g<span class="sy0">+</span>m<span class="sy0">,</span>b<span class="sy0">+</span>m<span class="br0">)</span><span class="sy0">;</span>
+    <span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>Or for those who want to save up on space (and achieve better performance, as branching is quite costly on GPUs), here's one-liner:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="c source-c">
+                  <pre class="de1">vec3 hsv<span class="br0">(</span><span class="kw4">float</span> h<span class="sy0">,</span><span class="kw4">float</span> s<span class="sy0">,</span><span class="kw4">float</span> v<span class="br0">)</span> <span class="br0">{</span> <span class="kw1">return</span> mix<span class="br0">(</span>vec3<span class="br0">(</span><span class="nu0">1</span>.<span class="br0">)</span><span class="sy0">,</span>clamp<span class="br0">(</span><span class="br0">(</span><span class="kw3">abs</span><span class="br0">(</span>fract<span class="br0">(</span>h<span class="sy0">+</span>vec3<span class="br0">(</span><span class="nu0">3</span>.<span class="sy0">,</span><span class="nu0">2</span>.<span class="sy0">,</span><span class="nu0">1</span>.<span class="br0">)</span><span class="sy0">/</span><span class="nu0">3</span>.<span class="br0">)</span><span class="sy0">*</span><span class="nu0">6</span>.<span class="sy0">-</span><span class="nu0">3</span>.<span class="br0">)</span><span class="sy0">-</span><span class="nu0">1</span>.<span class="br0">)</span><span class="sy0">,</span><span class="nu0">0</span>.<span class="sy0">,</span><span class="nu0">1</span>.<span class="br0">)</span><span class="sy0">,</span>s<span class="br0">)</span><span class="sy0">*</span>v<span class="sy0">;</span> <span class="br0">}</span></pre>
+                </div>
+              </div>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

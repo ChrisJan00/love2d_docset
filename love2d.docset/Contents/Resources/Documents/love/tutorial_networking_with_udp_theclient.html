@@ -1,0 +1,211 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tutorial:Networking with UDP-TheClient - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tutorial:Networking with UDP-TheClient" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-500 ns-subject page-Tutorial_Networking_with_UDP-TheClient skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tutorial:Networking with UDP-TheClient</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>The complete source for the UDP client
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- to start with, we need to require the 'socket' lib (which is compiled</span><span class="co1">-- into love). socket provides low-level networking features.</span><span class="kw1">local</span> socket <span class="sy0">=</span> <span class="kw3">require</span> <span class="st0">"socket"</span>
+&#xA0;
+<span class="co1">-- the address and port of the server</span>
+<span class="kw1">local</span> address<span class="sy0">,</span> port <span class="sy0">=</span> <span class="st0">"localhost"</span><span class="sy0">,</span> <span class="nu0">12345</span>
+&#xA0;
+<span class="kw1">local</span> entity <span class="co1">-- entity is what we'll be controlling</span>
+<span class="kw1">local</span> updaterate <span class="sy0">=</span> <span class="nu0">0.1</span> <span class="co1">-- how long to wait, in seconds, before requesting an update</span>
+&#xA0;
+<span class="kw1">local</span> world <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span> <span class="co1">-- the empty world-state</span>
+<span class="kw1">local</span> t
+&#xA0;
+<span class="co1">-- love.load, hopefully you are familiar with it from the callbacks tutorial</span>
+<span class="kw1">function</span> love<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- first up, we need a udp socket, from which we'll do all</span>
+	<span class="co1">-- out networking.</span>
+	udp <span class="sy0">=</span> socket<span class="sy0">.</span>udp<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- normally socket reads block until they have data, or a</span>
+	<span class="co1">-- certain amout of time passes.</span>
+	<span class="co1">-- that doesn't suit us, so we tell it not to do that by setting the </span>
+	<span class="co1">-- 'timeout' to zero</span>
+	udp<span class="sy0">:</span>settimeout<span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- unlike the server, we'll just be talking to the one machine, </span>
+	<span class="co1">-- so we'll "connect" this socket to the server's address and port</span>
+	<span class="co1">-- using setpeername.</span>
+	<span class="co1">--</span>
+	<span class="co1">-- [NOTE: UDP is actually connectionless, this is purely a convenience</span>
+	<span class="co1">-- provided by the socket library, it doesn't actually change the </span>
+	<span class="co1">--'bits on the wire', and in-fact we can change / remove this at any time.]</span>
+	udp<span class="sy0">:</span>setpeername<span class="br0">(</span>address<span class="sy0">,</span> port<span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- seed the random number generator, so we don't just get the</span>
+	<span class="co1">-- same numbers each time.</span>
+	<span class="kw3">math.randomseed</span><span class="br0">(</span><span class="kw3">os.time</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> 
+&#xA0;
+	<span class="co1">-- entity will be what we'll be controlling, for the sake of this</span>
+	<span class="co1">-- tutorial its just a number, but it'll do.</span>
+	<span class="co1">-- we'll just use random to give us a reasonably unique identity for little effort.</span>
+	<span class="co1">--</span>
+	<span class="co1">-- [NOTE: random isn't actually a very good way of doing this, but the</span>
+	<span class="co1">-- "correct" ways are beyond the scope of this article. the *simplest* </span>
+	<span class="co1">-- is just an auto-count, they get a *lot* more fancy from there on in]</span>
+&#xA0;
+	entity <span class="sy0">=</span> <span class="kw3">tostring</span><span class="br0">(</span><span class="kw3">math.random</span><span class="br0">(</span><span class="nu0">99999</span><span class="br0">)</span><span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- Here we do our first bit of actual networking:</span>
+	<span class="co1">-- we set up a string containing the data we want to send (using 'string.format')</span>
+	<span class="co1">-- and then send it using 'udp.send'. since we used 'setpeername' earlier</span>
+	<span class="co1">-- we don't even have to specify where to send it.</span>
+	<span class="co1">--</span>
+	<span class="co1">-- thats...it, really. the rest of this is just putting this context and practical use.</span>
+	<span class="kw1">local</span> dg <span class="sy0">=</span> <span class="kw3">string.format</span><span class="br0">(</span><span class="st0">"%s&#xA0;%s&#xA0;%d&#xA0;%d"</span><span class="sy0">,</span> entity<span class="sy0">,</span> <span class="st0">'at'</span><span class="sy0">,</span> <span class="nu0">320</span><span class="sy0">,</span> <span class="nu0">240</span><span class="br0">)</span>
+	udp<span class="sy0">:</span>send<span class="br0">(</span>dg<span class="br0">)</span> <span class="co1">-- the magic line in question.</span>
+&#xA0;
+	<span class="co1">-- t is just a variable we use to help us with the update rate in love.update.</span>
+	t <span class="sy0">=</span> <span class="nu0">0</span> <span class="co1">-- (re)set t to 0</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">-- love.update, hopefully you are familiar with it from the callbacks tutorial</span>
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>deltatime<span class="br0">)</span>
+&#xA0;
+	t <span class="sy0">=</span> t <span class="sy0">+</span> deltatime <span class="co1">-- increase t by the deltatime</span>
+&#xA0;
+	<span class="co1">-- its *very easy* to completely saturate a network connection if you</span>
+	<span class="co1">-- aren't careful with the packets we send (or request!), we hedge</span>
+	<span class="co1">-- our chances by limiting how often we send (and request) updates.</span>
+	<span class="co1">-- </span>
+	<span class="co1">-- for the record, ten times a second is considered good for most normal</span>
+	<span class="co1">-- games (including many MMOs), and you shouldn't ever really need more </span>
+	<span class="co1">-- than 30 updates a second, even for fast-paced games.</span>
+	<span class="kw1">if</span> t <span class="sy0">&gt;</span> updaterate <span class="kw1">then</span>
+		<span class="co1">-- we could send updates for every little move, but we consolidate</span>
+		<span class="co1">-- the last update-worth here into a single packet, drastically reducing</span>
+		<span class="co1">-- our bandwidth use.</span>
+		<span class="kw1">local</span> x<span class="sy0">,</span> y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span>
+		<span class="kw1">if</span> love<span class="sy0">.</span>keyboard<span class="sy0">.</span>isDown<span class="br0">(</span><span class="st0">'up'</span><span class="br0">)</span> <span class="kw1">then</span> 	y<span class="sy0">=</span>y<span class="sy0">-</span><span class="br0">(</span><span class="nu0">20</span><span class="sy0">*</span>t<span class="br0">)</span> <span class="kw1">end</span>
+		<span class="kw1">if</span> love<span class="sy0">.</span>keyboard<span class="sy0">.</span>isDown<span class="br0">(</span><span class="st0">'down'</span><span class="br0">)</span> <span class="kw1">then</span> 	y<span class="sy0">=</span>y<span class="sy0">+</span><span class="br0">(</span><span class="nu0">20</span><span class="sy0">*</span>t<span class="br0">)</span> <span class="kw1">end</span>
+		<span class="kw1">if</span> love<span class="sy0">.</span>keyboard<span class="sy0">.</span>isDown<span class="br0">(</span><span class="st0">'left'</span><span class="br0">)</span> <span class="kw1">then</span> 	x<span class="sy0">=</span>x<span class="sy0">-</span><span class="br0">(</span><span class="nu0">20</span><span class="sy0">*</span>t<span class="br0">)</span> <span class="kw1">end</span>
+		<span class="kw1">if</span> love<span class="sy0">.</span>keyboard<span class="sy0">.</span>isDown<span class="br0">(</span><span class="st0">'right'</span><span class="br0">)</span> <span class="kw1">then</span> 	x<span class="sy0">=</span>x<span class="sy0">+</span><span class="br0">(</span><span class="nu0">20</span><span class="sy0">*</span>t<span class="br0">)</span> <span class="kw1">end</span>
+&#xA0;
+&#xA0;
+		<span class="co1">-- again, we prepare a packet *payload* using string.format, </span>
+		<span class="co1">-- then send it on its way with udp:send</span>
+		<span class="co1">-- this one is the move update mentioned above</span>
+		<span class="kw1">local</span> dg <span class="sy0">=</span> <span class="kw3">string.format</span><span class="br0">(</span><span class="st0">"%s&#xA0;%s&#xA0;%f&#xA0;%f"</span><span class="sy0">,</span> entity<span class="sy0">,</span> <span class="st0">'move'</span><span class="sy0">,</span> x<span class="sy0">,</span> y<span class="br0">)</span>
+		udp<span class="sy0">:</span>send<span class="br0">(</span>dg<span class="br0">)</span>	
+&#xA0;
+		<span class="co1">-- and again! this is a require that the server send us an update for</span>
+		<span class="co1">--  the world state</span>
+		<span class="co1">--</span>
+		<span class="co1">-- [NOTE: in most designs you don't request world-state updates, you</span>
+		<span class="co1">-- just get them sent to you periodically. theres various reasons for</span>
+		<span class="co1">-- this, but theres one *BIG* one you will have to solemnly take note</span>
+		<span class="co1">-- of: 'anti-griefing'. World-updates are probably one of biggest things</span>
+		<span class="co1">-- the average game-server will pump out on a regular basis, and greifing</span>
+		<span class="co1">-- with forged update requests would be simple effective. so they just</span>
+		<span class="co1">-- don't support update requests, instead giving them out when they feel</span>
+		<span class="co1">-- its appropriate]</span>
+		<span class="kw1">local</span> dg <span class="sy0">=</span> <span class="kw3">string.format</span><span class="br0">(</span><span class="st0">"%s&#xA0;%s $"</span><span class="sy0">,</span> entity<span class="sy0">,</span> <span class="st0">'update'</span><span class="br0">)</span>
+		udp<span class="sy0">:</span>send<span class="br0">(</span>dg<span class="br0">)</span>
+&#xA0;
+		t<span class="sy0">=</span>t<span class="sy0">-</span>updaterate <span class="co1">-- set t for the next round</span>
+	<span class="kw1">end</span>
+&#xA0;
+&#xA0;
+	<span class="co1">-- there could well be more than one message waiting for us, so we'll</span>
+	<span class="co1">-- loop until we run out!</span>
+	<span class="kw1">repeat</span>
+		<span class="co1">-- and here is something new, the much anticipated other end of udp:send!</span>
+		<span class="co1">-- receive return a waiting packet (or nil, and an error message).</span>
+		<span class="co1">-- data is a string, the payload of the far-end's send. we can deal with it</span>
+		<span class="co1">-- the same ways we could deal with any other string in lua (needless to </span>
+		<span class="co1">-- say, getting familiar with lua's string handling functions is a must.</span>
+		data<span class="sy0">,</span> msg <span class="sy0">=</span> udp<span class="sy0">:</span>receive<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+		<span class="kw1">if</span> data <span class="kw1">then</span> <span class="co1">-- you remember, right? that all values in lua evaluate as true, save nil and false?</span>
+&#xA0;
+			<span class="co1">-- match is our freind here, its part of string.*, and data is</span>
+			<span class="co1">-- (or should be!) a string. that funky set of characters bares some </span>
+			<span class="co1">-- explanation, though.</span>
+			<span class="co1">-- (need summary of patterns, and link to section 5.4.1)</span>
+			ent<span class="sy0">,</span> cmd<span class="sy0">,</span> parms <span class="sy0">=</span> data<span class="sy0">:</span>match<span class="br0">(</span><span class="st0">"^(%S*) (%S*) (.*)"</span><span class="br0">)</span>
+			<span class="kw1">if</span> cmd <span class="sy0">==</span> <span class="st0">'at'</span> <span class="kw1">then</span>
+				<span class="co1">-- more patterns, this time with sets, and more length selectors!</span>
+				<span class="kw1">local</span> x<span class="sy0">,</span> y <span class="sy0">=</span> parms<span class="sy0">:</span>match<span class="br0">(</span><span class="st0">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="br0">)</span>
+				<span class="kw3">assert</span><span class="br0">(</span>x <span class="kw2">and</span> y<span class="br0">)</span> <span class="co1">-- validation is better, but asserts will serve.</span>
+&#xA0;
+				<span class="co1">-- don't forget, even if you matched a "number", the result is still a string!</span>
+				<span class="co1">-- thankfully conversion is easy in lua.</span>
+				x<span class="sy0">,</span> y <span class="sy0">=</span> <span class="kw3">tonumber</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">,</span> <span class="kw3">tonumber</span><span class="br0">(</span>y<span class="br0">)</span>
+				<span class="co1">-- and finally we stash it away</span>
+				world<span class="br0">[</span>ent<span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span>x<span class="sy0">=</span>x<span class="sy0">,</span> y<span class="sy0">=</span>y<span class="br0">}</span>
+			<span class="kw1">else</span>
+				<span class="co1">-- this case shouldn't trigger often, but its always a good idea</span>
+				<span class="co1">-- to check (and log!) any unexpected messages and events.</span>
+				<span class="co1">-- it can help you find bugs in your code...or people trying to hack the server.</span>
+				<span class="co1">-- never forget, you can not trust the client!</span>
+				<span class="kw3">print</span><span class="br0">(</span><span class="st0">"unrecognised command:"</span><span class="sy0">,</span> cmd<span class="br0">)</span>
+			<span class="kw1">end</span>
+&#xA0;
+		<span class="co1">-- if data was nil, then msg will contain a short description of the</span>
+		<span class="co1">-- problem (which are also error id...).</span>
+		<span class="co1">-- the most common will be 'timeout', since we settimeout() to zero,</span>
+		<span class="co1">-- anytime there isn't data *waiting* for us, it'll timeout.</span>
+		<span class="co1">--</span>
+		<span class="co1">-- but we should check to see if its a *different* error, and act accordingly.</span>
+		<span class="co1">-- in this case we don't even try to save ourselves, we just error out.</span>
+		<span class="kw1">elseif</span> msg <span class="sy0">~=</span> <span class="st0">'timeout'</span> <span class="kw1">then</span> 
+			<span class="kw3">error</span><span class="br0">(</span><span class="st0">"Network error: "</span><span class="sy0">..</span><span class="kw3">tostring</span><span class="br0">(</span>msg<span class="br0">)</span><span class="br0">)</span>
+		<span class="kw1">end</span>
+	<span class="kw1">until</span> <span class="kw2">not</span> data 
+&#xA0;
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">-- love.draw, hopefully you are familiar with it from the callbacks tutorial</span>
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+	<span class="co1">-- pretty simple, we just loop over the world table, and print the</span>
+	<span class="co1">-- name (key) of everything in their, at its own stored co-ords.</span>
+	<span class="kw1">for</span> k<span class="sy0">,</span> v <span class="kw2">in</span> <span class="kw3">pairs</span><span class="br0">(</span>world<span class="br0">)</span> <span class="kw1">do</span>
+		love<span class="sy0">.</span>graphics<span class="sy0">.</span><span class="kw3">print</span><span class="br0">(</span>k<span class="sy0">,</span> v<span class="sy0">.</span>x<span class="sy0">,</span> v<span class="sy0">.</span>y<span class="br0">)</span>
+	<span class="kw1">end</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="co1">-- And thats the end of the udp client example.</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="catlinks catlinks-allhidden" id="catlinks"/>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

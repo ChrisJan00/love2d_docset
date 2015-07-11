@@ -1,0 +1,121 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Common Organization of Controls Kit Callbacks - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Common Organization of Controls Kit Callbacks" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Common_Organization_of_Controls_Kit_Callbacks skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Common Organization of Controls Kit Callbacks</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>The library provides the functionality of envoking callbacks when certain action happens, just like love.keypressed or love.mousepressed callbacks.
+</p>
+              <h2>
+                <span class="mw-headline" id="Basics">Basics</span>
+              </h2>
+              <p>Following callbacks are defined:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">cock<span class="sy0">.</span>controlcaptured <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">(</span> id<span class="sy0">,</span> longdata <span class="br0">)</span>
+cock<span class="sy0">.</span>controlpressed <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">(</span> id<span class="sy0">,</span> map<span class="sy0">,</span> value <span class="br0">)</span>
+cock<span class="sy0">.</span>controlreleased <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">(</span> id<span class="sy0">,</span> map<span class="sy0">,</span> value <span class="br0">)</span>
+cock<span class="sy0">.</span>controlpeaked <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">(</span> id<span class="sy0">,</span> map<span class="sy0">,</span> value <span class="br0">)</span>
+cock<span class="sy0">.</span>controlzeroed <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">(</span> id<span class="sy0">,</span> map<span class="sy0">,</span> value <span class="br0">)</span>
+cock<span class="sy0">.</span>controlchanged <span class="sy0">=</span> <span class="kw1">function</span> <span class="br0">(</span> id<span class="sy0">,</span> map<span class="sy0">,</span> value <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> id</code>
+                </dt>
+                <dd> ID of the object that issued the callback.</dd>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> map</code>
+                </dt>
+                <dd> Control map that triggered the callback.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> value</code>
+                </dt>
+                <dd> Readings on the input.</dd>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> longdata</code>
+                </dt>
+                <dd> Programmatically arranged data that sums up all info about captured user input. It is used because all the fields wouldn't fit into callbacks' 4 available slots. You must use <a href="cock28.html" title="cock.explodeCapturedData">cock.explodeCapturedData</a> helper function to convert it to meaningful data. You can pass it "as is" to the <a href="cock8.html" title="cock.bind">cock.bind</a> function.</dd>
+              </dl>
+              <ul>
+                <li> controlcaptued called when in input mode some user input was captured</li>
+                <li> controlpressed called when readings went above 0.5 </li>
+                <li> controlreleased called when readings went below 0.5</li>
+                <li> controlpeaked called when readings reached 1.0 (or above)</li>
+                <li> controlzeroed called when readings dropped to 0.0</li>
+                <li> controlchanged called whenever reading is changed</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Details">Details</span>
+              </h2>
+              <p>Because this system generates vastly more calls than regular L&#xD6;VE callbacks system, all callbacks are disabled by default. You must enable them with <a href="cock4.html" title="cock.setCallbacks">cock.setCallbacks</a> except "controlcaptured", which is set at each <a href="cock6.html" title="cock.setCapture">cock.setCapture</a> call.
+</p>
+              <p>Every callback is supplied with ID of the object that issued the callback. You may not need it, but if you have multiple control objects, that will help you figure which one has the input activity. To get corresponding control object table, you can use <a href="cock29.html" title="cock.find">cock.find</a> function.
+</p>
+              <p>If your game uses user-defined controls via capturing them, then your most important callback is "controlcaptured". In it, you would decide whether or not you want to use the captured data, alter it, discard or actually bind, and finally perform other related actions. E.g. you may check whether or not supplied key is already binded elsewhere and prompt user for override or cancel capture.
+</p>
+              <p>All other callbacks are used the same way as L&#xD6;VE's callbacks.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_also">See also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="cock29.html" title="cock.find">cock.find</a>
+                </li>
+                <li>
+                  <a href="cock8.html" title="cock.bind">cock.bind</a>
+                </li>
+                <li>
+                  <a href="cock30.html" title="cock.getBinded">cock.getBinded</a>
+                </li>
+                <li>
+                  <a href="cock6.html" title="cock.setCapture">cock.setCapture</a>
+                </li>
+                <li>
+                  <a href="cock7.html" title="cock.cancelCapture">cock.cancelCapture</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_manual.html" title="Common Organization of Controls Kit Manual">Common Organization of Controls Kit Manual</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit.html" title="Common Organization of Controls Kit">Common Organization of Controls Kit</a>
+                </li>
+              </ul>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

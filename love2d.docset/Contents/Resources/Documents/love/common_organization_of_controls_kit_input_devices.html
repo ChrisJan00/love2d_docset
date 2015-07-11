@@ -1,0 +1,79 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Common Organization of Controls Kit Input devices - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Common Organization of Controls Kit Input devices" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Common_Organization_of_Controls_Kit_Input_devices skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Common Organization of Controls Kit Input devices</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>To simplify handling all the variety of input devices, and simplify binding them, every device is represented with a numerical and literal value.
+</p>
+              <h2>
+                <span class="mw-headline" id="Basics">Basics</span>
+              </h2>
+              <p>Following input devices are defined:
+</p>
+              <ul>
+                <li> "keyboard" (1)</li>
+                <li> "mouse button" (2)</li>
+                <li> "mouse axis" (3)</li>
+                <li> "joystick button" (4)</li>
+                <li> "joystick axis" (5)</li>
+                <li> "joystick hat" / "joystick hat 1" (6)</li>
+                <li> "joystick hat 2" (7)</li>
+                <li> "joystick hat 3" (8), etc.</li>
+              </ul>
+              <p>Additionally, every joystick is represented with internal number that may differ from L&#xD6;VE number, and internal name that <i>will</i> differ from L&#xD6;VE name. Name modification is really simple though, just a joystick number appended to the end of the joystick name. But that already allows for distinguishing joysticks with same names.
+</p>
+              <h2>
+                <span class="mw-headline" id="Details">Details</span>
+              </h2>
+              <p>When using any function that accepts an input device, you can either provide a numerical value, which is useful for programmatical input, or literal value, which is useful for user interaction. You shouldn't use numerical values for hard-coding data, because 1) that will make your code messier with all of these magic numbers and 2) internal conversion is an effecient and optimized operation, and it won't save execution time. Even if the libary didn't employed internal conversion and required to use numerical values, any performance difference would be completely neglectible. For lovers of the "Big O" notation: search time is O(1) average case and O(1+K) worst case. Every failed lookup creates programmatically generated data and stores for later use, thus once failed, the lookup will always be successful.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_also">See also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="common_organization_of_controls_kit_input_keys.html" title="Common Organization of Controls Kit Input keys">Common Organization of Controls Kit Input keys</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_fields.html" title="Common Organization of Controls Kit Fields">Common Organization of Controls Kit Fields</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_manual.html" title="Common Organization of Controls Kit Manual">Common Organization of Controls Kit Manual</a>
+                </li>
+              </ul>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+              </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
