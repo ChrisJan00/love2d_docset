@@ -1,0 +1,198 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>File:world raycast callback example.png - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="File:world raycast callback example.png" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-6 ns-subject page-File_world_raycast_callback_example_png skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">File:world raycast callback example.png</h1>
+          <div id="bodyContent">
+            <div id="mw-content-text">
+              <ul id="filetoc"/>
+              <div class="fullImageLink" id="file">
+                <div class="mw-filepage-resolutioninfo">Size of this preview: <a class="mw-thumbnail-link" href="world_raycast_callback_example.png">768 &#xD7; 599 pixels</a>. <span class="mw-filepage-other-resolutions">Other resolution: <a class="mw-thumbnail-link" href="world_raycast_callback_example.png">308 &#xD7; 240 pixels</a>.</span></div>
+                <img alt="File:world raycast callback example.png" height="599" src="world_raycast_callback_example.png" width="768"/>
+              </div>
+              <div class="fullMedia"><a class="internal" href="world_raycast_callback_example.png" title="world raycast callback example.png">Original file</a> &#x200E;<span class="fileInfo">(806 &#xD7; 629 pixels, file size: 41 KB, MIME type: image/png)</span>
+</div>
+              <div class="mw-content-ltr" dir="ltr" id="mw-imagepage-content" lang="en">
+                <p>A screenshot of a <a href="world_raycast.html" title="World:rayCast">World:rayCast</a> example for L&#xD6;VE <a href="0.8.html" title="0.8.0">0.8.0</a>.
+</p>
+                <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                  <div class="lua source-lua">
+                    <pre class="de1"><span class="kw1">function</span> worldRayCastCallback<span class="br0">(</span>fixture<span class="sy0">,</span> x<span class="sy0">,</span> y<span class="sy0">,</span> xn<span class="sy0">,</span> yn<span class="sy0">,</span> fraction<span class="br0">)</span>
+	<span class="kw1">local</span> hit <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+	hit<span class="sy0">.</span>fixture <span class="sy0">=</span> fixture
+	hit<span class="sy0">.</span>x<span class="sy0">,</span> hit<span class="sy0">.</span>y <span class="sy0">=</span> x<span class="sy0">,</span> y
+	hit<span class="sy0">.</span>xn<span class="sy0">,</span> hit<span class="sy0">.</span>yn <span class="sy0">=</span> xn<span class="sy0">,</span> yn
+	hit<span class="sy0">.</span>fraction <span class="sy0">=</span> fraction
+&#xA0;
+	<span class="kw3">table.insert</span><span class="br0">(</span>Ray<span class="sy0">.</span>hitList<span class="sy0">,</span> hit<span class="br0">)</span>
+&#xA0;
+	<span class="kw1">return</span> <span class="nu0">1</span> <span class="co1">-- Continues with ray cast through all shapes.</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> createStuff<span class="br0">(</span><span class="br0">)</span>
+	<span class="co1">-- Cleaning up the previous stuff.</span>
+	<span class="kw1">for</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="sy0">#</span>Terrain<span class="sy0">.</span>Stuff <span class="kw1">do</span>
+		Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>Fixture<span class="sy0">:</span>destroy<span class="br0">(</span><span class="br0">)</span>
+		Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> <span class="kw4">nil</span>
+	<span class="kw1">end</span>
+&#xA0;
+	<span class="co1">-- Generates some random shapes.</span>
+	<span class="kw1">for</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">30</span> <span class="kw1">do</span>
+		<span class="kw1">local</span> p <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+&#xA0;
+		p<span class="sy0">.</span>x<span class="sy0">,</span> p<span class="sy0">.</span>y <span class="sy0">=</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">700</span><span class="br0">)</span><span class="sy0">,</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">500</span><span class="br0">)</span>
+		<span class="kw1">local</span> shapetype <span class="sy0">=</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="nu0">3</span><span class="br0">)</span>
+		<span class="kw1">if</span> shapetype <span class="sy0">==</span> <span class="nu0">1</span> <span class="kw1">then</span>
+			<span class="kw1">local</span> w<span class="sy0">,</span> h<span class="sy0">,</span> r <span class="sy0">=</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">10</span> <span class="sy0">+</span> <span class="nu0">40</span><span class="sy0">,</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">10</span> <span class="sy0">+</span> <span class="nu0">40</span><span class="sy0">,</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="kw3">math.pi</span> <span class="sy0">*</span> <span class="nu0">2</span>
+			p<span class="sy0">.</span>Shape <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newRectangleShape<span class="br0">(</span>p<span class="sy0">.</span>x<span class="sy0">,</span> p<span class="sy0">.</span>y<span class="sy0">,</span> w<span class="sy0">,</span> h<span class="sy0">,</span> r<span class="br0">)</span>
+		<span class="kw1">elseif</span> shapetype <span class="sy0">==</span> <span class="nu0">2</span> <span class="kw1">then</span>
+			<span class="kw1">local</span> a <span class="sy0">=</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="kw3">math.pi</span> <span class="sy0">*</span> <span class="nu0">2</span>
+			<span class="kw1">local</span> x2<span class="sy0">,</span> y2 <span class="sy0">=</span> p<span class="sy0">.</span>x <span class="sy0">+</span> <span class="kw3">math.cos</span><span class="br0">(</span>a<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span><span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">20</span><span class="br0">)</span><span class="sy0">,</span> p<span class="sy0">.</span>y <span class="sy0">+</span> <span class="kw3">math.sin</span><span class="br0">(</span>a<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span><span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">20</span><span class="br0">)</span>
+			p<span class="sy0">.</span>Shape <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newEdgeShape<span class="br0">(</span>p<span class="sy0">.</span>x<span class="sy0">,</span> p<span class="sy0">.</span>y<span class="sy0">,</span> x2<span class="sy0">,</span> y2<span class="br0">)</span>
+		<span class="kw1">else</span>
+			<span class="kw1">local</span> r <span class="sy0">=</span> <span class="kw3">math.random</span><span class="br0">(</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">40</span> <span class="sy0">+</span> <span class="nu0">10</span>
+			p<span class="sy0">.</span>Shape <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newCircleShape<span class="br0">(</span>p<span class="sy0">.</span>x<span class="sy0">,</span> p<span class="sy0">.</span>y<span class="sy0">,</span> r<span class="br0">)</span>
+		<span class="kw1">end</span>
+&#xA0;
+		p<span class="sy0">.</span>Fixture <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newFixture<span class="br0">(</span>Terrain<span class="sy0">.</span>Body<span class="sy0">,</span> p<span class="sy0">.</span>Shape<span class="br0">)</span>
+&#xA0;
+		Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span> <span class="sy0">=</span> p
+	<span class="kw1">end</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>keypressed<span class="br0">(</span><span class="br0">)</span>
+	createStuff<span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span>
+	<span class="co1">-- Setting this to 1 to avoid all current scaling bugs.</span>
+	love<span class="sy0">.</span>physics<span class="sy0">.</span>setMeter<span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- Start out with the same random stuff each start.</span>
+	<span class="kw3">math.randomseed</span><span class="br0">(</span><span class="nu0">0xfacef00d</span><span class="br0">)</span>
+&#xA0;
+	World <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newWorld<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+	Terrain <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+	Terrain<span class="sy0">.</span>Body <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newBody<span class="br0">(</span>World<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="st0">"static"</span><span class="br0">)</span>
+	Terrain<span class="sy0">.</span>Stuff <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+	createStuff<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+	Ray <span class="sy0">=</span> <span class="br0">{</span>
+		x1 <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+		y1 <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+		x2 <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+		y2 <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span>
+		hitList <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+	<span class="br0">}</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+	<span class="kw1">local</span> now <span class="sy0">=</span> love<span class="sy0">.</span>timer<span class="sy0">.</span>getMicroTime<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+	World<span class="sy0">:</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- Clear fixture hit list.</span>
+	Ray<span class="sy0">.</span>hitList <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+&#xA0;
+	<span class="co1">-- Calculate ray position.</span>
+	<span class="kw1">local</span> pos <span class="sy0">=</span> <span class="br0">(</span><span class="kw3">math.sin</span><span class="br0">(</span>now<span class="sy0">/</span><span class="nu0">4</span><span class="br0">)</span> <span class="sy0">+</span> <span class="nu0">1.2</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">0.4</span>
+	Ray<span class="sy0">.</span>x2<span class="sy0">,</span> Ray<span class="sy0">.</span>y2 <span class="sy0">=</span> <span class="kw3">math.cos</span><span class="br0">(</span>pos <span class="sy0">*</span> <span class="br0">(</span><span class="kw3">math.pi</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">1000</span><span class="sy0">,</span> <span class="kw3">math.sin</span><span class="br0">(</span>pos <span class="sy0">*</span> <span class="br0">(</span><span class="kw3">math.pi</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">*</span> <span class="nu0">1000</span>
+&#xA0;
+	<span class="co1">-- Cast the ray and populate the hitList table.</span>
+	World<span class="sy0">:</span>rayCast<span class="br0">(</span>Ray<span class="sy0">.</span>x1<span class="sy0">,</span> Ray<span class="sy0">.</span>y1<span class="sy0">,</span> Ray<span class="sy0">.</span>x2<span class="sy0">,</span> Ray<span class="sy0">.</span>y2<span class="sy0">,</span> worldRayCastCallback<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+	<span class="co1">-- Drawing the terrain.</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setColor<span class="br0">(</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">)</span>
+	<span class="kw1">for</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="sy0">#</span>Terrain<span class="sy0">.</span>Stuff <span class="kw1">do</span>
+		<span class="kw1">if</span> Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>Shape<span class="sy0">:</span>getType<span class="br0">(</span><span class="br0">)</span> <span class="sy0">==</span> <span class="st0">"polygon"</span> <span class="kw1">then</span>
+			love<span class="sy0">.</span>graphics<span class="sy0">.</span>polygon<span class="br0">(</span><span class="st0">"line"</span><span class="sy0">,</span> Terrain<span class="sy0">.</span>Body<span class="sy0">:</span>getWorldPoints<span class="br0">(</span> Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>Shape<span class="sy0">:</span>getPoints<span class="br0">(</span><span class="br0">)</span> <span class="br0">)</span><span class="br0">)</span>
+		<span class="kw1">elseif</span> Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>Shape<span class="sy0">:</span>getType<span class="br0">(</span><span class="br0">)</span> <span class="sy0">==</span> <span class="st0">"edge"</span> <span class="kw1">then</span>
+			love<span class="sy0">.</span>graphics<span class="sy0">.</span>line<span class="br0">(</span>Terrain<span class="sy0">.</span>Body<span class="sy0">:</span>getWorldPoints<span class="br0">(</span> Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>Shape<span class="sy0">:</span>getPoints<span class="br0">(</span><span class="br0">)</span> <span class="br0">)</span><span class="br0">)</span>
+		<span class="kw1">else</span>
+			<span class="kw1">local</span> x<span class="sy0">,</span> y <span class="sy0">=</span> Terrain<span class="sy0">.</span>Body<span class="sy0">:</span>getWorldPoints<span class="br0">(</span>Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>x<span class="sy0">,</span> Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>y<span class="br0">)</span>
+			love<span class="sy0">.</span>graphics<span class="sy0">.</span>circle<span class="br0">(</span><span class="st0">"line"</span><span class="sy0">,</span> x<span class="sy0">,</span> y<span class="sy0">,</span> Terrain<span class="sy0">.</span>Stuff<span class="br0">[</span>i<span class="br0">]</span><span class="sy0">.</span>Shape<span class="sy0">:</span>getRadius<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>
+		<span class="kw1">end</span>
+	<span class="kw1">end</span>
+&#xA0;
+	<span class="co1">-- Drawing the ray.</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setLineWidth<span class="br0">(</span><span class="nu0">3</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setColor<span class="br0">(</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">100</span><span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>line<span class="br0">(</span>Ray<span class="sy0">.</span>x1<span class="sy0">,</span> Ray<span class="sy0">.</span>y1<span class="sy0">,</span> Ray<span class="sy0">.</span>x2<span class="sy0">,</span> Ray<span class="sy0">.</span>y2<span class="br0">)</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setLineWidth<span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>
+&#xA0;
+	<span class="co1">-- Drawing the intersection points and normal vectors if there were any.</span>
+	<span class="kw1">for</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="sy0">#</span>Ray<span class="sy0">.</span>hitList <span class="kw1">do</span>
+		<span class="kw1">local</span> hit <span class="sy0">=</span> Ray<span class="sy0">.</span>hitList<span class="br0">[</span>i<span class="br0">]</span>
+		love<span class="sy0">.</span>graphics<span class="sy0">.</span>setColor<span class="br0">(</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">)</span>
+		love<span class="sy0">.</span>graphics<span class="sy0">.</span><span class="kw3">print</span><span class="br0">(</span>i<span class="sy0">,</span> hit<span class="sy0">.</span>x<span class="sy0">,</span> hit<span class="sy0">.</span>y<span class="br0">)</span>				<span class="co1">-- print point&#x2116;...</span>
+		love<span class="sy0">.</span>graphics<span class="sy0">.</span>circle<span class="br0">(</span><span class="st0">"line"</span><span class="sy0">,</span> hit<span class="sy0">.</span>x<span class="sy0">,</span> hit<span class="sy0">.</span>y<span class="sy0">,</span> <span class="nu0">3</span><span class="br0">)</span>
+		love<span class="sy0">.</span>graphics<span class="sy0">.</span>setColor<span class="br0">(</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">)</span>
+		love<span class="sy0">.</span>graphics<span class="sy0">.</span>line<span class="br0">(</span>hit<span class="sy0">.</span>x<span class="sy0">,</span> hit<span class="sy0">.</span>y<span class="sy0">,</span> hit<span class="sy0">.</span>x <span class="sy0">+</span> hit<span class="sy0">.</span>xn <span class="sy0">*</span> <span class="nu0">25</span><span class="sy0">,</span> hit<span class="sy0">.</span>y <span class="sy0">+</span> hit<span class="sy0">.</span>yn <span class="sy0">*</span> <span class="nu0">25</span><span class="br0">)</span>
+	<span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                  </div>
+                </div>
+              </div>
+              <h2 id="filehistory">File history</h2>
+              <div id="mw-imagepage-section-filehistory">
+                <p>Click on a date/time to view the file as it appeared at that time.
+</p>
+                <table class="wikitable filehistory">
+                  <tr>
+                    <td/>
+                    <th>Date/Time</th>
+                    <th>Thumbnail</th>
+                    <th>Dimensions</th>
+                    <th>User</th>
+                    <th>Comment</th>
+                  </tr>
+                </table>
+              </div>
+              <ul>
+                <li id="mw-imagepage-upload-disallowed">You cannot overwrite this file.</li>
+              </ul>
+              <h2 id="filelinks">File usage</h2>
+              <div id="mw-imagepage-section-linkstoimage">
+                <p>The following page links to this file:
+</p>
+                <ul class="mw-imagepage-linkstoimage">
+                  <li class="mw-imagepage-linkstoimage-ns0">
+                    <a href="world_raycast.html" title="World:rayCast">World:rayCast</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="catlinks catlinks-allhidden" id="catlinks"/>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

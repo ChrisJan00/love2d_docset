@@ -1,0 +1,124 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>cock.setCapture - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="cock.setCapture" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-cock_setCapture skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">cock.setCapture</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Assumes "input capture" mode.
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">cock<span class="sy0">.</span>setCapture <span class="br0">(</span> self<span class="sy0">,</span> map<span class="sy0">,</span> option<span class="sy0">,</span> eventlock<span class="sy0">,</span> updatelock<span class="sy0">,</span> nomouse<span class="sy0">,</span> callback <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> self</code>
+                </dt>
+                <dd> An object to use.</dd>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> map</code>
+                </dt>
+                <dd> Control map to capture controls into.</dd>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> option</code>
+                </dt>
+                <dd> Optional. Map option to capture controls to. Will revert to <a href="common_organization_of_controls_kit_fields.html" title="Common Organization of Controls Kit Fields">defaultOption</a> if not provided.</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> eventlock</code>
+                </dt>
+                <dd> Optional. Specifies whether or not lock game's input event handlers during capture mode. Will use "false" if not provided.</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> updatelock</code>
+                </dt>
+                <dd> Optional. Specifies whether or not lock game's update function during capture mode. Will use "false" if not provided.</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> nomouse</code>
+                </dt>
+                <dd> Optional. Specifies whether or not capture mouse motion. Will use "false" if not provided.</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> callback</code>
+                </dt>
+                <dd> Optional. Specifies whether or not call <a href="common_organization_of_controls_kit_callbacks1.html" title="Common Organization of Controls Kit Callbacks">controlcaptured</a> callback on input capture. Will use "true" if not provided.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Remarks">Remarks</span>
+              </h2>
+              <p>Locking input handlers may be necessary to avoid undesired activity during capturing the input. This includes both L&#xD6;VE and COCK input handler callbacks. Locking update function serves same purpose, but due to processing data in it, locking it is generally not desired. If you use <a href="common_organization_of_controls_kit_fields.html" title="Common Organization of Controls Kit Fields">cock.current.*</a> fields to process user input in update function, then you are encouraged to lock it. Alternatively, make sure no such processing happens when the library is in "input capture" mode. Locking option for love.draw and other functions is not provided because it is assumed that activity in corresponding functions won't interfere with input capture.
+</p>
+              <p>Because mouse have normally specifically defined unique function in the game, there's an option to ignore mouse motion during input capture to ensure that none of such can be captured. If this is enabled, the libary will temporary set the mouse to the screen center, and will reset it back once input is captured. It is up to the programmer to hide and show mouse cursor before and after mouse position shifting respectively.
+</p>
+              <p>Not calling controlcaptured callback is equivalent to instantly binding captured input to specified map and option. Requesting to call it while having no controlcaptured callback defined is effectively equivalent to the same. Doing so if the callback is defined results in plain call to the callback with "longdata" arranged argument with no additional side-effects going along. User must manually call <a href="cock8.html" title="cock.bind">cock.bind</a> to use obtained data.
+</p>
+              <p><b>NOTE:</b> Assuming input capture mode without cancelling previous input capture mode of any other object will instantly bluescreen the game (stack overflow). This is due to internal structure. If you want capture input to several objects simultaneously, you define a controlcaptured callback that would bind obtained data across several objects, and only assume input mode once.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_also">See also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="cock31.html" title="cock.getCapture">cock.getCapture</a>
+                </li>
+                <li>
+                  <a href="cock7.html" title="cock.cancelCapture">cock.cancelCapture</a>
+                </li>
+                <li>
+                  <a href="cock8.html" title="cock.bind">cock.bind</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_fields.html" title="Common Organization of Controls Kit Fields">Common Organization of Controls Kit Fields</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit_manual.html" title="Common Organization of Controls Kit Manual">Common Organization of Controls Kit Manual</a>
+                </li>
+                <li>
+                  <a href="common_organization_of_controls_kit.html" title="Common Organization of Controls Kit">Common Organization of Controls Kit</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

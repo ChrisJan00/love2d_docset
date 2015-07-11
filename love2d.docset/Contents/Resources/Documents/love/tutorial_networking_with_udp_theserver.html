@@ -1,0 +1,143 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tutorial:Networking with UDP-TheServer - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tutorial:Networking with UDP-TheServer" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-500 ns-subject page-Tutorial_Networking_with_UDP-TheServer skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tutorial:Networking with UDP-TheServer</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>The complete source for the UDP server
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">local</span> socket <span class="sy0">=</span> <span class="kw3">require</span> <span class="st0">"socket"</span>
+&#xA0;
+<span class="co1">-- begin</span>
+<span class="kw1">local</span> udp <span class="sy0">=</span> socket<span class="sy0">.</span>udp<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+<span class="co1">-- normally socket reads block until they have data, or a</span>
+<span class="co1">-- certain amount of time passes.</span>
+<span class="co1">-- that doesn't suit us, so we tell it not to do that by setting the </span>
+<span class="co1">-- 'timeout' to zero</span>
+udp<span class="sy0">:</span>settimeout<span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>
+&#xA0;
+<span class="co1">-- unlike the client, the server has to be specific about where its</span>
+<span class="co1">-- 'bound', or the poor clients will never find it.</span>
+<span class="co1">-- thus while we can happily let the client auto-bind to whatever it likes,</span>
+<span class="co1">-- we have to tell the server to bind to something known.</span>
+<span class="co1">-- </span>
+<span class="co1">-- the first part is which "interface" we should bind to...a bit beyond this tutorial, but '*' basically means "all of them"</span>
+<span class="co1">-- port is simpler, the system maintains a list of up to 65535 (!) "ports"</span>
+<span class="co1">-- ...really just numbers. point is that if you send to a particular port, </span>
+<span class="co1">-- then only things "listening" to that port will be able to receive it, </span>
+<span class="co1">-- and likewise you can only read data sent to ports you are listening too.</span>
+<span class="co1">-- generally speaking, if an address is which machine you want to talk to, then a port is what program on that machine you want to talk to.</span>
+<span class="co1">--</span>
+<span class="co1">-- [NOTE: on some operating systems, ports between 0 and 1024 are "reserved for </span>
+<span class="co1">-- privileged processes". its a security precaution for those system.</span>
+<span class="co1">-- generally speaking, just not using ports in that range avoids a lot of problems]</span>
+udp<span class="sy0">:</span>setsockname<span class="br0">(</span><span class="st0">'*'</span><span class="sy0">,</span> <span class="nu0">12345</span><span class="br0">)</span>
+&#xA0;
+<span class="kw1">local</span> world <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span> <span class="co1">-- the empty world-state</span>
+&#xA0;
+<span class="co1">-- We declare a whole bunch of local variables that we'll be using the in </span>
+<span class="co1">-- main server loop below. you probably recognise some of them from the</span>
+<span class="co1">--client example, but you are also probably wondering what's with the fruity</span>
+<span class="co1">-- names, 'msg_or_ip'? 'port_or_nil'?</span>
+<span class="co1">-- </span>
+<span class="co1">-- well, we're using a slightly different function this time, you'll see when we get there.</span>
+<span class="kw1">local</span> data<span class="sy0">,</span> msg_or_ip<span class="sy0">,</span> port_or_nil
+<span class="kw1">local</span> entity<span class="sy0">,</span> cmd<span class="sy0">,</span> parms
+<span class="co1">-- indefinite loops are probably not something you used to if you only </span>
+<span class="co1">-- know love, but they are quite common. and in fact love has one at its</span>
+<span class="co1">-- heart, you just don't see it.</span>
+<span class="co1">-- regardless, we'll be needing one for our server. and this little</span>
+<span class="co1">-- variable lets us *stop* it&#xA0;:3</span>
+<span class="kw1">local</span> running <span class="sy0">=</span> <span class="kw4">true</span>
+&#xA0;
+<span class="co1">-- the beginning of the loop proper...</span>
+<span class="kw3">print</span> <span class="st0">"Beginning server loop."</span>
+<span class="kw1">while</span> running <span class="kw1">do</span>
+	<span class="co1">-- this line looks familiar, I'm sure, but we're using 'receivefrom'</span>
+	<span class="co1">-- this time. its similar to receive, but returns the data, sender's</span>
+	<span class="co1">-- ip address, and the sender's port. (which you'll hopefully recognise</span>
+	<span class="co1">-- as the two things we need to send messages to someone)</span>
+	<span class="co1">-- we didn't have to do this in the client example because we just bound</span>
+	<span class="co1">-- the socket to the server. ...but that also ignores messages from</span>
+	<span class="co1">-- sources other than what we've bound to, which obviously won't do at</span>
+	<span class="co1">-- all as a server.</span>
+	<span class="co1">--</span>
+	<span class="co1">-- [NOTE: strictly, we could have just used receivefrom (and its </span>
+	<span class="co1">-- counterpart, sendto) in the client. there's nothing special about the</span>
+	<span class="co1">-- functions to prevent it, indeed. send/receive are just convenience</span>
+	<span class="co1">-- functions, sendto/receive from are the real workers.]</span>
+	data<span class="sy0">,</span> msg_or_ip<span class="sy0">,</span> port_or_nil <span class="sy0">=</span> udp<span class="sy0">:</span>receivefrom<span class="br0">(</span><span class="br0">)</span>
+	<span class="kw1">if</span> data <span class="kw1">then</span>
+		<span class="co1">-- more of these funky match paterns!</span>
+		entity<span class="sy0">,</span> cmd<span class="sy0">,</span> parms <span class="sy0">=</span> data<span class="sy0">:</span>match<span class="br0">(</span><span class="st0">"^(%S*) (%S*) (.*)"</span><span class="br0">)</span>
+		<span class="kw1">if</span> cmd <span class="sy0">==</span> <span class="st0">'move'</span> <span class="kw1">then</span>
+			<span class="kw1">local</span> x<span class="sy0">,</span> y <span class="sy0">=</span> parms<span class="sy0">:</span>match<span class="br0">(</span><span class="st0">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="br0">)</span>
+			<span class="kw3">assert</span><span class="br0">(</span>x <span class="kw2">and</span> y<span class="br0">)</span> <span class="co1">-- validation is better, but asserts will serve.</span>
+			<span class="co1">-- don't forget, even if you matched a "number", the result is still a string!</span>
+			<span class="co1">-- thankfully conversion is easy in lua.</span>
+			x<span class="sy0">,</span> y <span class="sy0">=</span> <span class="kw3">tonumber</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">,</span> <span class="kw3">tonumber</span><span class="br0">(</span>y<span class="br0">)</span>
+			<span class="co1">-- and finally we stash it away</span>
+			<span class="kw1">local</span> ent <span class="sy0">=</span> world<span class="br0">[</span>entity<span class="br0">]</span> <span class="kw2">or</span> <span class="br0">{</span>x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">}</span>
+			world<span class="br0">[</span>entity<span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span>x<span class="sy0">=</span>ent<span class="sy0">.</span>x<span class="sy0">+</span>x<span class="sy0">,</span> y<span class="sy0">=</span>ent<span class="sy0">.</span>y<span class="sy0">+</span>y<span class="br0">}</span>
+		<span class="kw1">elseif</span> cmd <span class="sy0">==</span> <span class="st0">'at'</span> <span class="kw1">then</span>
+			<span class="kw1">local</span> x<span class="sy0">,</span> y <span class="sy0">=</span> parms<span class="sy0">:</span>match<span class="br0">(</span><span class="st0">"^(%-?[%d.e]*) (%-?[%d.e]*)$"</span><span class="br0">)</span>
+			<span class="kw3">assert</span><span class="br0">(</span>x <span class="kw2">and</span> y<span class="br0">)</span> <span class="co1">-- validation is better, but asserts will serve.</span>
+			x<span class="sy0">,</span> y <span class="sy0">=</span> <span class="kw3">tonumber</span><span class="br0">(</span>x<span class="br0">)</span><span class="sy0">,</span> <span class="kw3">tonumber</span><span class="br0">(</span>y<span class="br0">)</span>
+			world<span class="br0">[</span>entity<span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span>x<span class="sy0">=</span>x<span class="sy0">,</span> y<span class="sy0">=</span>y<span class="br0">}</span>
+		<span class="kw1">elseif</span> cmd <span class="sy0">==</span> <span class="st0">'update'</span> <span class="kw1">then</span>
+			<span class="kw1">for</span> k<span class="sy0">,</span> v <span class="kw2">in</span> <span class="kw3">pairs</span><span class="br0">(</span>world<span class="br0">)</span> <span class="kw1">do</span>
+				udp<span class="sy0">:</span>sendto<span class="br0">(</span><span class="kw3">string.format</span><span class="br0">(</span><span class="st0">"%s&#xA0;%s&#xA0;%d&#xA0;%d"</span><span class="sy0">,</span> k<span class="sy0">,</span> <span class="st0">'at'</span><span class="sy0">,</span> v<span class="sy0">.</span>x<span class="sy0">,</span> v<span class="sy0">.</span>y<span class="br0">)</span><span class="sy0">,</span> msg_or_ip<span class="sy0">,</span>  port_or_nil<span class="br0">)</span>
+			<span class="kw1">end</span>
+		<span class="kw1">elseif</span> cmd <span class="sy0">==</span> <span class="st0">'quit'</span> <span class="kw1">then</span>
+			running <span class="sy0">=</span> <span class="kw4">false</span><span class="sy0">;</span>
+		<span class="kw1">else</span>
+			<span class="kw3">print</span><span class="br0">(</span><span class="st0">"unrecognised command:"</span><span class="sy0">,</span> cmd<span class="br0">)</span>
+		<span class="kw1">end</span>
+	<span class="kw1">elseif</span> msg_or_ip <span class="sy0">~=</span> <span class="st0">'timeout'</span> <span class="kw1">then</span>
+		<span class="kw3">error</span><span class="br0">(</span><span class="st0">"Unknown network error: "</span><span class="sy0">..</span><span class="kw3">tostring</span><span class="br0">(</span>msg<span class="br0">)</span><span class="br0">)</span>
+	<span class="kw1">end</span>
+&#xA0;
+	socket<span class="sy0">.</span>sleep<span class="br0">(</span><span class="nu0">0.01</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw3">print</span> <span class="st0">"Thank you."</span>
+&#xA0;
+<span class="co1">-- and that the end of the udp server example.</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="catlinks catlinks-allhidden" id="catlinks"/>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

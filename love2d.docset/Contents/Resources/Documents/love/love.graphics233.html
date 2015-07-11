@@ -1,0 +1,117 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.graphics.translate - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.graphics.translate" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_graphics_translate skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.graphics.translate</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Translates the coordinate system in two dimensions.
+</p>
+              <p>When this function is called with two numbers, dx, and dy, all the following drawing operations take effect as if their x and y coordinates were x+dx and y+dy. 
+</p>
+              <p>Scale and translate are not commutative operations, therefore, calling them in different orders will change the outcome.
+</p>
+              <p>This change lasts until <a href="love49.html" title="love.draw">love.draw</a>() exits or else a <a href="love.graphics11.html" title="love.graphics.pop">love.graphics.pop</a> reverts to a previous <a href="love.graphics10.html" title="love.graphics.push">love.graphics.push</a>.
+</p>
+              <p>Translating using whole numbers will prevent tearing/blurring of images and fonts draw after translating.
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love<span class="sy0">.</span>graphics<span class="sy0">.</span>translate<span class="br0">(</span> dx<span class="sy0">,</span> dy <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> dx</code>
+                </dt>
+                <dd> The translation relative to the x-axis.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> dy</code>
+                </dt>
+                <dd> The translation relative to the y-axis.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <p>Nothing.
+</p>
+              <h2>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h2>
+              <p>Translate down and to the right by 10 pixels. Remember, the translation is reset at the end of each <a href="love49.html" title="love.draw">love.draw</a>.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+   love<span class="sy0">.</span>graphics<span class="sy0">.</span>translate<span class="br0">(</span><span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">10</span><span class="br0">)</span>
+   love<span class="sy0">.</span>graphics<span class="sy0">.</span><span class="kw3">print</span><span class="br0">(</span><span class="st0">"Text"</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">)</span>   <span class="co1">-- will effectively render at 15x15</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+                <li>
+                  <a href="love.graphics11.html" title="love.graphics.pop">love.graphics.pop</a>
+                </li>
+                <li>
+                  <a href="love.graphics10.html" title="love.graphics.push">love.graphics.push</a>
+                </li>
+                <li>
+                  <a href="love.graphics232.html" title="love.graphics.rotate">love.graphics.rotate</a>
+                </li>
+                <li>
+                  <a href="love.graphics103.html" title="love.graphics.scale">love.graphics.scale</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Skip list:Drawing Order - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Skip list:Drawing Order" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Skip_list_Drawing_Order skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Skip list:Drawing Order</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Z-ordering in L&#xD6;VE is tedious because the engine doesn't offer any support for it. You must draw the sprites in order by yourself, making it hard to handle a large number of sprites on different planes.
+</p>
+              <p>With the <a href="skip_list.html" title="Skip list">skip list</a> data structure, you can do:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">zlist <span class="sy0">=</span> makeSkipList<span class="br0">(</span><span class="nu0">3</span><span class="br0">)</span> <span class="co1">-- 3 is the estimated size of the structure. </span>
+                        <span class="co1">-- It's indicative, but a good guess improves the performance</span>
+&#xA0;
+&#xA0;
+Clown <span class="sy0">=</span> makeSprite <span class="br0">(</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="st0">"clown.png"</span><span class="br0">)</span> <span class="co1">-- x, y, z, image</span>
+Frogs <span class="sy0">=</span> makeSprite <span class="br0">(</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">110</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="st0">"frogs.png"</span><span class="br0">)</span> <span class="co1">-- on the same plane as the Clown, but drawn on top because it's been created after.</span>
+Tools <span class="sy0">=</span> makeSprite <span class="br0">(</span><span class="nu0">90</span><span class="sy0">,</span>  <span class="nu0">120</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="st0">"tools.png"</span><span class="br0">)</span> <span class="co1">-- under the clown</span>
+&#xA0;
+&#xA0;
+zlist<span class="sy0">:</span>insert<span class="br0">(</span> Frogs <span class="br0">)</span>
+zlist<span class="sy0">:</span>insert<span class="br0">(</span> Tools <span class="br0">)</span>
+zlist<span class="sy0">:</span>insert<span class="br0">(</span> Clown <span class="br0">)</span> <span class="co1">-- You can insert them in any order</span>
+&#xA0;
+<span class="kw1">for</span> _<span class="sy0">,</span> sprite <span class="kw2">in</span> zlist<span class="sy0">:</span>iter<span class="br0">(</span><span class="br0">)</span> <span class="kw1">do</span>
+	<span class="co1">-- draw the sprite in Z order&#xA0;:-)</span>
+	<span class="kw3">print</span><span class="br0">(</span> sprite<span class="sy0">.</span>x<span class="sy0">,</span> sprite<span class="sy0">.</span>y<span class="sy0">,</span> sprite<span class="sy0">.</span>z<span class="sy0">,</span> sprite<span class="sy0">.</span>image <span class="br0">)</span> 
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Output:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="nu0">90</span><span class="nu0">120</span><span class="nu0">0</span>       tools<span class="sy0">.</span>png
+<span class="nu0">100</span>     <span class="nu0">100</span>     <span class="nu0">1</span>       clown<span class="sy0">.</span>png
+<span class="nu0">100</span>     <span class="nu0">110</span>     <span class="nu0">1</span>       frogs<span class="sy0">.</span>png</pre>
+                </div>
+              </div>
+              <p><br/>
+If you want to change the position of an item on the Z axis, you remove it and insert it back.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Tools<span class="sy0">.</span>z <span class="sy0">=</span> <span class="nu0">2</span>
+zlist<span class="sy0">:</span>delete<span class="br0">(</span>Tools<span class="br0">)</span>
+zlist<span class="sy0">:</span>insert<span class="br0">(</span>Tools<span class="br0">)</span> <span class="co1">-- now Tools is on top of the pile</span>
+&#xA0;
+<span class="kw1">for</span> _<span class="sy0">,</span>sprite <span class="kw2">in</span> zlist<span class="sy0">:</span>iter<span class="br0">(</span><span class="br0">)</span> <span class="kw1">do</span>
+	<span class="kw3">print</span><span class="br0">(</span>sprite<span class="sy0">.</span>x<span class="sy0">,</span> sprite<span class="sy0">.</span>y<span class="sy0">,</span> sprite<span class="sy0">.</span>z<span class="sy0">,</span> sprite<span class="sy0">.</span>image<span class="br0">)</span> <span class="co1">-- draw(sprite)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Here's the output:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="nu0">100</span><span class="nu0">100</span><span class="nu0">1</span>       clown<span class="sy0">.</span>png
+<span class="nu0">100</span>     <span class="nu0">110</span>     <span class="nu0">1</span>       frogs<span class="sy0">.</span>png
+<span class="nu0">90</span>      <span class="nu0">120</span>     <span class="nu0">2</span>       tools<span class="sy0">.</span>png</pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Toy_implementation_of_makesprite:">Toy implementation of makesprite:</span>
+              </h2>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">do</span><span class="kw1">local</span> count <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">function</span> counter<span class="br0">(</span><span class="br0">)</span>
+	count <span class="sy0">=</span> count <span class="sy0">+</span> <span class="nu0">1</span>
+	<span class="kw1">return</span> count
+<span class="kw1">end</span>
+<span class="kw1">end</span>
+&#xA0;
+&#xA0;
+<span class="kw1">do</span>
+<span class="kw1">local</span> lt <span class="sy0">=</span> <span class="kw1">function</span><span class="br0">(</span>a<span class="sy0">,</span>b<span class="br0">)</span>
+	<span class="kw1">if</span> a<span class="sy0">.</span>z <span class="sy0">&lt;</span> b<span class="sy0">.</span>z <span class="kw1">then</span> <span class="kw1">return</span> <span class="kw4">true</span>
+	<span class="kw1">elseif</span> a<span class="sy0">.</span>z<span class="sy0">==</span>b<span class="sy0">.</span>z <span class="kw2">and</span> a<span class="sy0">.</span>id <span class="sy0">&lt;</span> b<span class="sy0">.</span>id <span class="kw1">then</span> <span class="kw1">return</span> <span class="kw4">true</span>
+	<span class="kw1">else</span> <span class="kw1">return</span> <span class="kw4">false</span>
+	<span class="kw1">end</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">local</span> mt<span class="sy0">=</span><span class="br0">{</span>
+	__lt<span class="sy0">=</span>lt<span class="sy0">,</span>
+	__le<span class="sy0">=</span>lt
+<span class="br0">}</span>
+<span class="kw1">function</span> makeSprite <span class="br0">(</span>x<span class="sy0">,</span>y<span class="sy0">,</span>z<span class="sy0">,</span>image<span class="br0">)</span>
+	<span class="kw1">local</span> s<span class="sy0">=</span><span class="br0">{</span>x <span class="sy0">=</span> x<span class="sy0">,</span> y <span class="sy0">=</span> y<span class="sy0">,</span> z <span class="sy0">=</span> z<span class="sy0">,</span> image<span class="sy0">=</span>image<span class="sy0">,</span> id <span class="sy0">=</span> counter<span class="br0">(</span><span class="br0">)</span><span class="br0">}</span> 
+<span class="co1">-- the id field is necessary because, otherwise, items on the same plane would cause troubles.</span>
+	<span class="kw1">return</span> <span class="kw3">setmetatable</span><span class="br0">(</span>s<span class="sy0">,</span>mt<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

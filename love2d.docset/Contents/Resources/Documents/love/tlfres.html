@@ -1,0 +1,160 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>TLfres - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="TLfres" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-TLfres skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">TLfres</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <h2>
+                <span class="mw-headline" id="About">About</span>
+              </h2>
+              <p>TLfres aims to make it extremely easy to make <a class="external text" href="http://dl.dropbox.com/u/3713769/web/Love/TLTools/TLfres%20pic.png" rel="nofollow">any game run at any screen resolution</a>. Using it doesn't even require you to rewrite your graphics code!
+</p>
+              <p>It's under the <a class="external text" href="http://www.opensource.org/licenses/zlib-license.php" rel="nofollow">ZLIB license</a>.
+</p>
+              <h3>
+                <span class="mw-headline" id="Download">Download</span>
+              </h3>
+              <p>
+                <a class="external text" href="http://dl.dropbox.com/u/3713769/web/Love/TLTools/TLfres.lua" rel="nofollow">Direct from Dropbox</a>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Contact">Contact</span>
+              </h3>
+              <ul>
+                <li>
+                  <em class="external text" rel="nofollow">Forum thread</em>
+                </li>
+                <li>Taehl - SelfMadeSpirit@gmail.com</li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="Setup">Setup</span>
+              </h2>
+              <p>Everything in the module is contained in the TLfres namespace, so don't worry about it messing with your global variables. Assuming your game was built to use the Love-default resolution of 800x600:
+</p>
+              <ol>
+                <li> Put TLfres.lua in your game's folder</li>
+                <li> At the top of main.lua, add the line <code>require"TLfres"</code></li>
+                <li> At the beginning of love.draw(), add the line <code>TLfres.transform()</code></li>
+                <li> At the bottom of love.draw() add the line <code>TLfres.letterbox(4,3)</code></li>
+              </ol>
+              <h2>
+                <span class="mw-headline" id="FAQ">FAQ</span>
+              </h2>
+              <dl>
+                <dt>Q) Why should I use this instead of <a href="love.graphics103.html" title="love.graphics.scale">love.graphics.scale</a>?</dt>
+                <dd>A) Because even stretching the screen to a given res requires tricky math, which TLfres can do for you. Furthermore, most people hate stretched graphics - that's why you should use TLfres's letterboxing option. Instead of stretching the screen, it resizes it in the correct ratio and draws black boxes at the top and bottom if needed.</dd>
+              </dl>
+              <dl>
+                <dt>Q) What resolutions / aspect ratios does it support?</dt>
+                <dd>A) Theoretically, any. However, letterboxes act weird if you use a screen taller than it is wide.</dd>
+              </dl>
+              <dl>
+                <dt>Q) I made my game to use a non-default resolution. Will I have to change everything to make TLfres work with it?</dt>
+                <dd>A) Nope! Just call TLfres.setScreen() with the resolution you built your game for (see below).</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <h4>
+                <span class="mw-headline" id="TLfres.setScreen">TLfres.setScreen</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLfres<span class="sy0">.</span>setScreen<span class="br0">(</span>mode<span class="sy0">,</span> extent<span class="sy0">,</span> centered<span class="sy0">,</span> stretch<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Call this INSTEAD of <a href="love.graphics24.html" title="love.graphics.setMode">love.graphics.setMode</a>! This will both configure TLfres and change resolution. If your game was originally made to use the default Love screen of 800x600, you don't need to use any parameters.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> mode</code>
+                </dt>
+                <dd>This table specifies screen geometry. It may contain the following data: w (the width of the screen, in pixels), h (the height of the screen, in pixels), full (whether to use fullscreen or not), vsync (whether to use vsync or not), aa (how many antialiasing samples to use). Defaults to <code>{w=800, h=600, full=false, vsync=false, aa=0}.</code></dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> extent (800)</code>
+                </dt>
+                <dd>The width of the screen that the game was originally programmed to use. Alternately, if you're making a new game using TLfres, this number can be whatever you want to represent the width of the screen in your code. For instance, I like using the number 1, so all coordinates are normalized decimals (this makes the most sense to me). You could use 100 if you prefer to think in percentages (drawing something at x=50 would be the middle of the screen in this case), etc..</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> centered (false)</code>
+                </dt>
+                <dd>If false, the coordinate 0,0 is located at the top-left of the screen, as in default Love. If true, 0,0 is the center of the screen. This should be false if you're adding TLfres to an existing game, but may be set to taste when programming a new game.</dd>
+                <dt>
+                  <code><a href="boolean.html" title="boolean">boolean</a> stretch (false)</code>
+                </dt>
+                <dd>If true, graphics will be stretched to fill the entire screen at any res. If the aspect ratio the game was programmed to use is different from the aspect ratio of the screen, stretching will occur. Some people prefer this to letterboxing, so it's a matter of personal taste. If you don't stretch, make sure to call TLfres.letterbox() at the end of love.draw().</dd>
+              </dl>
+              <h4>
+                <span class="mw-headline" id="TLfres.transform">TLfres.transform</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLfres<span class="sy0">.</span>transform<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Call this at the very beginning of <a href="love49.html" title="love.draw">love.draw</a>(), before drawing anything. This scales and translates the screen coordinates as needed by the current screen resolution. If you want to draw something at absolute screen coordinates, you may want to use <a href="love.graphics10.html" title="love.graphics.push">love.graphics.push</a>() before calling TLfres.transform().
+</p>
+              <h4>
+                <span class="mw-headline" id="TLfres.letterbox">TLfres.letterbox</span>
+              </h4>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TLfres<span class="sy0">.</span>letterbox<span class="br0">(</span>w<span class="sy0">,</span> h<span class="sy0">,</span> c<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>If not stretching the graphics (see TLfres.setScreen()), call this at the end of <a href="love49.html" title="love.draw">love.draw</a>(), after drawing everything. This draws letterboxes to trim any graphics which should be out of the screen. It defaults to the aspect ratio 4:3 with black letterboxes.
+</p>
+              <dl>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> w (4)</code>
+                </dt>
+                <dd> The width of the aspect ratio the game is meant to have.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> h (3)</code>
+                </dt>
+                <dd> The height of the aspect ratio the game is meant to have.</dd>
+                <dt>
+                  <code><a href="table.html" title="table">table</a> c {0,0,0, 255}</code>
+                </dt>
+                <dd> The color of the letterboxes, given in RGBA (just like <a href="love.graphics228.html#Function_2" title="love.graphics.setColor">love.graphics.setColor</a>). Defaults to black.</dd>
+              </dl>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

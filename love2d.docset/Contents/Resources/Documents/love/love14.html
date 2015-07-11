@@ -1,0 +1,214 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.thread - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.thread" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_thread skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.thread</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table bgcolor="#d0d0ff" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Available since L&#xD6;VE <a href="0.7.html" title="0.7.0">0.7.0</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This module is not supported in earlier versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <p>Allows you to work with threads.
+</p>
+              <p>Threads are separate Lua environments, running in parallel to the main code. As their code runs separately, they can be used to compute complex operations without adversely affecting the frame rate of the main thread. However, as they are separate environments, they cannot access the variables and functions of the main thread, and communication between threads is limited.
+</p>
+              <p>All LOVE objects (userdata) are shared among threads so you'll only have to send their references across threads. You may run into concurrency issues if you manipulate an object on multiple threads at the same time.
+</p>
+              <p>When a <a href="thread.html" title="Thread">Thread</a> is started, it only loads the love.thread module. Every other module has to be loaded with <a href="require.html" title="require">require</a>.
+</p>
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>The <a href="love5.html" title="love.graphics">love.graphics</a> and <a href="love16.html" title="love.window">love.window</a> modules have several restrictions and therefore should only be used in the main thread.
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>Unless you define the <a href="love17.html" title="love.threaderror">love.threaderror</a> callback or call <a href="thread_geterror.html" title="Thread:getError">Thread:getError</a> you won't see any errors your thread code throws.
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>If your get "module not found" error in your thread, include <a href="love3.html" title="love.filesystem">love.filesystem</a> first. This will fix require paths.
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <h2>
+                <span class="mw-headline" id="Types">Types</span>
+              </h2>
+              <table class="smwtable" style="background-color: #eeeeff;">
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="channel.html" title="Channel">Channel</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">An object which can be used to send and receive data between different threads.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="thread.html" title="Thread">Thread</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">A Thread represents a thread.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.7.html" title="0.7.0">0.7.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+              </table>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <table class="smwtable" style="background-color: #eeeeff;">
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="love.thread.html" title="love.thread.getChannel">love.thread.getChannel</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates or retrieves a named thread channel.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="love.thread1.html" title="love.thread.getThread">love.thread.getThread</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Look for a thread and get its object.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.7.html" title="0.7.0">0.7.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="love.thread2.html" title="love.thread.getThreads">love.thread.getThreads</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Get all threads.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.7.html" title="0.7.0">0.7.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="love.thread3.html" title="love.thread.newChannel">love.thread.newChannel</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new unnamed thread channel.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="love.thread4.html" title="love.thread.newThread">love.thread.newThread</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new Thread from a Lua file or <a href="filedata.html" title="FileData">FileData</a> object.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.7.html" title="0.7.0">0.7.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+              </table>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h2>
+              <p>For 0.9.0: <em class="external free" rel="nofollow">http://love2d.org/forums/viewtopic.php?f=4&amp;t=76670</em>
+</p>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love.html" title="love">love</a>
+                </li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_modules.html" title="Category:Modules">Modules</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

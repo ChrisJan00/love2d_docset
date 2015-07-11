@@ -1,0 +1,143 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Simple Educative Class Library - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Simple Educative Class Library" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Simple_Educative_Class_Library skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Simple Educative Class Library</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Also known as SECL.
+This is a simple implementation of classes that works, it's not commented, so it's a nice test of your lua skills.
+</p>
+              <p>The current version can always be found <a class="external text" href="https://github.com/bartbes/love-misc-libs" rel="nofollow">in the love-misc-libs repository</a>
+</p>
+              <h2>
+                <span class="mw-headline" id="Basic_version_example">Basic version example</span>
+              </h2>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw3">require</span><span class="st0">"class"</span><span class="co1">--this assumes you've saved the code above in class.lua</span>
+&#xA0;
+myclass <span class="sy0">=</span> class<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span>
+myclass<span class="sy0">.</span>value <span class="sy0">=</span> <span class="nu0">13</span>
+<span class="kw1">function</span> myclass<span class="sy0">:</span>setvalue<span class="br0">(</span>v<span class="br0">)</span>
+    self<span class="sy0">.</span>value <span class="sy0">=</span> v
+<span class="kw1">end</span>
+object <span class="sy0">=</span> myclass<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span>
+object<span class="sy0">:</span>setvalue<span class="br0">(</span><span class="nu0">128</span><span class="br0">)</span>
+<span class="co1">--myclass.value is still 13 and object.value is now 128</span>
+anotherObject <span class="sy0">=</span> object<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span>
+<span class="co1">--anotherObject.value is 128</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Advanced_version_example">Advanced version example</span>
+              </h2>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">--NOTE: this example only contains features the basic version doesn't, if you want to see those functions see the basic example</span><span class="co1">--require it here</span>
+&#xA0;
+<span class="co1">--create the tables/classes</span>
+cl1 <span class="sy0">=</span> class<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span>
+cl2 <span class="sy0">=</span> class<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span>
+cl3 <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+&#xA0;
+<span class="co1">--fill the tables/classes</span>
+cl1<span class="sy0">.</span>val1 <span class="sy0">=</span> <span class="nu0">12</span>
+cl2<span class="sy0">.</span>val2 <span class="sy0">=</span> <span class="nu0">24</span>
+cl3<span class="sy0">.</span>val3 <span class="sy0">=</span> <span class="nu0">48</span>
+&#xA0;
+<span class="co1">--create the new merged class</span>
+merged <span class="sy0">=</span> cl1<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span>
+<span class="kw3">print</span><span class="br0">(</span>merged<span class="sy0">.</span>val1<span class="sy0">,</span> merged<span class="sy0">.</span>val2<span class="sy0">,</span> merged<span class="sy0">.</span>val3<span class="br0">)</span> <span class="co1">--&gt; 12  nil  nil</span>
+merged<span class="sy0">:</span>addparent<span class="br0">(</span>cl2<span class="br0">)</span>
+<span class="kw3">print</span><span class="br0">(</span>merged<span class="sy0">.</span>val1<span class="sy0">,</span> merged<span class="sy0">.</span>val2<span class="sy0">,</span> merged<span class="sy0">.</span>val3<span class="br0">)</span> <span class="co1">--&gt; 12  24  nil</span>
+<span class="co1">--remember cl3 is a normal table, not a class?</span>
+class<span class="sy0">:</span>convert<span class="br0">(</span>cl3<span class="br0">)</span> <span class="co1">--converts the table in place and returns it, so you can use it in expressions</span>
+merged<span class="sy0">:</span>addparent<span class="br0">(</span>cl3<span class="br0">)</span> <span class="co1">--could also be merged:addparent(class:convert(cl3))</span>
+<span class="kw3">print</span><span class="br0">(</span>merged<span class="sy0">.</span>val1<span class="sy0">,</span> merged<span class="sy0">.</span>val2<span class="sy0">,</span> merged<span class="sy0">.</span>val3<span class="br0">)</span> <span class="co1">--&gt; 12  24  48</span>
+&#xA0;
+<span class="co1">--convert is part of any class, the parent of the converted class is the class where convert is called from</span>
+<span class="co1">--NOTE: addparent supports multiple parents at once, the way that it's done here is to serve as an example</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Full_version_example">Full version example</span>
+              </h2>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">--NOTE: This example only contains features the advanced version doesn't have</span><span class="co1">--require it here</span>
+&#xA0;
+cl1 <span class="sy0">=</span> class<span class="br0">(</span><span class="br0">)</span> <span class="co1">--new is implied</span>
+cl2 <span class="sy0">=</span> class<span class="br0">(</span><span class="br0">)</span>
+&#xA0;
+cl1<span class="sy0">.</span>val1 <span class="sy0">=</span> <span class="nu0">12</span>
+cl2<span class="sy0">.</span>val2 <span class="sy0">=</span> <span class="nu0">24</span>
+&#xA0;
+merged <span class="sy0">=</span> cl1<span class="br0">(</span><span class="br0">)</span> <span class="sy0">+</span> cl2 <span class="co1">--yes, we can just add cl2 as if we were doing math</span>
+<span class="kw3">print</span><span class="br0">(</span>merged<span class="sy0">.</span>val1<span class="sy0">,</span> merged<span class="sy0">.</span>val2<span class="br0">)</span> <span class="co1">--&gt; 12  24</span>
+&#xA0;
+<span class="kw1">if</span> merged <span class="sy0">&gt;</span> cl1 <span class="kw1">then</span>
+    <span class="kw3">print</span><span class="br0">(</span><span class="st0">"Merged is a derivative of cl1"</span><span class="br0">)</span> <span class="co1">--which it is, so this is printed</span>
+<span class="kw1">end</span>
+<span class="kw1">if</span> merged <span class="sy0">&gt;</span> cl2 <span class="kw1">then</span>
+    <span class="kw3">print</span><span class="br0">(</span><span class="st0">"Merged is a derivative of cl2"</span><span class="br0">)</span> <span class="co1">--it's that as well, so print</span>
+<span class="kw1">end</span>
+&#xA0;
+merged2 <span class="sy0">=</span> cl1<span class="br0">(</span><span class="br0">)</span> <span class="sy0">+</span> cl2  <span class="co1">--create another derivative with the same parents</span>
+merged2<span class="sy0">.</span>val1 <span class="sy0">=</span> <span class="nu0">36</span>  <span class="co1">--we change one value</span>
+&#xA0;
+<span class="kw1">if</span> merged <span class="sy0">==</span> merged2 <span class="kw1">then</span>
+    <span class="kw3">print</span><span class="br0">(</span><span class="st0">"Merged2 is of the same type as merged"</span><span class="br0">)</span> <span class="co1">--they are the same type, note this only works when changing, when you add or remove values it is considered as a new class</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Revised_version_example">Revised version example</span>
+              </h2>
+              <p>Same as full.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_also">See also</span>
+              </h2>
+              <p><em href="user_bartbes.html">Bartbes</em>, creator and maintainer of SECS.
+</p>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>LuaPill - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="LuaPill" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-LuaPill skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">LuaPill</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>
+                <br/>
+              </p>
+              <p><br/><b>LuaPill</b> (short for "Practical Isometric Layering Library for Lua") is an engine for generating isometric maps for L&#xF6;ve2D and Lua.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span>
+   map <span class="sy0">=</span> <span class="kw3">require</span> <span class="st0">"luapill"</span>
+   <span class="kw1">local</span> config <span class="sy0">=</span> <span class="br0">{</span>
+      tilewidth <span class="sy0">=</span> <span class="nu0">128</span><span class="sy0">,</span>
+      tileheight <span class="sy0">=</span> <span class="nu0">64</span><span class="sy0">,</span>
+      folder <span class="sy0">=</span> <span class="st0">"images"</span>
+   <span class="br0">}</span>
+   map<span class="sy0">:</span>setup<span class="br0">(</span>config<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+   map<span class="sy0">:</span>draw<span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>
+                <br/>
+              </p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">config <span class="sy0">=</span> <span class="br0">{</span>
+      tilewidth <span class="sy0">=</span> number<span class="sy0">,</span> <span class="co1">-- required</span>
+      tilewidth <span class="sy0">=</span> number<span class="sy0">,</span> <span class="co1">-- required</span>
+      folder <span class="sy0">=</span> <span class="st0">"path"</span><span class="sy0">,</span> <span class="co1">-- required</span>
+      sortFolder <span class="sy0">=</span> boolean<span class="sy0">,</span> <span class="co1">-- optional, default false</span>
+      defaultTile <span class="sy0">=</span> number<span class="sy0">,</span> <span class="co1">-- optional, default 1</span>
+      tileIndex <span class="sy0">=</span> number <span class="co1">-- optional, default 1</span>
+   <span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>Grab it and give it a spin on <a class="external autonumber" href="https://github.com/Kyrremann/LuaPill" rel="nofollow">[1]</a>. There is even a full working demo there.
+</p>
+              <p>Enjoy!
+</p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

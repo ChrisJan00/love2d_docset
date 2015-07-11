@@ -1,0 +1,226 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.sound.newDecoder - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.sound.newDecoder" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_sound_newDecoder skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.sound.newDecoder</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Attempts to find a decoder for the encoded sound data in the specified file.
+</p>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">decoder <span class="sy0">=</span> love<span class="sy0">.</span>sound<span class="sy0">.</span>newDecoder<span class="br0">(</span> file<span class="sy0">,</span> buffer <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="file.html" title="File">File</a> file</code>
+                </dt>
+                <dd> The file with encoded sound data.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> buffer (2048)</code>
+                </dt>
+                <dd> The size of each decoded chunk, in bytes.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="decoder.html" title="Decoder">Decoder</a> decoder</code>
+                </dt>
+                <dd> A new Decoder object.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_2">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis_2">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">decoder <span class="sy0">=</span> love<span class="sy0">.</span>sound<span class="sy0">.</span>newDecoder<span class="br0">(</span> filename<span class="sy0">,</span> buffer <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_2">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> filename</code>
+                </dt>
+                <dd> The filename of the file with encoded sound data.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> buffer (2048)</code>
+                </dt>
+                <dd> The size of each decoded chunk, in bytes.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_2">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="decoder.html" title="Decoder">Decoder</a> decoder</code>
+                </dt>
+                <dd> A new Decoder object.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_3">Function</span>
+              </h2>
+              <table bgcolor="#ffacac" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Removed in L&#xD6;VE <a href="0.72.html" title="0.7.1">0.7.1</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This variant is not supported in that and later versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <h3>
+                <span class="mw-headline" id="Synopsis_3">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">decoder <span class="sy0">=</span> love<span class="sy0">.</span>sound<span class="sy0">.</span>newDecoder<span class="br0">(</span> file<span class="sy0">,</span> buffer<span class="sy0">,</span> rate <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_3">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="file.html" title="File">File</a> file</code>
+                </dt>
+                <dd> The file with encoded sound data.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> buffer (2048)</code>
+                </dt>
+                <dd> The size of each decoded chunk, in bytes.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> rate (44100)</code>
+                </dt>
+                <dd> Samples per second, or quality of the audio. Use either 44100 (good), 22050 (medium) or 11025 (poor).</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_3">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="decoder.html" title="Decoder">Decoder</a> decoder</code>
+                </dt>
+                <dd> A new Decoder object.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_4">Function</span>
+              </h2>
+              <table bgcolor="#ffacac" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Removed in L&#xD6;VE <a href="0.72.html" title="0.7.1">0.7.1</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This variant is not supported in that and later versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <h3>
+                <span class="mw-headline" id="Synopsis_4">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">decoder <span class="sy0">=</span> love<span class="sy0">.</span>sound<span class="sy0">.</span>newDecoder<span class="br0">(</span> filename<span class="sy0">,</span> buffer<span class="sy0">,</span> rate <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_4">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> filename</code>
+                </dt>
+                <dd> The filename of the file with encoded sound data.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> buffer (2048)</code>
+                </dt>
+                <dd> The size of each decoded chunk, in bytes.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> rate (44100)</code>
+                </dt>
+                <dd> Samples per second, or quality of the audio. Use either 44100 (good), 22050 (medium) or 11025 (poor).</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_4">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="decoder.html" title="Decoder">Decoder</a> decoder</code>
+                </dt>
+                <dd> A new Decoder object.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love12.html" title="love.sound">love.sound</a>
+                </li>
+                <li>
+                  <a href="decoder.html" title="Decoder">Decoder</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

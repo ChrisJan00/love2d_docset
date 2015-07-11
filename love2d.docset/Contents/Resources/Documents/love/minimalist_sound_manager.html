@@ -1,0 +1,110 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Minimalist Sound Manager - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Minimalist Sound Manager" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Minimalist_Sound_Manager skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Minimalist Sound Manager</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>A minimalist sound manager to make playing sounds easier without adding a whole library:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">do</span><span class="co1">-- will hold the currently playing sources</span><span class="kw1">local</span> sources <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+&#xA0;
+    <span class="co1">-- check for sources that finished playing and remove them</span>
+    <span class="co1">-- add to love.update</span>
+    <span class="kw1">function</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>update<span class="br0">(</span><span class="br0">)</span>
+        <span class="kw1">local</span> <span class="kw3">remove</span> <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+        <span class="kw1">for</span> _<span class="sy0">,</span>s <span class="kw2">in</span> <span class="kw3">pairs</span><span class="br0">(</span>sources<span class="br0">)</span> <span class="kw1">do</span>
+            <span class="kw1">if</span> s<span class="sy0">:</span>isStopped<span class="br0">(</span><span class="br0">)</span> <span class="kw1">then</span>
+                <span class="kw3">remove</span><span class="br0">[</span><span class="sy0">#</span>remove <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">]</span> <span class="sy0">=</span> s
+            <span class="kw1">end</span>
+        <span class="kw1">end</span>
+&#xA0;
+        <span class="kw1">for</span> i<span class="sy0">,</span>s <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span><span class="kw3">remove</span><span class="br0">)</span> <span class="kw1">do</span>
+            sources<span class="br0">[</span>s<span class="br0">]</span> <span class="sy0">=</span> <span class="kw4">nil</span>
+        <span class="kw1">end</span>
+    <span class="kw1">end</span>
+&#xA0;
+    <span class="co1">-- overwrite love.audio.play to create and register source if needed</span>
+    <span class="kw1">local</span> play <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>play
+    <span class="kw1">function</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span>what<span class="sy0">,</span> how<span class="sy0">,</span> loop<span class="br0">)</span>
+        <span class="kw1">local</span> src <span class="sy0">=</span> what
+        <span class="kw1">if</span> <span class="kw3">type</span><span class="br0">(</span>what<span class="br0">)</span> <span class="sy0">~=</span> <span class="st0">"userdata"</span> <span class="kw2">or</span> <span class="kw2">not</span> what<span class="sy0">:</span>typeOf<span class="br0">(</span><span class="st0">"Source"</span><span class="br0">)</span> <span class="kw1">then</span>
+            src <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>newSource<span class="br0">(</span>what<span class="sy0">,</span> how<span class="br0">)</span>
+            src<span class="sy0">:</span>setLooping<span class="br0">(</span>loop <span class="kw2">or</span> <span class="kw4">false</span><span class="br0">)</span>
+        <span class="kw1">end</span>
+&#xA0;
+        play<span class="br0">(</span>src<span class="br0">)</span>
+        sources<span class="br0">[</span>src<span class="br0">]</span> <span class="sy0">=</span> src
+        <span class="kw1">return</span> src
+    <span class="kw1">end</span>
+&#xA0;
+    <span class="co1">-- stops a source</span>
+    <span class="kw1">local</span> stop <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>stop
+    <span class="kw1">function</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>stop<span class="br0">(</span>src<span class="br0">)</span>
+        <span class="kw1">if</span> <span class="kw2">not</span> src <span class="kw1">then</span> <span class="kw1">return</span> <span class="kw1">end</span>
+        stop<span class="br0">(</span>src<span class="br0">)</span>
+        sources<span class="br0">[</span>src<span class="br0">]</span> <span class="sy0">=</span> <span class="kw4">nil</span>
+    <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Now you can play sound effects and background music without worrying about the actual source objects:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">function</span> love<span class="sy0">.</span>load<span class="br0">(</span><span class="br0">)</span>
+    <span class="co1">-- you will still get a source handle if you need it</span>
+    bgm <span class="sy0">=</span> love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span><span class="st0">"background-music.ogg"</span><span class="sy0">,</span> <span class="st0">"stream"</span><span class="sy0">,</span> <span class="kw4">true</span><span class="br0">)</span> <span class="co1">-- stream and loop background music</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+    love<span class="sy0">.</span>audio<span class="sy0">.</span>update<span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>keypressed<span class="br0">(</span>key<span class="br0">)</span>
+    <span class="kw1">if</span> key <span class="sy0">==</span> <span class="st0">'s'</span> <span class="kw1">then</span>
+        love<span class="sy0">.</span>audio<span class="sy0">.</span>stop<span class="br0">(</span>bgm<span class="br0">)</span>
+    <span class="kw1">elseif</span> key <span class="sy0">==</span> <span class="st0">'p'</span> <span class="kw1">then</span>
+        love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span>bgm<span class="br0">)</span> <span class="co1">-- still streaming and looping</span>
+    <span class="kw1">else</span>
+        love<span class="sy0">.</span>audio<span class="sy0">.</span>play<span class="br0">(</span><span class="st0">"explosion.ogg"</span><span class="br0">)</span> <span class="co1">-- play explosion sound once</span>
+    <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

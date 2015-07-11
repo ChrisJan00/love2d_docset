@@ -1,0 +1,97 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Monocle - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Monocle" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Monocle skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Monocle</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>
+                <br/>
+              </p>
+              <p><br/><b>Monocle</b>is a simple, but very helpful debugging library for Love2D. <br/> 
+Monocle can watch variables and expressions and keep them pinned to the top left of the screen.&lt;/br&gt;
+If a problem occurs, the game will issue an error, but the watched expressions stay on the screen.&lt;/br&gt;
+Best of all, the game will watch files and automatically reload the game when those files have been changed.
+</p>
+              <p>Basic implementation:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw3">require</span><span class="st0">'monocle/monocle'</span>
+Monocle<span class="sy0">.</span>new<span class="br0">(</span><span class="br0">{</span><span class="br0">}</span><span class="br0">)</span>
+&#xA0;
+<span class="co1">-- The most basic way to watch any expression or variable:</span>
+Monocle<span class="sy0">.</span>watch<span class="br0">(</span><span class="st0">"FPS"</span><span class="sy0">,</span> <span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span> <span class="kw1">return</span> <span class="kw3">math.floor</span><span class="br0">(</span><span class="nu0">1</span><span class="sy0">/</span>love<span class="sy0">.</span>timer<span class="sy0">.</span>getDelta<span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="kw1">end</span><span class="br0">)</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+    Monocle<span class="sy0">.</span>update<span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+    Monocle<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>textinput<span class="br0">(</span>t<span class="br0">)</span>
+    Monocle<span class="sy0">.</span>textinput<span class="br0">(</span>t<span class="br0">)</span>
+<span class="kw1">end</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>keypressed<span class="br0">(</span>text<span class="br0">)</span>
+    Monocle<span class="sy0">.</span>keypressed<span class="br0">(</span>text<span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Monocle can also be started with options in mind that are tailored to your needs!
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Monocle<span class="sy0">.</span>new<span class="br0">(</span><span class="br0">{</span>       <span class="co1">-- ALL of these parameters are optional!</span>
+   isActive<span class="sy0">=</span><span class="kw4">true</span><span class="sy0">,</span>          <span class="co1">-- Whether the debugger is initially active</span>
+   customPrinter<span class="sy0">=</span><span class="kw4">false</span><span class="sy0">,</span>    <span class="co1">-- Whether Monocle prints status messages to the output</span>
+   printColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">51</span><span class="sy0">,</span><span class="nu0">51</span><span class="sy0">,</span><span class="nu0">51</span><span class="br0">}</span><span class="sy0">,</span><span class="co1">-- Color to print with</span>
+   debugToggle<span class="sy0">=</span><span class="st0">'`'</span><span class="sy0">,</span>        <span class="co1">-- The keyboard button for toggling Monocle</span>
+   filesToWatch<span class="sy0">=</span>           <span class="co1">-- Files that, when edited, cause the game to reload automatically</span>
+      <span class="br0">{</span>
+         <span class="st0">'main.lua'</span>
+      <span class="br0">}</span>
+<span class="br0">}</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>
+                <br/>
+              </p>
+              <p>You can find it at <a class="external autonumber" href="https://github.com/kurtjarvi/monocle" rel="nofollow">[1]</a>.
+</p>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

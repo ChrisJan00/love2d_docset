@@ -1,0 +1,620 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>ParticleSystem - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="ParticleSystem" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-ParticleSystem skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">ParticleSystem</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>A ParticleSystem can be used to create particle effects like fire or smoke.
+</p>
+              <p>The particle system has to be created using <a href="love.graphics64.html" title="love.graphics.newParticleSystem">love.graphics.newParticleSystem</a>. Just like any other <a href="drawable.html" title="Drawable">Drawable</a> it can be drawn to the screen using <a href="love.graphics29.html" title="love.graphics.draw">love.graphics.draw</a>. You also have to <a href="particlesystem_update.html" title="ParticleSystem:update">update</a> it in the <a href="love48.html" title="love.update">update callback</a> to see any changes in the particles emitted.
+</p>
+              <p>The particle system won't create any particles unless you call <a href="particlesystem_setparticlelifetime.html" title="ParticleSystem:setParticleLifetime">setParticleLifetime</a> and <a href="particlesystem_setemissionrate.html" title="ParticleSystem:setEmissionRate">setEmissionRate</a>.
+</p>
+              <h2>
+                <span class="mw-headline" id="Constructors">Constructors</span>
+              </h2>
+              <table class="smwtable" style="background-color: #eeeeff;">
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="love.graphics64.html" title="love.graphics.newParticleSystem">love.graphics.newParticleSystem</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates a new <strong class="selflink">ParticleSystem</strong>.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+              </table>
+              <h2>
+                <span class="mw-headline" id="Functions">Functions</span>
+              </h2>
+              <table class="smwtable" style="background-color: #eeeeff;">
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="object_type.html" title="Object:type">Object:type</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the type of the object as a string.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="object_typeof.html" title="Object:typeOf">Object:typeOf</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether an object is of a certain type.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_clone.html" title="ParticleSystem:clone">ParticleSystem:clone</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Creates an identical copy of the ParticleSystem in the stopped state.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.92.html" title="0.9.1">0.9.1</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_count.html" title="ParticleSystem:count">ParticleSystem:count</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the amount of particles that are currently in the system.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_emit.html" title="ParticleSystem:emit">ParticleSystem:emit</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Emits a burst of particles from the particle emitter.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getareaspread.html" title="ParticleSystem:getAreaSpread">ParticleSystem:getAreaSpread</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the area-based spawn parameters for the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getbuffersize.html" title="ParticleSystem:getBufferSize">ParticleSystem:getBufferSize</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the maximum number of particles the ParticleSystem can have at once.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getcount.html" title="ParticleSystem:getCount">ParticleSystem:getCount</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the number of particles that are currently in the system.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getimage.html" title="ParticleSystem:getImage">ParticleSystem:getImage</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the image used for the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getinsertmode.html" title="ParticleSystem:getInsertMode">ParticleSystem:getInsertMode</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the mode used when the ParticleSystem adds new particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getlineardamping.html" title="ParticleSystem:getLinearDamping">ParticleSystem:getLinearDamping</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the amount of linear damping (constant deceleration) for particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.91.html" title="0.9.2">0.9.2</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getposition.html" title="ParticleSystem:getPosition">ParticleSystem:getPosition</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the position of the emitter.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getradialacceleration.html" title="ParticleSystem:getRadialAcceleration">ParticleSystem:getRadialAcceleration</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the radial acceleration (away from the emitter).</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_gettexture.html" title="ParticleSystem:getTexture">ParticleSystem:getTexture</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the texture (<a href="image1.html" title="Image">Image</a> or <a href="canvas.html" title="Canvas">Canvas</a>) used for the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.92.html" title="0.9.1">0.9.1</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_getx.html" title="ParticleSystem:getX">ParticleSystem:getX</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the x-coordinate of the particle emitter's position.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_gety.html" title="ParticleSystem:getY">ParticleSystem:getY</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets the y-coordinate of the particle emitter's position.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_hasrelativerotation.html" title="ParticleSystem:hasRelativeRotation">ParticleSystem:hasRelativeRotation</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Gets whether particle angles and rotations are relative to their velocities.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.92.html" title="0.9.1">0.9.1</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_isactive.html" title="ParticleSystem:isActive">ParticleSystem:isActive</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether the particle system is actively emitting particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_isempty.html" title="ParticleSystem:isEmpty">ParticleSystem:isEmpty</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether the particle system is empty of particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_isfull.html" title="ParticleSystem:isFull">ParticleSystem:isFull</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether the particle system is full of particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_ispaused.html" title="ParticleSystem:isPaused">ParticleSystem:isPaused</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether the particle system is paused.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_isstopped.html" title="ParticleSystem:isStopped">ParticleSystem:isStopped</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Checks whether the particle system is stopped.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_moveto.html" title="ParticleSystem:moveTo">ParticleSystem:moveTo</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Moves the position of the emitter.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.92.html" title="0.9.1">0.9.1</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setareaspread.html" title="ParticleSystem:setAreaSpread">ParticleSystem:setAreaSpread</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets area-based spawn parameters for the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setbuffersize.html" title="ParticleSystem:setBufferSize">ParticleSystem:setBufferSize</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the size of the buffer (the max allowed amount of particles in the system).</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setemissionrate.html" title="ParticleSystem:setEmissionRate">ParticleSystem:setEmissionRate</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the amount of particles emitted per second.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setemitterlifetime.html" title="ParticleSystem:setEmitterLifetime">ParticleSystem:setEmitterLifetime</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets how long the particle system should emit particles</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setgravity.html" title="ParticleSystem:setGravity">ParticleSystem:setGravity</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the gravity affecting the particles (acceleration along the y-axis).</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setimage.html" title="ParticleSystem:setImage">ParticleSystem:setImage</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the image to be used for the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setinsertmode.html" title="ParticleSystem:setInsertMode">ParticleSystem:setInsertMode</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the mode to use when the ParticleSystem adds new particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setlifetime.html" title="ParticleSystem:setLifetime">ParticleSystem:setLifetime</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets how long the particle system should emit particles (if -1 then it emits particles forever).</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setlinearacceleration.html" title="ParticleSystem:setLinearAcceleration">ParticleSystem:setLinearAcceleration</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the linear acceleration (acceleration along the x and y axes) for particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setlineardamping.html" title="ParticleSystem:setLinearDamping">ParticleSystem:setLinearDamping</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the amount of linear damping (constant deceleration) for particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.91.html" title="0.9.2">0.9.2</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setparticlelife.html" title="ParticleSystem:setParticleLife">ParticleSystem:setParticleLife</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the life of the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setparticlelifetime.html" title="ParticleSystem:setParticleLifetime">ParticleSystem:setParticleLifetime</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the lifetime of the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setposition.html" title="ParticleSystem:setPosition">ParticleSystem:setPosition</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the position of the emitter.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setquads.html" title="ParticleSystem:setQuads">ParticleSystem:setQuads</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets a series of <a href="quad.html" title="Quad">Quads</a> to use for the particle sprites.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.91.html" title="0.9.2">0.9.2</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setrelativerotation.html" title="ParticleSystem:setRelativeRotation">ParticleSystem:setRelativeRotation</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets whether particle angles and rotations are relative to their velocities.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.92.html" title="0.9.1">0.9.1</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setsize.html" title="ParticleSystem:setSize">ParticleSystem:setSize</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the size of the particle (1.0 being normal size).</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.8.html" title="0.8.0">0.8.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setsizevariation.html" title="ParticleSystem:setSizeVariation">ParticleSystem:setSizeVariation</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the amount of size variation.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setsizes.html" title="ParticleSystem:setSizes">ParticleSystem:setSizes</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the sizes of the particle over its lifetime.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.8.html" title="0.8.0">0.8.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_setsprite.html" title="ParticleSystem:setSprite">ParticleSystem:setSprite</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the image which is to be emitted.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #fff8f8; vertical-align: top;">
+                    <img alt="Removed in" height="11" src="remove.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_settexture.html" title="ParticleSystem:setTexture">ParticleSystem:setTexture</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Sets the texture (<a href="image1.html" title="Image">Image</a> or <a href="canvas.html" title="Canvas">Canvas</a>) to be used for the particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.92.html" title="0.9.1">0.9.1</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particlesystem_update.html" title="ParticleSystem:update">ParticleSystem:update</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Updates the particle system; moving, creating and killing particles.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;"> </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+              </table>
+              <h2>
+                <span class="mw-headline" id="Enums">Enums</span>
+              </h2>
+              <table class="smwtable" style="background-color: #eeeeff;">
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="areaspreaddistribution.html" title="AreaSpreadDistribution">AreaSpreadDistribution</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">Types of particle area spread distribution.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+                <tr>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+                    <a href="particleinsertmode.html" title="ParticleInsertMode">ParticleInsertMode</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">How newly created particles are added to the ParticleSystem.</td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #f8fff8; vertical-align: top;">
+                    <img alt="Added since" height="11" src="add.png" width="8"/>
+                    <a href="0.9.html" title="0.9.0">0.9.0</a>
+                  </td>
+                  <td style="padding: 1px 5px 1px 5px; background-color: #ffffff; vertical-align: top;">
+</td>
+                </tr>
+              </table>
+              <h2>
+                <span class="mw-headline" id="Supertypes">Supertypes</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="drawable.html" title="Drawable">Drawable</a>
+                </li>
+                <li>
+                  <a href="object.html" title="Object">Object</a>
+                </li>
+              </ul>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+              </ul>
+              <p><br/>
+Particle editors:
+</p>
+              <ul>
+                <li>
+                  <em class="external free" rel="nofollow">https://love2d.org/forums/viewtopic.php?f=4&amp;t=2110</em>
+                </li>
+                <li>
+                  <em class="external free" rel="nofollow">https://love2d.org/forums/viewtopic.php?f=5&amp;t=32954</em>
+                </li>
+                <li>
+                  <em class="external free" rel="nofollow">https://love2d.org/forums/viewtopic.php?f=5&amp;t=76986</em>
+                </li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_types.html" title="Category:Types">Types</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

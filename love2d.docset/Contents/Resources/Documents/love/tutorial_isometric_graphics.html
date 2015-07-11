@@ -1,0 +1,165 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Tutorial:Isometric Graphics - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Tutorial:Isometric Graphics" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-500 ns-subject page-Tutorial_Isometric_Graphics skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Tutorial:Isometric Graphics</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p><em class="new">Isometric graphics</em> are quite popular in <a class="mw-redirect" href="rpg.html" title="RPG">RPGs</a> and <em class="new">strategy</em> <em class="new">games</em>, so learning how to draw a grid of isometric cubes could be useful. For the sake of this <em class="new">tutorial</em> I will assume that you are using cubes of equal size as we are working on making a grid of the cubes. 
+</p>
+              <p>First, you need some source images. If you take a look at the source we have two wonderful cubes that are supposed to represent grass and dirt (using vaguely green and brown colors respectfully). For the sake of reference I have included a border around the cubes which will show up as an actual grid as it makes it easier to discern where one cube ends and the other begins. You should also make note at the fact that the bottom and right borders is missing, this is because the cubes are supposed to form a grid nicely and we don't want to get a double-border anywhere. In your own cubes you can probably draw whatever you want to connect the cubes as you don't HAVE to have a border around it, but I will do it for this example. 
+</p>
+              <p>
+                <i>Note: This code is made for cubes, but works also if you want to create a grid with only the top face. This will result in the two values block_height and block_depth (as seen below) being the same.</i>
+              </p>
+              <p>First of all, once we have added the images to our game, we need some values. The width and the height of each cube (easily taken from the width and height of our source images) and a third value: the block_depth. This just means the height of the top face (easier to call it "depth" than to have to write "block_face_height" or something each time) and, in this case, is half the height of the cube itself:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">block_width <span class="sy0">=</span> grass<span class="sy0">:</span>getWidth<span class="br0">(</span><span class="br0">)</span>
+block_height <span class="sy0">=</span> grass<span class="sy0">:</span>getHeight<span class="br0">(</span><span class="br0">)</span>
+block_depth <span class="sy0">=</span> block_height <span class="sy0">/</span> <span class="nu0">2</span></pre>
+                </div>
+              </div>
+              <p>These values will be used in doing the lovely math below. 
+</p>
+              <p><br/>
+Next, we need the grid itself. A simple 2-dimensional array will do, which we will fill with the value 1 (which represents a grass cube). I also specify a grid size so I can change things easily (if I want to): 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">grid_size <span class="sy0">=</span> <span class="nu0">20</span>
+grid <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+<span class="kw1">for</span> x <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span>grid_size <span class="kw1">do</span>
+   grid<span class="br0">[</span>x<span class="br0">]</span> <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+   <span class="kw1">for</span> y <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span>grid_size <span class="kw1">do</span>
+      grid<span class="br0">[</span>x<span class="br0">]</span><span class="br0">[</span>y<span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">1</span>
+   <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>For good measure (and to show where the various points would be) let's change two of the grid positions into the value 2 (which represents a dirt cube): 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">grid<span class="br0">[</span><span class="nu0">2</span><span class="br0">]</span><span class="br0">[</span><span class="nu0">4</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">2</span>
+grid<span class="br0">[</span><span class="nu0">6</span><span class="br0">]</span><span class="br0">[</span><span class="nu0">5</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">2</span></pre>
+                </div>
+              </div>
+              <p><br/>
+The actual <a href="love49.html" title="love.draw">drawing</a> of the grid is like this (grid_x and grid_y are variables I declared earlier to keep a track of where the center of the grid should be; these would be used when moving the grid):
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="kw1">for</span> x <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span>grid_size <span class="kw1">do</span>
+   <span class="kw1">for</span> y <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">,</span>grid_size <span class="kw1">do</span>
+      <span class="kw1">if</span> grid<span class="br0">[</span>x<span class="br0">]</span><span class="br0">[</span>y<span class="br0">]</span> <span class="sy0">==</span> <span class="nu0">1</span> <span class="kw1">then</span>
+         love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>grass<span class="sy0">,</span>
+            grid_x <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>y<span class="sy0">-</span>x<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">,</span>
+            grid_y <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>x<span class="sy0">+</span>y<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_depth <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">-</span> <span class="br0">(</span>block_depth <span class="sy0">*</span> <span class="br0">(</span>grid_size <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span>
+      <span class="kw1">else</span> <span class="co1">-- grid[x][y] == 2</span>
+         love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>dirt<span class="sy0">,</span>
+            grid_x <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>y<span class="sy0">-</span>x<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">,</span>
+            grid_y <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>x<span class="sy0">+</span>y<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_depth <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">-</span> <span class="br0">(</span>block_depth <span class="sy0">*</span> <span class="br0">(</span>grid_size <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span>
+      <span class="kw1">end</span>
+   <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>But I will focus on just the grass part, to make things easier: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>grass<span class="sy0">,</span>
+   grid_x <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>y<span class="sy0">-</span>x<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">,</span>
+   grid_y <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>x<span class="sy0">+</span>y<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_depth <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">-</span> <span class="br0">(</span>block_depth <span class="sy0">*</span> <span class="br0">(</span>grid_size <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>This draws the grass cubes starting from the top and moving down along the top-right side, then moves one step to the bottom-left and does it again. This ensures that the cubes are all drawn in the right order so that the ones that are in the "back" will not overlap the ones in the front.
+This part of the code ensures that the grid_x and grid_y variables point to the center of the grid: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="sy0">-</span><span class="br0">(</span>block_depth <span class="sy0">*</span><span class="br0">(</span>grid_size <span class="sy0">/</span><span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p><br/>
+Note:If you don't like that the x-coordinate goes from the top to the right and the y-coordinate goes from the top to the left, you can easily switch them by switching their places in the line: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">grid_x <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>y<span class="sy0">-</span>x<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">,</span></pre>
+                </div>
+              </div>
+              <p>Which would result in this line: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">grid_x <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>x<span class="sy0">-</span>y<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">,</span></pre>
+                </div>
+              </div>
+              <p><br/>
+Now what about adding a 3rd dimension?
+This is easy by adding the following code to the end of the y-coordinate you pass to <i>love.graphics.draw</i>: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="sy0">-</span> block_depth</pre>
+                </div>
+              </div>
+              <p>(multiplied by every subsequent level you go up)
+So if we wanted to add another level to our grid you would simply put this into the nested for-loops: 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">love<span class="sy0">.</span>graphics<span class="sy0">.</span>draw<span class="br0">(</span>grass<span class="sy0">,</span>
+   grid_x <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>y<span class="sy0">-</span>x<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">,</span>
+   grid_y <span class="sy0">+</span> <span class="br0">(</span><span class="br0">(</span>x<span class="sy0">+</span>y<span class="br0">)</span> <span class="sy0">*</span> <span class="br0">(</span>block_depth <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">-</span> <span class="br0">(</span>block_depth <span class="sy0">*</span> <span class="br0">(</span>grid_size <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span><span class="br0">)</span> <span class="sy0">-</span> block_depth<span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p><br/>
+I hope this has taught you how to draw a simple isometric grid which you can use for fun and profit (if you ever make a profit remember me ^^).
+</p>
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Other_languages">Other languages</span>
+              </h2>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_tutorials.html" title="Category:Tutorials">Tutorials</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

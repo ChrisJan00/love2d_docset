@@ -1,0 +1,113 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>TextureFormat - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="TextureFormat" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-TextureFormat skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">TextureFormat</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table bgcolor="#d0d0ff" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Available since L&#xD6;VE <a href="0.9.html" title="0.9.0">0.9.0</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This enum is not supported in earlier versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <p><a href="image1.html" title="Image">Image</a> texture formats.
+</p>
+              <p>As of L&#xD6;VE <a href="0.91.html" title="0.9.2">0.9.2</a>, <a href="canvas.html" title="Canvas">Canvases</a> use <a href="canvasformat.html" title="CanvasFormat">CanvasFormats</a> rather than TextureFormats.
+</p>
+              <h2>
+                <span class="mw-headline" id="Constants">Constants</span>
+              </h2>
+              <dl>
+                <dt>normal</dt>
+                <dd> The default texture format: 8 bits per channel (32 bpp) RGBA. Color channel values range from 0-255 (0-1 in shaders.)</dd>
+                <dt>hdr</dt>
+                <dd> Only usable in Canvases. The high dynamic range texture format: floating point 16 bits per channel (64 bpp) RGBA. Color channel values inside the Canvas range from -infinity to +infinity.</dd>
+              </dl>
+              <table bgcolor="#d0d0ff" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Available since L&#xD6;VE <a href="0.92.html" title="0.9.1">0.9.1</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This constant is not supported in earlier versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <dl>
+                <dt>srgb</dt>
+                <dd> The same as <code>normal</code>, but the texture is <i>interpreted</i> as being in the sRGB color space. It will be decoded from sRGB to linear RGB when drawn or sampled from in a shader. For Canvases, this will also convert everything drawn <i>to</i> the Canvas from linear RGB to sRGB.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Notes">Notes</span>
+              </h2>
+              <p>The HDR format is most useful when combined with pixel shaders. Effects such as tonemapped HDR with bloom can be accomplished, or the canvas can be used to store arbitrary non-color data such as positions which are then interpreted and used in a shader, as long as you draw the right things to the canvas.
+</p>
+              <p>The sRGB format should only be used when doing gamma-correct rendering, which is an advanced topic and it's easy to get color-spaces mixed up. If you're not sure whether you need this, you might want to avoid it. Read more about gamma-correct rendering <a class="external text" href="http://http.developer.nvidia.com/GPUGems3/gpugems3_ch24.html" rel="nofollow">here</a>, <a class="external text" href="http://filmicgames.com/archives/299" rel="nofollow">here</a>, and <a class="external text" href="http://renderwonk.com/blog/index.php/archive/adventures-with-gamma-correct-rendering/" rel="nofollow">here</a>.
+</p>
+              <p>Not all systems support the HDR and sRGB formats. Use <a href="love.graphics5.html" title="love.graphics.isSupported">love.graphics.isSupported</a> to check before creating the Canvas or Image.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+                <li>
+                  <a href="love.graphics58.html" title="love.graphics.newImage">love.graphics.newImage</a>
+                </li>
+                <li>
+                  <a href="love.graphics33.html" title="love.graphics.newCanvas">love.graphics.newCanvas</a>
+                </li>
+                <li>
+                  <a href="love.graphics5.html" title="love.graphics.isSupported">love.graphics.isSupported</a>
+                </li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_enums.html" title="Category:Enums">Enums</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

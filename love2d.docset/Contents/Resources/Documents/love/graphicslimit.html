@@ -1,0 +1,94 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>GraphicsLimit - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="GraphicsLimit" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-GraphicsLimit skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">GraphicsLimit</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <table bgcolor="#d0d0ff" style="margin-top: 1em; padding: 3px; border-radius:5px; -moz-border-radius:5px;">
+                <tr>
+                  <td>
+                    <i>
+                      <b>Available since L&#xD6;VE <a href="0.92.html" title="0.9.1">0.9.1</a></b>
+                    </i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <small>This enum is not supported in earlier versions.</small>
+                  </td>
+                </tr>
+              </table>
+              <p>Types of system-dependent graphics limits checked for using <a href="love.graphics46.html" title="love.graphics.getSystemLimit">love.graphics.getSystemLimit</a>.
+</p>
+              <h2>
+                <span class="mw-headline" id="Constants">Constants</span>
+              </h2>
+              <dl>
+                <dt>pointsize</dt>
+                <dd> The maximum size of <a href="love.graphics121.html" title="love.graphics.point">points</a>.</dd>
+                <dt>texturesize</dt>
+                <dd> The maximum width or height of <a href="image1.html" title="Image">Images</a> and <a href="canvas.html" title="Canvas">Canvases</a>.</dd>
+                <dt>multicanvas</dt>
+                <dd> The maximum number of simultaneously active canvases (via <a href="love.graphics15.html" title="love.graphics.setCanvas">love.graphics.setCanvas</a>.)</dd>
+                <dt>canvasfsaa</dt>
+                <dd> The maximum number of antialiasing samples for a <a href="love.graphics33.html" title="love.graphics.newCanvas">Canvas</a>.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Notes">Notes</span>
+              </h2>
+              <p>Attempting to create an <a href="image1.html" title="Image">Image</a> with a width **or** height greater than the maximum supported will create a checkerboard-patterned image instead. Doing the same for a <a href="canvas.html" title="Canvas">Canvas</a> will result in an error.
+</p>
+              <p>It's safe to assume the maximum texture size will never be less than 1024 and will almost always be 2048 or greater.There is an <a class="external text" href="http://feedback.wildfiregames.com/report/opengl/feature/GL_MAX_TEXTURE_SIZE" rel="nofollow">online database</a> which has collected info about the max texture size for various systems.
+</p>
+              <p>The value for <a href="love.graphics46.html" title="love.graphics.getSystemLimit">love.graphics.getSystemLimit("multicanvas")</a> will be at least 4, as long as multi-canvas rendering is <a href="graphicsfeature.html" title="GraphicsFeature">supported</a>.
+</p>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+                <li>
+                  <a href="love.graphics46.html" title="love.graphics.getSystemLimit">love.graphics.getSystemLimit</a>
+                </li>
+                <li>
+                  <a href="canvas_getfsaa.html" title="Canvas:getFSAA">Canvas:getFSAA</a>
+                </li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_enums.html" title="Category:Enums">Enums</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

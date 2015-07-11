@@ -1,0 +1,84 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Remove Workaround - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Remove Workaround" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Remove_Workaround skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Remove Workaround</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <h2>
+                <span class="mw-headline" id="Workaround_for_a_Physics_module_issue">Workaround for a Physics module issue</span>
+              </h2>
+              <p>There is an <em class="external text" rel="nofollow">unresolved issue</em> with the third callback of <a href="world_setcallbacks.html" title="World:setCallbacks">World:setCallbacks</a>, the remove callback. If there are active contacts when a shape is destroyed, the next physics update will cause a crash when L&#xD6;VE attempts to call the callback. This issue appears at least in L&#xD6;VE version 0.6.2.
+</p>
+              <p>To work around this problem, a shape must first leave from all the active contacts before it can be destroyed safely. This can be done by moving the shape into a special area, or more simply by setting the shape to not collide with anything.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- remove a shape from all contact categories</span>
+shape<span class="sy0">:</span>setMask<span class="br0">(</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">6</span><span class="sy0">,</span><span class="nu0">7</span><span class="sy0">,</span><span class="nu0">8</span><span class="sy0">,</span><span class="nu0">9</span><span class="sy0">,</span><span class="nu0">10</span><span class="sy0">,</span><span class="nu0">11</span><span class="sy0">,</span><span class="nu0">12</span><span class="sy0">,</span><span class="nu0">13</span><span class="sy0">,</span><span class="nu0">14</span><span class="sy0">,</span><span class="nu0">15</span><span class="sy0">,</span><span class="nu0">16</span><span class="br0">)</span>
+<span class="co1">-- add it into the pending destroy list</span>
+<span class="kw3">table.insert</span><span class="br0">(</span>removals<span class="sy0">,</span> shape<span class="br0">)</span>
+<span class="co1">-- either remove the shape from the list of drawn objects, or mark</span>
+<span class="co1">-- it with a flag so it won't be no longer drawn</span></pre>
+                </div>
+              </div>
+              <p>After this is done, the shape will no longer have an affect on the world. After the next physics update is performed, it will also have lost all of its contacts, and can be safely destroyed.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- world update happens usually in love.update callback</span>
+world<span class="sy0">:</span>update<span class="br0">(</span>dt<span class="br0">)</span>
+<span class="co1">-- you can follow it by destroying any shaped listed to be removed</span>
+<span class="kw1">for</span> _<span class="sy0">,</span> shape <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>removals<span class="br0">)</span> <span class="kw1">do</span>
+	shape<span class="sy0">:</span>destroy<span class="br0">(</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Remember that updating the world before removing the shape makes sure it will no longer be in contact with anything.
+</p>
+              <h3>
+                <span class="mw-headline" id="See_also">See also</span>
+              </h3>
+              <ul>
+                <li>
+                  <a href="shape_setmask.html" title="Shape:setMask">Shape:setMask</a>
+                </li>
+                <li>
+                  <a href="contact.html" title="Contact">Contact</a>
+                </li>
+              </ul>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Categories</em>: <ul><li><a href="category_l_ve.html" title="Category:L&#xD6;VE">L&#xD6;VE</a></li><li><em class="new">Workarounds</em></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

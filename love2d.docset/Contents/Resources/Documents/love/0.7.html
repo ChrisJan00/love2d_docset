@@ -1,0 +1,105 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>0.7.0 - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="0.7.0" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-0_7_0 skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">0.7.0</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>The codename of L&#xD6;VE 0.7.0 is "<b>Game Slave</b>". It is currently <b><span style="color:#0000ff;">released</span></b>.
+</p>
+              <h2>
+                <span class="mw-headline" id="Changes_from_0.6.2">Changes from <a href="0.6.html" title="0.6.2">0.6.2</a></span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Additions">Additions</span>
+              </h3>
+              <ul>
+                <li> Added <a href="love14.html" title="love.thread">love.thread</a>.</li>
+                <li> Added <a href="love4.html" title="love.font">love.font</a>.</li>
+                <li> Added <a href="framebuffer.html" title="Framebuffer">love.graphics.Framebuffer</a>.</li>
+                <li> Added <a href="source_play.html" title="Source:play">Source:play</a>, <a href="source_pause.html" title="Source:pause">Source:pause</a>, etc.</li>
+                <li> Added <a href="source_isstatic.html" title="Source:isStatic">Source:isStatic</a>.</li>
+                <li> Added <a href="source_getposition.html" title="Source:getPosition">Source:getPosition</a>/<a href="source_setposition.html" title="Source:setPosition">setPosition</a>, <a href="source_getvelocity.html" title="Source:getVelocity">Source:getVelocity</a>/<a href="source_setvelocity.html" title="Source:setVelocity">setVelocity</a>, and <a href="source_getdirection.html" title="Source:getDirection">Source:getDirection</a>/<a href="source_setdirection.html" title="Source:setDirection">setDirection</a> to <a href="source.html" title="Source">Source</a>.</li>
+                <li> Added <em class="new">CircleShape:getGroupIndex</em>/<em class="new">setGroupIndex</em></li>
+                <li> Added <em class="new">PolygonShape:getGroupIndex</em>/<em class="new">setGroupIndex</em></li>
+                <li> Added <a href="font_getwrap.html" title="Font:getWrap">Font:getWrap</a>.</li>
+                <li> Added identity field to <a class="mw-redirect" href="config_files.html" title="love.conf">love.conf</a>.</li>
+                <li> Added <a href="love53.html" title="love.quit">love.quit</a> callback.</li>
+                <li> Added <a href="love52.html" title="love.focus">love.focus</a> callback.</li>
+                <li> Added extra meter parameter to <a href="love.physics6.html" title="love.physics.newWorld">love.physics.newWorld</a>.</li>
+                <li> Added <a href="love.graphics238.html" title="love.graphics.setIcon">love.graphics.setIcon</a>.</li>
+                <li> Added way to make the window desktop resolution.</li>
+                <li> Added subtractive and multiplicative <a href="blendmode.html" title="BlendMode">blend modes</a>.</li>
+                <li> Added <a href="body_getallowsleeping.html" title="Body:getAllowSleeping">Body:getAllowSleeping</a>.</li>
+                <li> Added <a href="shape_getbody.html" title="Shape:getBody">Shape:getBody</a>.</li>
+                <li> Added <a href="filedata.html" title="FileData">love.filesystem.FileData</a> for public usage.</li>
+                <li> Added base64 support for <a href="filedata.html" title="FileData">love.filesystem.FileData</a>.</li>
+              </ul>
+              <h3>
+                <span class="mw-headline" id="Bugfixes">Bugfixes</span>
+              </h3>
+              <ul>
+                <li> Fixed the debug module not being an upvalue of the error handlers. (you can now override debug)</li>
+                <li> Fixed some cases when <a href="love.audio33.html" title="love.audio.pause">love.audio.pause</a> and friends were acting on everything, not just the passed <a href="source.html" title="Source">Source</a>.</li>
+                <li> Fixed <a href="body_setfixedrotation.html" title="Body:setFixedRotation">setFixedRotation</a> enabling other flags.</li>
+                <li> Fixed a bug in the loader (for require).</li>
+                <li> Fixed ParticleSystem::setSprite not retaining the new image.</li>
+                <li> Fixed <a href="love.graphics24.html" title="love.graphics.setMode">setMode</a> removing images settings (wrapping, filters).</li>
+                <li> Fixed <a href="shape_getbody.html" title="Shape:getBody">Shape:getBody</a>, it's now exposed for L&#xD6;VE usage.</li>
+                <li> Fixed <a href="joint_gettype.html" title="Joint:getType">DistanceJoint:getType()</a> returning "circle" - it now returns "distance".</li>
+                <li> Fixed <a href="spritebatch.html" title="SpriteBatch">SpriteBatches</a> being unaffected by <a href="love.graphics228.html" title="love.graphics.setColor">setColor</a></li>
+                <li> Fixed the audio bug.</li>
+                <li> Fixed invalid FSAA values crashing L&#xD6;VE.</li>
+                <li> Fixed a bunch of compiler warnings.</li>
+                <li> Fixed OS X not properly using UTIs for .love files.</li>
+                <li> Fixed the modplug decoder not properly handeling files that fail to load.</li>
+                <li> Fixed a memory leak in <a href="love.graphics17.html" title="love.graphics.setFont">setFont</a>.</li>
+                <li> Fixed bug where errors in threads wouldn't get picked up by demand.</li>
+                <li> Fixed part of the bug with newlines when scaling text (rotating still messes up the lines).</li>
+                <li> Fixed the bug where <a href="love.graphics52.html" title="love.graphics.newImageFont">newImageFont</a> would try to create <a href="imagedata.html" title="ImageData">ImageData</a> out of ImageData.</li>
+                <li> Fixed error handler not resetting the <a href="blendmode.html" title="BlendMode">blend mode</a>.</li>
+              </ul>
+              <h3>
+                <span class="mw-headline" id="Others">Others</span>
+              </h3>
+              <ul>
+                <li> Changed fonts, they're now po2 safe.</li>
+                <li> Changed the traceback in the error screen.</li>
+                <li> Changed font origin to top-left.</li>
+                <li> Changed behavior of <a href="love.physics6.html" title="love.physics.newWorld">love.physics.newWorld(w, h)</a>, it now creates a w*h world, not a 4*w*h world.</li>
+                <li> Removed font functions from <a href="love5.html" title="love.graphics">love.graphics</a>.</li>
+              </ul>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_versions.html" title="Category:Versions">Versions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

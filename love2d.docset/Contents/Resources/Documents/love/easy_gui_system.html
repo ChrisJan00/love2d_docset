@@ -1,0 +1,494 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Easy GUI System - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="Easy GUI System" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-Easy_GUI_System skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">Easy GUI System</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>
+                <br/>
+              </p>
+              <p>
+                <br/>
+              </p>
+              <p>EGS uses the LGPL license 3.0. Basically give me credit - Any fixes you make to my code; give me them too. You don't need to give me your code; though. I think it goes somewhat like that. [<a class="external text" href="http://www.opensource.org/licenses/lgpl-3.0.html" rel="nofollow">License details and stuff</a>].
+</p>
+              <p>The license above does NOT APPLY TO the 'Tetris.mp3' sound included
+</p>
+              <p><a class="external free" href="http://www.newgrounds.com/audio/listen/435221" rel="nofollow">http://www.newgrounds.com/audio/listen/435221</a>
+PLEASE LOOK AT THE TETRIS.mp3 LICENSE BEFORE REDISTRIBUTING! OR ELSE!
+</p>
+              <p><br/>
+Easy GUI System is an easy-to-use GUI system made by <em class="new">User:Trappingnoobs</em>.
+</p>
+              <div style="border:2px solid green;width:100%;text-align:center;background-color:skyblue">Download link:<br/>[<a class="external autonumber" href="https://github.com/trappingnoobs/EGS" rel="nofollow">[1]</a>]</div>
+              <div class="toc" id="toc">
+                <div id="toctitle">
+                  <h2>Contents</h2>
+                </div>
+              </div>
+              <h1>
+                <span class="mw-headline" id="General_tutorial">General tutorial</span>
+              </h1>
+              <h2>
+                <span class="mw-headline" id="Included">Included</span>
+              </h2>
+              <ul>
+                <li>Ships with class.lua by Trappingnoobs from love2D forum.</li>
+                <li>Ships with 'Tetris with DONK' by Jordan Snelling (Jordach) from newgrounds.</li>
+              </ul>
+              <p>If any owner of an above file/product does not wish EGS to contain their products anymore; you can contact me via email (Ash2424@live.co.uk), or via the Love2D forum (Send a private message to 'Trappingnoobs' or post on the EGS thread.)
+</p>
+              <h2>
+                <span class="mw-headline" id="Class.lua_by_Trappingnoobs">Class.lua by Trappingnoobs</span>
+              </h2>
+              <p>My class system is incredibly simple to use. The following few tutorials will just teach you the basics.
+</p>
+              <h3>
+                <span class="mw-headline" id="Defining_a_class">Defining a class</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"ClassName"</span> <span class="br0">{</span>Properties<span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>There we have a basic class called 'ClassName'. It has ONE property, called "Properties", with a default value of an empty string (We didn't give it a default value).
+</p>
+              <p>
+                <br/>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Defining_a_class_with_multiple_properties">Defining a class with multiple properties</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"ClassName"</span> <span class="br0">{</span>
+	Property1<span class="sy0">,</span>
+	Property2<span class="sy0">,</span>
+<span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>Yet another very basic class. It literally just creates a class with two properties. If it wasn't obvious from <a href="#Defining_a_class">#Defining a class</a>, you pass in a table.
+</p>
+              <p>
+                <br/>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Defining_a_class_with_multiple_properties_with_default_values">Defining a class with multiple properties with default values</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"ClassName"</span> <span class="br0">{</span>
+	<span class="br0">[</span><span class="st0">"Property1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">7</span><span class="sy0">,</span>
+	Property2<span class="sy0">,</span>
+<span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>To give a property a default value, just make it a key instead of a value, such as above, and give it a value of the default value.
+</p>
+              <p>Default values can be functions, tables, anything!
+</p>
+              <p>
+                <br/>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Instanciating_a_class">Instanciating a class</span>
+              </h3>
+              <pre>You only ever run new on a class. Do not type "ClassName.Property1 = ." because it WILL error. Only change instance's properties if that makes sense..</pre>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"ClassName"</span> <span class="br0">{</span>
+	<span class="br0">[</span><span class="st0">"Property1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">7</span><span class="sy0">,</span>
+	Property2<span class="sy0">,</span>
+<span class="br0">}</span>
+&#xA0;
+ClassName<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"InstanceName"</span><span class="br0">)</span>
+<span class="kw3">print</span><span class="br0">(</span>InstanceName<span class="sy0">.</span>Property1<span class="br0">)</span>
+&#xA0;
+<span class="sy0">&gt;</span><span class="nu0">7</span></pre>
+                </div>
+              </div>
+              <p>As you can see, and probably already noticed, we're passing in the names, rather than getting a return value, such as the above instead of
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">ClassName <span class="sy0">=</span> Class <span class="br0">{</span>
+	<span class="br0">[</span><span class="st0">"Property1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">7</span><span class="sy0">,</span>
+	Property2<span class="sy0">,</span>
+<span class="br0">}</span>
+InstanceName <span class="sy0">=</span> ClassName<span class="sy0">:</span>new<span class="br0">(</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>The class function makes use of the 'getfenv()' function. This allows it to define variables in the calling environment. Classes are not local variables, they are global. So are instances.
+</p>
+              <p>
+                <br/>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Creating_multiple_intances_of_a_class">Creating multiple intances of a class</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"ClassName"</span> <span class="br0">{</span>
+	<span class="br0">[</span><span class="st0">"Property1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">7</span><span class="sy0">,</span>
+	Property2<span class="sy0">,</span>
+<span class="br0">}</span>
+&#xA0;
+ClassName<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"InstanceName"</span><span class="br0">)</span>
+InstanceName<span class="sy0">.</span>Property2 <span class="sy0">=</span> <span class="st0">"Ohai world"</span>
+<span class="kw3">print</span><span class="br0">(</span><span class="st0">"InstanceName1 says: "</span><span class="sy0">..</span>InstanceName<span class="sy0">.</span>Property2<span class="br0">)</span>
+ClassName<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"InstanceName2"</span><span class="br0">)</span>
+<span class="kw3">print</span><span class="br0">(</span><span class="st0">"InstanceName2 says: "</span><span class="sy0">..</span>InstanceName2<span class="sy0">.</span>Property2<span class="br0">)</span>
+&#xA0;
+<span class="sy0">&gt;</span>InstanceName1 says<span class="sy0">:</span> Ohai world
+<span class="sy0">&gt;</span>InstanceName2 says<span class="sy0">:</span></pre>
+                </div>
+              </div>
+              <p>Like I said earlier; if no default is set, a class property will get a default value of an empty string, not nil, so it doesn't error when you try to concatenate it.
+</p>
+              <h3>
+                <span class="mw-headline" id="Inheriting_properties">Inheriting properties</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"ClassName"</span> <span class="br0">{</span>
+	<span class="br0">[</span><span class="st0">"eggs"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="kw4">true</span><span class="sy0">,</span>
+<span class="br0">}</span>
+&#xA0;
+Class <span class="st0">"ClassName2"</span> <span class="br0">(</span><span class="br0">{</span>
+	<span class="br0">[</span><span class="st0">"Property1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="nu0">7</span><span class="sy0">,</span>
+	Property2<span class="sy0">,</span>
+<span class="br0">}</span><span class="sy0">,</span> <span class="br0">{</span>ClassName<span class="br0">}</span><span class="br0">)</span>
+&#xA0;
+ClassName2<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"InstanceName"</span><span class="br0">)</span>
+<span class="kw3">print</span><span class="br0">(</span><span class="kw3">tostring</span><span class="br0">(</span>InstanceName<span class="sy0">.</span>eggs<span class="br0">)</span><span class="br0">)</span>
+<span class="sy0">&gt;</span><span class="kw4">true</span></pre>
+                </div>
+              </div>
+              <p>To inherit, instead of typing
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"cName"</span> <span class="br0">{</span>Properties<span class="br0">}</span></pre>
+                </div>
+              </div>
+              <p>We type
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"cName"</span> <span class="br0">(</span><span class="br0">{</span>Properties<span class="br0">}</span><span class="sy0">,</span> <span class="br0">{</span>Which classes to inherit from<span class="br0">}</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>As it's a table you can inherit from multiple classes.
+</p>
+              <p>If you have the same property in both classes, for example
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Class <span class="st0">"cName"</span> <span class="br0">{</span><span class="br0">[</span><span class="st0">"Prop1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="st0">"LOLHAX5000"</span><span class="br0">}</span>
+Class <span class="st0">"cName2"</span> <span class="br0">(</span><span class="br0">{</span><span class="br0">[</span><span class="st0">"Prop1"</span><span class="br0">]</span> <span class="sy0">=</span> <span class="st0">"LOLHAX6000"</span><span class="br0">}</span><span class="sy0">,</span> <span class="br0">{</span>cName<span class="br0">}</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Like that, it inherits from an object with a property the same, the second class (cName2)'s Prop1 will become it's default, as it overrides the inherited value.
+</p>
+              <p>So if I instanced "cName", and printed it's Prop1, it'd print LOLHAX5000, but doing the same to cName2 would print LOLHAX6000. This allows you to make classes that inherit the majority of things from another, but change or completely destroy (just set it to nil) some, you can.
+</p>
+              <p>
+                <br/>
+              </p>
+              <h3>
+                <span class="mw-headline" id="End_of_class_tutorial">End of class tutorial</span>
+              </h3>
+              <p>I hoped your understood; but if not, you don't need to understand it all. Only that you should know how to instance classes (ClassName:new("InstanceName).
+</p>
+              <p>
+                <br/>
+              </p>
+              <h2>
+                <span class="mw-headline" id="Using_my_GUI_library">Using my GUI library</span>
+              </h2>
+              <p>By now you should be familiar with <a href="#Class.lua_by_Trappingnoobs">my class system.</a>
+</p>
+              <p>My GUI library classes are organised into two sections: Structural and Non-Structural classes.
+</p>
+              <h3>
+                <span class="mw-headline" id="Events">Events</span>
+              </h3>
+              <p>Events are identical to those found on [<a class="external text" href="http://roblox.com" rel="nofollow">Roblox</a>]. 
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">Object<span class="sy0">.</span>Event<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>For example:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">CheckBox<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"Checkbox1"</span><span class="br0">)</span>
+Checkbox1<span class="sy0">.</span>checkStateChanged<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	<span class="kw3">print</span><span class="br0">(</span><span class="st0">"Checkbox1's state was changed by the&#xA0;:changeState() function. It fires on mouse click automatically but can be fired manually."</span><span class="br0">)</span>
+<span class="kw1">end</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="What_are_Structural_Classes.3F">What are Structural Classes?</span>
+              </h3>
+              <p>In my GUI library, structural classes are classes that the only purpouse is for other classes to inherit from. Instancing them is a VERY bad idea.
+</p>
+              <p>For this reason, I didn't bother to document some of the structural classes.
+</p>
+              <h3>
+                <span class="mw-headline" id="What_are_Non-Structural_Classes.3F">What are Non-Structural Classes?</span>
+              </h3>
+              <p>Non-Structural classes are things like <a href="#Checkbox">Checkboxes.</a> You can instance them, and they are mainly GUI items.
+</p>
+              <h3>
+                <span class="mw-headline" id="Terminology">Terminology</span>
+              </h3>
+              <table class="wikitable">
+                <tr>
+                  <th>Word
+</th>
+                  <th>Meaning
+</th>
+                </tr>
+                <tr>
+                  <td>Superclasses
+</td>
+                  <td>Classes that a class inherits from (CheckBox's SuperClass is GUIElement.)
+</td>
+                </tr>
+                <tr>
+                  <td>Derived Classes
+</td>
+                  <td>Classes that inherit from a class. (CheckBox is a derived class of GUIElement)
+</td>
+                </tr>
+                <tr>
+                  <td>Dropped Properties/Events
+</td>
+                  <td>Properties/Events that usualy would've been inherited but were nilled in the class (Eg TextLabel drops mouseClicked, mousePressed, mouseReleased)
+</td>
+                </tr>
+              </table>
+              <h1>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h1>
+              <p>Rather than document every individual property; I'm going to give examples on how to do certain tasks!
+</p>
+              <h2>
+                <span class="mw-headline" id="Buttons">Buttons</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Making_a_TextLabel_appear_when_a_Button_is_hovered">Making a TextLabel appear when a Button is hovered</span>
+              </h3>
+              <p>Note that since TextLabel only drops the events 'mouseClicked', 'mousePressed', and 'mouseReleased', but not 'mouseEntered' and 'mouseExited', it's possible to do this with two TextLabels with identical results. However TextLabels were not made to be functional so it's not recommended.
+</p>
+              <p>First we need a TextLabel and a TextButton. Put these lines in love.load:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TextButton<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"HoverButton"</span><span class="br0">)</span>
+TextLabel<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"Display"</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Now that we've got them we can define some variables. Also put these lines below the ones you just did in love.load:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">HoverButton<span class="sy0">.</span>text <span class="sy0">=</span> <span class="st0">"Hover me to see the TextLabel."</span>
+HoverButton<span class="sy0">.</span>autoSize <span class="sy0">=</span> <span class="kw4">false</span>
+HoverButton<span class="sy0">.</span>size <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">}</span>
+HoverButton<span class="sy0">:</span>centerText<span class="br0">(</span><span class="br0">)</span><span class="co1">--Aligns text to center on Y and X axis.</span>
+HoverButton<span class="sy0">.</span>hasBorder <span class="sy0">=</span> <span class="kw4">false</span>
+Display<span class="sy0">.</span>text <span class="sy0">=</span> <span class="st0">":o"</span>
+Display<span class="sy0">.</span>visible <span class="sy0">=</span> <span class="kw4">false</span>
+Display<span class="sy0">.</span>size <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">}</span>
+Display<span class="sy0">:</span>centerText<span class="br0">(</span><span class="br0">)</span>
+Display<span class="sy0">.</span>position <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">}</span>
+Display<span class="sy0">.</span>hasBorder <span class="sy0">=</span> <span class="kw4">false</span></pre>
+                </div>
+              </div>
+              <p>Now we need <a href="#Events">#Events</a>. These are also in love.load.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">HoverButton<span class="sy0">.</span>mouseEntered<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	Display<span class="sy0">.</span>visible <span class="sy0">=</span> <span class="kw4">true</span>
+<span class="kw1">end</span><span class="br0">)</span>
+HoverButton<span class="sy0">.</span>mouseExited<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	Display<span class="sy0">.</span>visible <span class="sy0">=</span> <span class="kw4">false</span>
+<span class="kw1">end</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Now if we run that, it's a functional example!&#xA0;:o
+</p>
+              <p>Most of that is realy straightforward, right?!
+</p>
+              <p>That's because EGS was made to be easy, and it is, but maintains a good range of customisability. For example, notice the shading when you hover on the button? See how it gets darker when we hold the mouse down? We can turn that off by just adding:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">HoverButton<span class="sy0">.</span>hasShading <span class="sy0">=</span> <span class="kw4">false</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Making_a_button_respond_to_hovering">Making a button respond to hovering</span>
+              </h3>
+              <p>In this tutorial we'll make a button respond to hovering. The purpouse is to explore more properties of GUI elements. For example, all three color properties (textColor, borderColor, backgroundColor) are just a table with three values in, {R, G, B}, for example, {255, 0, 0} represents pure red.
+</p>
+              <p>I recommend you set the window backgroundColor to white for this tutorial! (love.graphic.setBackgroundColor(255,255,255))
+</p>
+              <p>First we make the button and initialise some values:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TextButton<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"TB"</span><span class="br0">)</span>
+TB<span class="sy0">.</span>text <span class="sy0">=</span> <span class="st0">"Hover me!"</span>
+TB<span class="sy0">.</span>autoSize <span class="sy0">=</span> <span class="kw4">false</span>
+TB<span class="sy0">.</span>size <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">}</span>
+TB<span class="sy0">.</span>position <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">10</span><span class="sy0">,</span><span class="nu0">10</span><span class="br0">}</span>
+TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--That's ROUGHLY skyblue.</span>
+TB<span class="sy0">:</span>centerText<span class="br0">(</span><span class="br0">)</span><span class="co1">--Aligns text to center on Y and X axis.</span></pre>
+                </div>
+              </div>
+              <p>Try that. Not so great; so far it just does the defaults; some shading. Let's mix it up a little.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TB<span class="sy0">.</span>hasShading <span class="sy0">=</span> <span class="kw4">false</span> <span class="co1">--Get rid of shading.</span>
+TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">1</span> <span class="co1">--Make the border thinner.</span>
+TB<span class="sy0">.</span>mouseEntered<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">2</span>
+<span class="kw1">end</span><span class="br0">)</span>
+TB<span class="sy0">.</span>mouseExited<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">1</span>
+<span class="kw1">end</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Now THAT is cooler. It looks realy nice with the thinner border! We'll now try changing the color a little- not too much, just a tad. Replace those two events you did with this:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TB<span class="sy0">.</span>mouseEntered<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">2</span>
+	TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">150</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--Less green!</span>
+<span class="kw1">end</span><span class="br0">)</span>
+TB<span class="sy0">.</span>mouseExited<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">1</span>
+	TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--Back to skyblue.</span>
+<span class="kw1">end</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>Getting better, but still not perfect. How about making the borderColor and textColors change too?
+</p>
+              <p>
+                <br/>
+              </p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TB<span class="sy0">.</span>mouseEntered<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">2</span>
+	TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">150</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--Less green!</span>
+	TB<span class="sy0">.</span>textColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">}</span>
+	TB<span class="sy0">.</span>borderColor <span class="sy0">=</span> TB<span class="sy0">.</span>textColor
+<span class="kw1">end</span><span class="br0">)</span>
+TB<span class="sy0">.</span>mouseExited<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">1</span>
+	TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--Back to skyblue.</span>
+	TB<span class="sy0">.</span>textColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">}</span>
+	TB<span class="sy0">.</span>borderColor <span class="sy0">=</span> TB<span class="sy0">.</span>textColor
+<span class="kw1">end</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>That's the end of the tutorial, but you might not like the above effect- It's realy in-your-face and end-users might find it annoying, try this:
+</p>
+              <p>
+                <br/>
+              </p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TB<span class="sy0">.</span>mouseEntered<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">150</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--Less green!</span>
+<span class="kw1">end</span><span class="br0">)</span>
+TB<span class="sy0">.</span>mouseExited<span class="sy0">:</span>connect<span class="br0">(</span><span class="kw1">function</span><span class="br0">(</span><span class="br0">)</span>
+	TB<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span> <span class="co1">--Back to skyblue.</span>
+<span class="kw1">end</span><span class="br0">)</span></pre>
+                </div>
+              </div>
+              <p>
+                <br/>
+              </p>
+              <h3>
+                <span class="mw-headline" id="Making_a_TextLabel_with_a_message_when_you_hover">Making a TextLabel with a message when you hover</span>
+              </h3>
+              <p>Now, to do this, you may wonder how this is relevant to teaching you about my GUI features, because this is mainly just math to make it follow the mouse, count the frames, but NO! There's no need to do ANY of this!&#xA0;:D
+</p>
+              <p>It's REALY simple to do this task, and ALL GUIElements have this feature, called <i>Caption</i>. Watch:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TextLabel<span class="sy0">:</span>new<span class="br0">(</span><span class="st0">"TL"</span><span class="br0">)</span>
+TL<span class="sy0">.</span>text <span class="sy0">=</span> <span class="st0">"Hover me!"</span>
+TL<span class="sy0">.</span>autoSize <span class="sy0">=</span> <span class="kw4">false</span>
+TL<span class="sy0">.</span>size <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">}</span>
+TL<span class="sy0">.</span>position <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">10</span><span class="sy0">,</span><span class="nu0">10</span><span class="br0">}</span>
+TL<span class="sy0">.</span>backgroundColor <span class="sy0">=</span> <span class="br0">{</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">}</span>
+TL<span class="sy0">:</span>centerText<span class="br0">(</span><span class="br0">)</span>
+TL<span class="sy0">.</span>hasShading <span class="sy0">=</span> <span class="kw4">false</span> 
+TL<span class="sy0">.</span>borderWidth <span class="sy0">=</span> <span class="nu0">1</span></pre>
+                </div>
+              </div>
+              <p>We're going to stick with the nice style we made in the last tutorial. But we need a few more variables for a caption. Add this:
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TL<span class="sy0">.</span>hasCaption <span class="sy0">=</span> <span class="kw4">true</span>
+TL<span class="sy0">.</span>caption <span class="sy0">=</span> <span class="st0">"This is a caption!"</span></pre>
+                </div>
+              </div>
+              <p>Execute it, and huzzah!
+</p>
+              <p>If you want the caption to come up quicker or slower, there's a neat function for that, add this just below TL.caption = "This is a caption!":
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">TL<span class="sy0">:</span>setSecondsForCaption<span class="br0">(</span><span class="nu0">3</span><span class="br0">)</span> 
+<span class="co1">--Will wait 3 seconds of mouse hovering to display caption.</span></pre>
+                </div>
+              </div>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_libraries.html" title="Category:Libraries">Libraries</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

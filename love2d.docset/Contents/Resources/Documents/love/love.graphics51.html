@@ -1,0 +1,223 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>love.graphics.newFont - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="love.graphics.newFont" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-love_graphics_newFont skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">love.graphics.newFont</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>Creates a new <a href="font.html" title="Font">Font</a>.
+</p>
+              <table align="center" bgcolor="gold" style="border-style:solid;border-width:1px;-moz-border-radius:3px;border-radius:3px;" width="80%">
+                <tr>
+                  <td width="1">
+                    <img alt="O.png" height="64" src="o.png" width="64"/>
+                  </td>
+                  <td>This function can be slow if it is called repeatedly, such as from <a href="love48.html" title="love.update">love.update</a> or <a href="love49.html" title="love.draw">love.draw</a>. If you need to use a specific resource often, create it once and store it somewhere it can be reused!
+</td>
+                  <td width="1">&#xA0;
+</td>
+                </tr>
+              </table>
+              <br/>
+              <br/>
+              <h2>
+                <span class="mw-headline" id="Function">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">font <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newFont<span class="br0">(</span> filename<span class="sy0">,</span> size <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="string.html" title="string">string</a> filename</code>
+                </dt>
+                <dd> The filepath to the font file.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> size (12)</code>
+                </dt>
+                <dd> The size of the font in pixels.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="font.html" title="Font">Font</a> font</code>
+                </dt>
+                <dd> A Font object which can be used to draw text on screen.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_2">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis_2">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">font <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newFont<span class="br0">(</span> file<span class="sy0">,</span> size <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_2">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="file.html" title="File">File</a> file</code>
+                </dt>
+                <dd> A File pointing to a font.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> size (12)</code>
+                </dt>
+                <dd> The size of the font in pixels.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_2">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="font.html" title="Font">Font</a> font</code>
+                </dt>
+                <dd> A Font object which can be used to draw text on screen.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_3">Function</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Synopsis_3">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">font <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newFont<span class="br0">(</span> data<span class="sy0">,</span> size <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_3">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="data.html" title="Data">Data</a> data</code>
+                </dt>
+                <dd> The encoded data to decode into a font.</dd>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> size (12)</code>
+                </dt>
+                <dd> The size of the font in pixels.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_3">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="font.html" title="Font">Font</a> font</code>
+                </dt>
+                <dd> A Font object which can be used to draw text on screen.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Function_4">Function</span>
+              </h2>
+              <p>This variant uses the default font (Vera Sans) with a custom size.
+</p>
+              <h3>
+                <span class="mw-headline" id="Synopsis_4">Synopsis</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1">font <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newFont<span class="br0">(</span> size <span class="br0">)</span></pre>
+                </div>
+              </div>
+              <h3>
+                <span class="mw-headline" id="Arguments_4">Arguments</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="number.html" title="number">number</a> size (12)</code>
+                </dt>
+                <dd> The size of the font in pixels.</dd>
+              </dl>
+              <h3>
+                <span class="mw-headline" id="Returns_4">Returns</span>
+              </h3>
+              <dl>
+                <dt>
+                  <code><a href="font.html" title="Font">Font</a> font</code>
+                </dt>
+                <dd> A Font object which can be used to draw text on screen.</dd>
+              </dl>
+              <h2>
+                <span class="mw-headline" id="Examples">Examples</span>
+              </h2>
+              <h3>
+                <span class="mw-headline" id="Use_newFont_to_draw_a_custom_styled_text">Use newFont to draw a custom styled text</span>
+              </h3>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- load ttf file font. set 20px font-size</span>
+mainFont <span class="sy0">=</span> love<span class="sy0">.</span>graphics<span class="sy0">.</span>newFont<span class="br0">(</span><span class="st0">"anyfont.ttf"</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">)</span><span class="sy0">;</span>
+&#xA0;
+<span class="kw1">function</span> love<span class="sy0">.</span>draw<span class="br0">(</span><span class="br0">)</span> 
+	<span class="co1">-- set font before draw text</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span>setFont<span class="br0">(</span>mainFont<span class="br0">)</span><span class="sy0">;</span>
+	<span class="co1">-- draw text "Hello world!" at left: 100, top: 200</span>
+	love<span class="sy0">.</span>graphics<span class="sy0">.</span><span class="kw3">print</span><span class="br0">(</span><span class="st0">"Hello world!"</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">200</span><span class="br0">)</span><span class="sy0">;</span>
+<span class="kw1">end</span><span class="sy0">;</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="See_Also">See Also</span>
+              </h2>
+              <ul>
+                <li>
+                  <a href="font.html" title="Font">Font</a>
+                </li>
+                <li>
+                  <a href="love5.html" title="love.graphics">love.graphics</a>
+                </li>
+                <li>
+                  <a href="love.graphics17.html" title="love.graphics.setFont">love.graphics.setFont</a>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_functions.html" title="Category:Functions">Functions</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

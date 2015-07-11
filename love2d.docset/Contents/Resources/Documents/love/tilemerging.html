@@ -1,0 +1,168 @@
+<html class="client-nojs" dir="ltr" lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>TileMerging - LOVE</title>
+    <meta content="MediaWiki 1.24.2" name="generator"/>
+    <link href="" rel="ExportRDF" title="TileMerging" type="application/rdf+xml"/>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="opensearch_desc.php" rel="search" title="LOVE (en)" type="application/opensearchdescription+xml"/>
+    <link href="api.php_action_rsd" rel="EditURI" type="application/rsd+xml"/>
+    <link href="" hreflang="x-default" rel="alternate"/>
+    <link href="http://www.gnu.org/copyleft/fdl.html" rel="copyright"/>
+    <link href="" rel="alternate" title="LOVE Atom feed" type="application/atom+xml"/>
+    <link href="love_wiki_style.css" rel="stylesheet"/>
+    <meta content="" name="ResourceLoaderDynamicStyles"/>
+    <style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: love2d_wiki:resourceloader:filter:minify-css:7:daf253d59690fd9cabb6b95510bce103 */</style>
+  </head>
+  <body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-TileMerging skin-love action-view">
+    <div id="globalWrapper">
+      <div id="column-content">
+        <div class="mw-body" id="content" role="main">
+          <h1 class="firstHeading" id="firstHeading" lang="en">TileMerging</h1>
+          <div id="bodyContent">
+            <div class="mw-content-ltr" dir="ltr" id="mw-content-text" lang="en">
+              <p>This algorithm is for 2D tile maps. The algorithm generates a (hopefully) minimum set of rectangles that cover all tiles of a certain type.
+</p>
+              <p>This is useful for physics where you can generate rectangles to cover all wall tiles. You use the rectangles to create physics bodies that can cover multiple wall tiles, instead of create a physics body for every single tile.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- map_width and map_height are the dimensions of the map</span><span class="co1">-- is_wall_f checks if a tile is a wall</span>
+&#xA0;
+<span class="kw1">local</span> rectangles <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span> <span class="co1">-- Each rectangle covers a grid of wall tiles</span>
+&#xA0;
+<span class="kw1">for</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> map_width <span class="sy0">-</span> <span class="nu0">1</span> <span class="kw1">do</span>
+    <span class="kw1">local</span> start_y
+    <span class="kw1">local</span> end_y
+&#xA0;
+    <span class="kw1">for</span> y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> map_height <span class="sy0">-</span> <span class="nu0">1</span> <span class="kw1">do</span>
+        <span class="kw1">if</span> is_wall_f<span class="br0">(</span>x<span class="sy0">,</span> y<span class="br0">)</span> <span class="kw1">then</span>
+            <span class="kw1">if</span> <span class="kw2">not</span> start_y <span class="kw1">then</span>
+                start_y <span class="sy0">=</span> y
+            <span class="kw1">end</span>
+            end_y <span class="sy0">=</span> y
+        <span class="kw1">elseif</span> start_y <span class="kw1">then</span>
+            <span class="kw1">local</span> overlaps <span class="sy0">=</span> <span class="br0">{</span><span class="br0">}</span>
+            <span class="kw1">for</span> _<span class="sy0">,</span> r <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>rectangles<span class="br0">)</span> <span class="kw1">do</span>
+                <span class="kw1">if</span> <span class="br0">(</span>r<span class="sy0">.</span>end_x <span class="sy0">==</span> x <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">)</span>
+                  <span class="kw2">and</span> <span class="br0">(</span>start_y <span class="sy0">&lt;=</span> r<span class="sy0">.</span>start_y<span class="br0">)</span>
+                  <span class="kw2">and</span> <span class="br0">(</span>end_y <span class="sy0">&gt;=</span> r<span class="sy0">.</span>end_y<span class="br0">)</span> <span class="kw1">then</span>
+                    <span class="kw3">table.insert</span><span class="br0">(</span>overlaps<span class="sy0">,</span> r<span class="br0">)</span>
+                <span class="kw1">end</span>
+            <span class="kw1">end</span>
+            <span class="kw3">table.sort</span><span class="br0">(</span>
+                overlaps<span class="sy0">,</span>
+                <span class="kw1">function</span> <span class="br0">(</span>a<span class="sy0">,</span> b<span class="br0">)</span>
+                    <span class="kw1">return</span> a<span class="sy0">.</span>start_y <span class="sy0">&lt;</span> b<span class="sy0">.</span>start_y
+                <span class="kw1">end</span>
+            <span class="br0">)</span>
+&#xA0;
+            <span class="kw1">for</span> _<span class="sy0">,</span> r <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>overlaps<span class="br0">)</span> <span class="kw1">do</span>
+                <span class="kw1">if</span> start_y <span class="sy0">&lt;</span> r<span class="sy0">.</span>start_y <span class="kw1">then</span>
+                    <span class="kw1">local</span> new_rect <span class="sy0">=</span> <span class="br0">{</span>
+                        start_x <span class="sy0">=</span> x<span class="sy0">,</span>
+                        start_y <span class="sy0">=</span> start_y<span class="sy0">,</span>
+                        end_x <span class="sy0">=</span> x<span class="sy0">,</span>
+                        end_y <span class="sy0">=</span> r<span class="sy0">.</span>start_y <span class="sy0">-</span> <span class="nu0">1</span>
+                    <span class="br0">}</span>
+                    <span class="kw3">table.insert</span><span class="br0">(</span>rectangles<span class="sy0">,</span> new_rect<span class="br0">)</span>
+                    start_y <span class="sy0">=</span> r<span class="sy0">.</span>start_y
+                <span class="kw1">end</span>
+&#xA0;
+                <span class="kw1">if</span> start_y <span class="sy0">==</span> r<span class="sy0">.</span>start_y <span class="kw1">then</span>
+                    r<span class="sy0">.</span>end_x <span class="sy0">=</span> r<span class="sy0">.</span>end_x <span class="sy0">+</span> <span class="nu0">1</span>
+&#xA0;
+                    <span class="kw1">if</span> end_y <span class="sy0">==</span> r<span class="sy0">.</span>end_y <span class="kw1">then</span>
+                        start_y <span class="sy0">=</span> <span class="kw4">nil</span>
+                        end_y <span class="sy0">=</span> <span class="kw4">nil</span>
+                    <span class="kw1">elseif</span> end_y <span class="sy0">&gt;</span> r<span class="sy0">.</span>end_y <span class="kw1">then</span>
+                        start_y <span class="sy0">=</span> r<span class="sy0">.</span>end_y <span class="sy0">+</span> <span class="nu0">1</span>
+                    <span class="kw1">end</span>
+                <span class="kw1">end</span>
+            <span class="kw1">end</span>
+&#xA0;
+            <span class="kw1">if</span> start_y <span class="kw1">then</span>
+                <span class="kw1">local</span> new_rect <span class="sy0">=</span> <span class="br0">{</span>
+                    start_x <span class="sy0">=</span> x<span class="sy0">,</span>
+                    start_y <span class="sy0">=</span> start_y<span class="sy0">,</span>
+                    end_x <span class="sy0">=</span> x<span class="sy0">,</span>
+                    end_y <span class="sy0">=</span> end_y
+                <span class="br0">}</span>
+                <span class="kw3">table.insert</span><span class="br0">(</span>rectangles<span class="sy0">,</span> new_rect<span class="br0">)</span>
+&#xA0;
+                start_y <span class="sy0">=</span> <span class="kw4">nil</span>
+                end_y <span class="sy0">=</span> <span class="kw4">nil</span>
+            <span class="kw1">end</span>
+        <span class="kw1">end</span>
+    <span class="kw1">end</span>
+&#xA0;
+    <span class="kw1">if</span> start_y <span class="kw1">then</span>
+        <span class="kw1">local</span> new_rect <span class="sy0">=</span> <span class="br0">{</span>
+            start_x <span class="sy0">=</span> x<span class="sy0">,</span>
+            start_y <span class="sy0">=</span> start_y<span class="sy0">,</span>
+            end_x <span class="sy0">=</span> x<span class="sy0">,</span>
+            end_y <span class="sy0">=</span> end_y
+        <span class="br0">}</span>
+        <span class="kw3">table.insert</span><span class="br0">(</span>rectangles<span class="sy0">,</span> new_rect<span class="br0">)</span>
+&#xA0;
+        start_y <span class="sy0">=</span> <span class="kw4">nil</span>
+        end_y <span class="sy0">=</span> <span class="kw4">nil</span>
+    <span class="kw1">end</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <p>Here's how the rectangles would be used for physics.
+</p>
+              <div class="mw-geshi mw-code mw-content-ltr" dir="ltr">
+                <div class="lua source-lua">
+                  <pre class="de1"><span class="co1">-- Use contents of rectangles to create physics bodies</span><span class="co1">-- phys_world is the world, wall_rects is the list of...</span><span class="co1">-- wall rectangles</span>
+&#xA0;
+<span class="kw1">for</span> _<span class="sy0">,</span> r <span class="kw2">in</span> <span class="kw3">ipairs</span><span class="br0">(</span>rectangles<span class="br0">)</span> <span class="kw1">do</span>
+    <span class="kw1">local</span> start_x <span class="sy0">=</span> r<span class="sy0">.</span>start_x <span class="sy0">*</span> TILE_SIZE
+    <span class="kw1">local</span> start_y <span class="sy0">=</span> r<span class="sy0">.</span>start_y <span class="sy0">*</span> TILE_SIZE
+    <span class="kw1">local</span> width <span class="sy0">=</span> <span class="br0">(</span>r<span class="sy0">.</span>end_x <span class="sy0">-</span> r<span class="sy0">.</span>start_x <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy0">*</span> TILE_SIZE
+    <span class="kw1">local</span> height <span class="sy0">=</span> <span class="br0">(</span>r<span class="sy0">.</span>end_y <span class="sy0">-</span> r<span class="sy0">.</span>start_y <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">)</span> <span class="sy0">*</span> TILE_SIZE
+&#xA0;
+    <span class="kw1">local</span> x <span class="sy0">=</span> start_x <span class="sy0">+</span> <span class="br0">(</span>width <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span>
+    <span class="kw1">local</span> y <span class="sy0">=</span> start_y <span class="sy0">+</span> <span class="br0">(</span>height <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">)</span>
+&#xA0;
+    <span class="kw1">local</span> body <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newBody<span class="br0">(</span>phys_world<span class="sy0">,</span> x<span class="sy0">,</span> y<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">)</span>
+    <span class="kw1">local</span> shape <span class="sy0">=</span> love<span class="sy0">.</span>physics<span class="sy0">.</span>newRectangleShape<span class="br0">(</span>body<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span>
+      width<span class="sy0">,</span> height<span class="br0">)</span>
+&#xA0;
+    shape<span class="sy0">:</span>setFriction<span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>
+&#xA0;
+    <span class="kw3">table.insert</span><span class="br0">(</span>wall_rects<span class="sy0">,</span> <span class="br0">{</span>body <span class="sy0">=</span> body<span class="sy0">,</span> shape <span class="sy0">=</span> shape<span class="br0">}</span><span class="br0">)</span>
+<span class="kw1">end</span></pre>
+                </div>
+              </div>
+              <h2>
+                <span class="mw-headline" id="Contributors">Contributors</span>
+              </h2>
+              <ul>
+                <li>
+                  <em class="new">AaronWizard</em>
+                </li>
+              </ul>
+              <p>
+                <br/>
+              </p>
+              <h2/>
+            </div>
+            <div class="catlinks" id="catlinks">
+              <div class="mw-normal-catlinks" id="mw-normal-catlinks"><em>Category</em>: <ul><li><a href="category_snippets.html" title="Category:Snippets">Snippets</a></li></ul></div>
+            </div>
+            <div class="visualClear"/>
+          </div>
+        </div>
+      </div>
+      <div class="visualClear"/>
+      <div id="footer" role="contentinfo">
+        <ul id="f-list">
+          <li id="copyright">Content is available under <a class="external" href="http://www.gnu.org/copyleft/fdl.html" rel="nofollow">GNU Free Documentation License 1.3</a> unless otherwise noted.</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
