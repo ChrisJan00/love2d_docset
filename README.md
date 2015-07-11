@@ -8,7 +8,7 @@ Feed
 
 Instructions: in Zeal, go to File->Options->Docsets->Add feed, paste the following URL:
 
-dash-feed://http%3A%2F%2Fchrisjan00.github.io%2Flove2d_docset%2Flove2d.xml
+dash-feed://http%3A%2F%2Fchrisjan00.github.io%2Flove2d_docset%2FLove2d.xml
 
 
 Direct Download
@@ -16,7 +16,7 @@ Direct Download
 
 Alternatively, download the tarball, unpack in your docset storage directory.
 
-[http://chrisjan00.github.io/love2d_docset/love2d.tgz](http://chrisjan00.github.io/love2d_docset/love2d.tgz)
+[http://chrisjan00.github.io/love2d_docset/Love2d.tgz](http://chrisjan00.github.io/love2d_docset/Love2d.tgz)
 
 
 License
